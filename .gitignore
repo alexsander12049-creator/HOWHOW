@@ -1,0 +1,21 @@
+# dependências e builds
+node_modules/
+.next/
+out/
+build/
+dist/
+web-build/
+.expo/
+*.tsbuildinfo
+expo-env.d.ts
+
+# configurações locais de ferramentas
+.claude/
+.vscode/
+.idea/
+
+# sistema / env
+.DS_Store
+.env*
+*.pem
+npm-debug.log*

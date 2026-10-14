@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Howhow",
+    "slug": "howhow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/howhow/foguete.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/howhow/foguete.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-video"
+    ],
+    "scheme": "howhow",
+    "splash": {
+      "image": "./assets/howhow/foguete.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f2f2f2"
+    }
+  }
+}
