@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "sync": "node -e \"require('fs').copyFileSync('../shared/content.ts','lib/content.ts')\"",
+    "sync": "node -e \"const fs=require('fs');if(fs.existsSync('../shared/content.ts'))fs.copyFileSync('../shared/content.ts','lib/content.ts')\"",
     "predev": "npm run sync",
     "dev": "next dev --turbopack",
     "prebuild": "npm run sync",
