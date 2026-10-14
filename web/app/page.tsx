@@ -5,6 +5,8 @@ import Faq from "@/components/Faq";
 import ContactForm from "@/components/ContactForm";
 import CaseVideo from "@/components/CaseVideo";
 import VslPlayer from "@/components/VslPlayer";
+import VideoModal from "@/components/VideoModal";
+import ScrollProgress from "@/components/ScrollProgress";
 import GoalTabs from "@/components/GoalTabs";
 import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
@@ -67,6 +69,8 @@ export default function Home() {
   return (
     <>
       <Reveal />
+      <ScrollProgress />
+      <VideoModal />
       <Nav />
 
       {/* 1. PROMESSA */}
@@ -74,7 +78,13 @@ export default function Home() {
         <div className="container">
           <div className="hero-copy">
             <Tag>{hero.tag}</Tag>
-            <h1 className="h1 reveal">{hero.title}</h1>
+            <h1 className="h1 hero-title">
+              {hero.title.split(" ").map((w, i) => (
+                <span key={i} className="hw" style={{ ["--i" as string]: i }}>
+                  {w}{" "}
+                </span>
+              ))}
+            </h1>
             <p className="lead reveal">{hero.text}</p>
             <div className="hero-actions reveal">
               <a href={hero.primary.href} className="btn black">
@@ -98,7 +108,13 @@ export default function Home() {
                 <Heart color="#ff4d00" /> Nova candidatura <i className="live" />
               </span>
             </div>
-            <VslPlayer src="/howhow/vsl.mp4" poster="/howhow/vsl-capa.jpg" duration={hero.vsl.duration} ctaHref="#contato" />
+            <VslPlayer
+              src="/howhow/vsl.mp4"
+              poster="/howhow/vsl-capa.jpg"
+              duration={hero.vsl.duration}
+              ctaHref="#contato"
+              modal={{ src: "/howhow/vsl.mp4", poster: "/howhow/vsl-capa.jpg", title: "Veja a Howhow em ação", subtitle: "Howhow" }}
+            />
           </div>
         </div>
       </header>
@@ -180,8 +196,8 @@ export default function Home() {
         <div className="container">
           <Heading tag={showcase.tag} title={showcase.title} text={showcase.text} />
           <div className="cases">
-            {showcase.items.map((c) => (
-              <CaseVideo key={c.video} {...c} />
+            {showcase.items.map((c, i) => (
+              <CaseVideo key={c.video} {...c} index={i} />
             ))}
           </div>
         </div>
@@ -230,15 +246,15 @@ export default function Home() {
         <div className="container">
           <Heading tag={compare.tag} title={compare.title} />
           <div className="compare">
-            {compare.columns.map((col) => (
-              <div className="compare-col reveal" key={col.title}>
+            {compare.columns.map((col, ci) => (
+              <div className={`compare-col reveal${col.good ? " good" : ""}`} key={col.title} style={{ ["--i" as string]: ci }}>
                 <div className={`compare-head${col.good ? " good" : ""}`}>
                   {col.good && <Image src={images.fogueteBranco} alt="" width={26} height={26} />}
                   <h3 className="h4">{col.title}</h3>
                 </div>
                 <div className="compare-list">
-                  {col.items.map((it) => (
-                    <div className="compare-item" key={it}>
+                  {col.items.map((it, k) => (
+                    <div className="compare-item" key={it} style={{ ["--k" as string]: k }}>
                       {col.good ? <Check color="#0096dc" /> : <Cross color="#000" />}
                       {it}
                     </div>
@@ -264,8 +280,8 @@ export default function Home() {
               </a>
             </div>
             <div className="managed-list">
-              {managed.bullets.map((b) => (
-                <div className="managed-item" key={b}>
+              {managed.bullets.map((b, k) => (
+                <div className="managed-item" key={b} style={{ ["--k" as string]: k }}>
                   <Check color="#ff4d00" /> {b}
                 </div>
               ))}
@@ -279,9 +295,9 @@ export default function Home() {
       <section className="section" id="comecar">
         <div className="container">
           <Heading tag={start.tag} title={start.title} />
-          <div className="timeline">
+          <div className="timeline reveal">
             {start.steps.map((s, i) => (
-              <div className="tl-step reveal" key={s.title}>
+              <div className="tl-step reveal" key={s.title} style={{ ["--i" as string]: i }}>
                 <div className="tl-dot">{i + 1}</div>
                 <span className="tl-when">{s.when}</span>
                 <h3 className="h4">{s.title}</h3>
@@ -338,8 +354,8 @@ export default function Home() {
               </a>
               <p className="body muted">{brand.slogan}</p>
             </div>
-            {footer.columns.map((c) => (
-              <div className="footer-col reveal" key={c.title}>
+            {footer.columns.map((c, i) => (
+              <div className="footer-col reveal" key={c.title} style={{ ["--i" as string]: i + 1 }}>
                 <h3>{c.title}</h3>
                 {c.links.map((l) => (
                   <a key={l.label} href={l.href}>{l.label}</a>

@@ -8,7 +8,7 @@ export default function Faq() {
   return (
     <div className="faq reveal">
       {faq.items.map((it, n) => (
-        <div key={it.q} className={`faq-item${open === n ? " open" : ""}`}>
+        <div key={it.q} className={`faq-item${open === n ? " open" : ""}`} style={{ ["--i" as string]: n }}>
           <button className="faq-q" aria-expanded={open === n} onClick={() => setOpen(open === n ? -1 : n)}>
             <span>{it.q}</span>
             <i className="faq-icon">

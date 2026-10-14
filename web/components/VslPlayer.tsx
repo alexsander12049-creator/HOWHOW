@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { openVideo, type VideoItem } from "@/lib/video";
 
 const fmt = (s: number) => {
   if (!Number.isFinite(s) || s < 0) return "0:00";
@@ -9,9 +10,17 @@ const fmt = (s: number) => {
 // Mesmo canal dos cards de case: só um vídeo toca por vez na página.
 const PLAY_EVENT = "howhow:case-play";
 
-// Player da VSL no topo da página: capa com play grande, controles próprios
+// Player de vídeo: capa com play grande, controles próprios
 // (play/pause, tempo, barra de progresso clicável, som, tela cheia) e chamada no final.
-export default function VslPlayer({ src, poster, duration, ctaHref }: { src: string; poster: string; duration: string; ctaHref: string }) {
+// - `modal`: na página, o play abre o pop-up de vídeo em vez de tocar ali mesmo;
+// - `autoStart`: já começa tocando (usado dentro do pop-up);
+// - `vertical`: vídeo 9:16; `onCta`: o que fazer no botão do fim (ex.: fechar o pop-up).
+export default function VslPlayer({
+  src, poster, duration, ctaHref, modal, autoStart, vertical, onCta,
+}: {
+  src: string; poster: string; duration: string; ctaHref: string;
+  modal?: VideoItem; autoStart?: boolean; vertical?: boolean; onCta?: () => void;
+}) {
   const box = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLVideoElement>(null);
   const bar = useRef<HTMLDivElement>(null);
@@ -77,6 +86,7 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
   }, []);
 
   const play = () => {
+    if (modal) return openVideo([modal]);
     const v = ref.current;
     if (!v) return;
     if (ended) v.currentTime = 0;
@@ -84,6 +94,12 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
     v.play().catch(() => {});
     wake();
   };
+  // dentro do pop-up: começa tocando com som (o clique que abriu o pop-up libera o áudio)
+  useEffect(() => {
+    if (autoStart) play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const toggle = () => (ref.current?.paused ? play() : ref.current?.pause());
 
   const seek = (clientX: number) => {
@@ -107,7 +123,7 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
   return (
     <div
       ref={box}
-      className={`vsl${started ? " started" : ""}${playing ? " playing" : ""}${controls || !playing ? " show-controls" : ""}`}
+      className={`vsl${vertical ? " vertical" : ""}${modal ? " teaser" : ""}${started ? " started" : ""}${playing ? " playing" : ""}${controls || !playing ? " show-controls" : ""}`}
       onMouseMove={started ? wake : undefined}
       onMouseLeave={() => playing && setControls(false)}
     >
@@ -116,7 +132,7 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
         className="vsl-video"
         src={src}
         poster={poster}
-        preload="metadata"
+        preload={modal ? "none" : "metadata"}
         playsInline
         muted={muted}
         onClick={started ? toggle : undefined}
@@ -133,7 +149,7 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
           </span>
           <span className="vsl-cover-text">
             <b>Veja a Howhow em ação</b>
-            <span>{duration} · assista com som</span>
+            {duration && <span>{duration} · assista com som</span>}
           </span>
         </button>
       )}
@@ -143,7 +159,7 @@ export default function VslPlayer({ src, poster, duration, ctaHref }: { src: str
         <div className="vsl-end">
           <p>Pronto pra decolar?</p>
           <div className="vsl-end-actions">
-            <a href={ctaHref} className="btn orange">
+            <a href={ctaHref} className="btn orange" onClick={onCta}>
               <i className="dot" /> Fale com a gente
             </a>
             <button type="button" className="btn white" onClick={play}>
