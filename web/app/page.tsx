@@ -10,6 +10,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import GoalTabs from "@/components/GoalTabs";
 import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
+import Results from "@/components/Results";
 import CountUp from "@/components/CountUp";
 import Refund from "@/components/Refund";
 import Num from "@/components/Num";
@@ -216,6 +217,7 @@ export default function Home() {
             ))}
           </div>
           <Testimonials />
+          <Results />
         </div>
       </section>
 

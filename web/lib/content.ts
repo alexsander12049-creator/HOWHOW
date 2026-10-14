@@ -188,6 +188,14 @@ export const stories = {
     { value: "8,4%", label: "engajamento" },
     { value: "96%", label: "aprovadas sem retrabalho" },
   ],
+  // Cards de resultado ao lado dos depoimentos: só campanhas reais (dados do site antigo e do benchmark).
+  // `video` = índice do vídeo em showcase.items (abre no pop-up). [CONFIRMAR] views/CPM por case, quando houver.
+  resultsTitle: "Resultados de campanhas",
+  results: [
+    { brand: "HBO Max", campaign: "House of the Dragon", highlight: "Fãs reais", text: "Buzz orgânico e massivo nas redes com fãs de verdade falando sobre a série.", video: 0 },
+    { brand: "Kwai", campaign: "Programa Kwai Creators", highlight: "127 → 30", text: "127 creators se candidataram e 30 foram aprovados para o programa.", video: 1 },
+    { brand: "JBL", campaign: "PartyBox", highlight: "Produto em uso", text: "Creators de lifestyle e música mostraram a PartyBox no contexto real de uso.", video: 2 },
+  ],
   quotes: [
     {
       quote: "Para House of the Dragon, precisávamos de fãs reais falando sobre a série. A curadoria foi perfeita e o buzz nas redes sociais foi orgânico e massivo.",

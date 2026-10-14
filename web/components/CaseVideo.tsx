@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { showcase } from "@/lib/content";
-import { openVideo, type VideoItem } from "@/lib/video";
+import { caseVideos, openVideo } from "@/lib/video";
 import { Heart } from "./icons";
 
 type Props = {
@@ -12,15 +11,6 @@ type Props = {
   video: number;
   index: number;
 };
-
-// Todos os vídeos de case, para o pop-up poder passar de um para o outro com as setas.
-const allCases: VideoItem[] = showcase.items.map((c) => ({
-  src: `/howhow/videos/video-${c.video}.mp4`,
-  poster: `/howhow/videos/capa-${c.video}.jpg`,
-  title: c.campaign,
-  subtitle: c.brand,
-  vertical: true,
-}));
 
 // Card de case com vídeo:
 // - passando o mouse, uma bolinha de play acompanha o cursor e a capa aproxima de leve;
@@ -53,7 +43,7 @@ export default function CaseVideo({ brand, campaign, result, gradient, video, in
     const r = card.current?.getBoundingClientRect();
     return r ? { x: e.clientX - r.left, y: e.clientY - r.top } : { x: 0, y: 0 };
   };
-  const open = () => openVideo(allCases, index);
+  const open = () => openVideo(caseVideos, index);
 
   return (
     // A animação de entrada (.reveal → .in) fica num invólucro fixo: o React reescreve o className do card a cada estado.
