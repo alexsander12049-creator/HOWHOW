@@ -97,7 +97,7 @@ export default function GoalTabs() {
               {g.example.map((e, k) => (
                 <div key={e.label} style={iv(k)}>
                   <b>
-                    <Num value={e.value} delay={k * 120} duration={900} />
+                    <Num value={e.value} delay={k * 120} duration={900} replay />
                   </b>
                   <span>{e.label}</span>
                 </div>
@@ -110,7 +110,7 @@ export default function GoalTabs() {
                   <div className="goal-bar-top">
                     <span>{m.label}</span>
                     <b>
-                      <Num value={`${m.n} vídeos`} delay={300 + k * 150} duration={900} />
+                      <Num value={`${m.n} vídeos`} delay={300 + k * 150} duration={900} replay />
                     </b>
                   </div>
                   <div className="goal-track">

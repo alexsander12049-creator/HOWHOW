@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 // - conta de 0 até o valor quando aparece na tela (com `delay` opcional);
 // - se o valor mudar depois (ex.: mensal → anual), desliza do valor atual para o novo.
 // Textos sem número (ex.: "∞") aparecem como estão.
-export default function Num({ value, delay = 0, duration = 1300 }: { value: string; delay?: number; duration?: number }) {
+// `replay`: conta de novo mesmo se já estiver na tela ao montar (ex.: números que trocam com a aba).
+export default function Num({ value, delay = 0, duration = 1300, replay = false }: { value: string; delay?: number; duration?: number; replay?: boolean }) {
   const m = value.match(/^(\D*?)([\d.,]+)(.*)$/);
   const pre = m?.[1] ?? "";
   const raw = m?.[2] ?? "";
@@ -14,8 +15,10 @@ export default function Num({ value, delay = 0, duration = 1300 }: { value: stri
   const target = m ? Number(raw.replace(/\./g, "").replace(",", ".")) : 0;
 
   const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(0);
-  const cur = useRef(0);
+  // o HTML já sai com o valor final (Google e quem abre sem JavaScript veem o número certo);
+  // no navegador, se o número ainda estiver fora da tela, ele volta a 0 e conta quando aparecer
+  const [n, setN] = useState(target);
+  const cur = useRef(target);
   const started = useRef(false);
   const raf = useRef(0);
 
@@ -38,6 +41,12 @@ export default function Num({ value, delay = 0, duration = 1300 }: { value: stri
   useEffect(() => {
     const el = ref.current;
     if (!el || !m) return;
+    if (!replay && el.getBoundingClientRect().top < window.innerHeight) {
+      started.current = true; // já está na tela ao abrir: mostra o valor sem animar
+      return;
+    }
+    cur.current = 0;
+    setN(0);
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting || started.current) return;
