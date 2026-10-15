@@ -1468,3 +1468,54 @@ html.rc-on select { cursor: auto !important; }
   from { opacity: 0.65; transform: translate(var(--x), var(--y)) scale(var(--s)); }
   to { opacity: 0; transform: translate(calc(var(--x) + var(--dx)), calc(var(--y) + var(--dy))) scale(calc(var(--s) * 2.6)); }
 }
+
+/* ================= notificações em volta da VSL ================= */
+.hn { position: absolute; inset: 0; z-index: 6; pointer-events: none; --px: 0; --py: 0; }
+.hn-card { position: absolute; transform: translate3d(calc(var(--px) * var(--d) * 1px), calc(var(--py) * var(--d) * 1px), 0); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.hn-a { top: -34px; left: -48px; }
+.hn-b { top: 20%; right: -64px; }
+.hn-c { bottom: 14%; left: -40px; }
+/* entrada: sobe com mola, um card depois do outro */
+.vsl-wrap .hn-float { opacity: 0; }
+.vsl-wrap.in .hn-float { animation: hn-in 0.9s cubic-bezier(0.34, 1.3, 0.64, 1) both, hn-bob 6s ease-in-out infinite; }
+.vsl-wrap.in .hn-a .hn-float { animation-delay: 0.6s, 1.5s; }
+.vsl-wrap.in .hn-b .hn-float { animation-delay: 0.9s, 2.2s; animation-duration: 0.9s, 7s; }
+.vsl-wrap.in .hn-c .hn-float { animation-delay: 1.2s, 2.8s; animation-duration: 0.9s, 6.5s; }
+@keyframes hn-in { from { opacity: 0; transform: translateY(24px) scale(0.9); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes hn-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+.hn-glass {
+  position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; min-width: 260px; padding: 12px 14px 12px 12px; border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 50px -24px rgba(13, 14, 17, 0.45), 0 2px 6px rgba(13, 14, 17, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+/* "pilha" de notificações atrás do card de candidatura */
+.hn-stack { position: absolute; z-index: 0; left: 12px; right: 12px; bottom: -8px; height: 24px; border-radius: 0 0 18px 18px; background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 14px 30px -18px rgba(13, 14, 17, 0.35); }
+.hn-app { width: 40px; height: 40px; flex: none; border-radius: 11px; display: grid; place-items: center; box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.45); animation: hn-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.hn-app svg { width: 22px; height: 22px; }
+.hn-avatar { width: 40px; height: 40px; flex: none; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.45); animation: hn-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes hn-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+.hn-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; animation: hn-swap 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes hn-swap { from { opacity: 0; transform: translateY(12px); filter: blur(3px); } to { opacity: 1; transform: none; filter: blur(0); } }
+.hn-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.hn-top b { font-size: 13px; letter-spacing: -0.01em; }
+.hn-top em { font-style: normal; font-size: 11px; color: var(--muted); }
+.hn-sub { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+.hn-btn { flex: none; font-size: 12px; font-weight: 700; color: #fff; background: var(--ink); padding: 7px 12px; border-radius: 20px; animation: hn-press 3.6s 2.4s ease-in-out infinite; }
+@keyframes hn-press { 0%, 72%, 100% { transform: scale(1); background: var(--ink); } 78% { transform: scale(0.92); } 84% { transform: scale(1); background: #1a9a50; } 96% { background: #1a9a50; } }
+.hn-mini { min-width: 0; padding: 10px 16px 10px 12px; gap: 10px; }
+.hn-spark { width: 60px; height: 24px; display: block; }
+.hn-spark svg { width: 100%; height: 100%; display: block; }
+.hn-spark path { stroke-dasharray: 80; stroke-dashoffset: 80; }
+.vsl-wrap.in .hn-spark path { animation: hn-draw 1.4s 1.6s ease-out forwards; }
+@keyframes hn-draw { to { stroke-dashoffset: 0; } }
+.hn-mini-text { display: flex; flex-direction: column; }
+.hn-mini-text b { font-size: 18px; letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.hn-mini-text span { font-size: 11px; font-weight: 700; color: #1a9a50; }
+@media (max-width: 1199.98px) { .hn-a { left: -16px; } .hn-b { right: -20px; } .hn-c { left: -12px; } }
+@media (max-width: 809.98px) { .hn { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .vsl-wrap .hn-float, .vsl-wrap.in .hn-float { opacity: 1; animation: none; }
+  .hn-btn, .hn-app, .hn-avatar, .hn-text { animation: none; }
+  .hn-spark path { stroke-dashoffset: 0; }
+}

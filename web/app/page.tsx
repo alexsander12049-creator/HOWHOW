@@ -8,6 +8,7 @@ import VslPlayer from "@/components/VslPlayer";
 import VideoModal from "@/components/VideoModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import RocketCursor from "@/components/RocketCursor";
+import HeroNotifications from "@/components/HeroNotifications";
 import GoalTabs from "@/components/GoalTabs";
 import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
@@ -16,9 +17,9 @@ import MetricsDashboard from "@/components/MetricsDashboard";
 import CpmCampaign from "@/components/CpmCampaign";
 import Refund from "@/components/Refund";
 import Num from "@/components/Num";
-import { Check, Cross, Heart, Instagram, Sparkle } from "@/components/icons";
+import { Check, Cross, Sparkle } from "@/components/icons";
 import {
-  brand, clients, compare, cpm, creators, faq, finalCta, footer, hero, managed, metrics, plans, scale, showcase, start, steps, stories,
+  brand, clients, compare, creators, faq, finalCta, footer, hero, managed, metrics, plans, scale, showcase, start, steps, stories,
 } from "@/lib/content";
 import { images } from "@/lib/images";
 
@@ -102,16 +103,7 @@ export default function Home() {
           </div>
 
           <div className="vsl-wrap reveal">
-            <div className="float vsl-f1">
-              <span className="pill balloon">
-                <Instagram color="#0096dc" /> Redes conectadas <i className="live" />
-              </span>
-            </div>
-            <div className="float vsl-f2">
-              <span className="pill balloon">
-                <Heart color="#ff4d00" /> Nova candidatura <i className="live" />
-              </span>
-            </div>
+            <HeroNotifications />
             <VslPlayer
               src="/howhow/vsl.mp4"
               poster="/howhow/vsl-capa.jpg"
