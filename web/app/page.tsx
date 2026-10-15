@@ -15,6 +15,7 @@ import HowItWorks from "@/components/HowItWorks";
 import MetricsDashboard from "@/components/MetricsDashboard";
 import CpmCampaign from "@/components/CpmCampaign";
 import Refund from "@/components/Refund";
+import ManagedMotion from "@/components/ManagedMotion";
 import ScaleStats from "@/components/ScaleStats";
 import { Check, Cross } from "@/components/icons";
 import { Cta, Heading, Tag, Ticker } from "@/components/ui";
@@ -206,14 +207,7 @@ export default function Home() {
                 <i className="dot" /> {managed.cta.label}
               </a>
             </div>
-            <div className="managed-list">
-              {managed.bullets.map((b, k) => (
-                <div className="managed-item" key={b} style={{ ["--k" as string]: k }}>
-                  <Check color="#ff4d00" /> {b}
-                </div>
-              ))}
-              <p className="managed-price">{managed.price}</p>
-            </div>
+            <ManagedMotion />
           </div>
         </div>
       </section>

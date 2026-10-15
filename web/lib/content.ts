@@ -449,6 +449,14 @@ export const managed = {
   bullets: ["Casting feito pelo nosso time", "Roteiro dos conteúdos", "Envio de produto e revisão", "Nota fiscal e pagamentos"],
   price: "20% da verba · mínimo de R$ 25 mil",
   cta: { label: "Agendar uma demo", href: "#contato" },
+  // "vídeo" em motion de cada tópico (abre ao clicar): 3 legendas que acompanham as fases da animação
+  hint: "Toque em cada etapa para ver como funciona",
+  demos: [
+    { steps: ["Nosso time lê o seu briefing", "Filtra creators por nicho, público e estilo", "Você recebe a shortlist pronta para aprovar"] },
+    { steps: ["Cada creator recebe um roteiro", "Gancho, demonstração e chamada no ponto certo", "Você aprova antes de alguém gravar"] },
+    { steps: ["O produto sai para a casa de cada creator", "O vídeo chega e a gente revisa com você", "Ajustes feitos, versão final aprovada"] },
+    { steps: ["A nota fiscal de cada entrega é conferida", "Cada creator recebe pelo que entregou", "Tudo conciliado num relatório só"] },
+  ],
 };
 
 /* 12. COMO COMEÇAR */
