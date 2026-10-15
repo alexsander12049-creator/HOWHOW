@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   title: "Howhow — Um exército de creators UGC para a sua marca",
   description:
     "2.246 creators UGC criando conteúdo viral para a sua marca. Acompanhe as views de cada post em tempo real e pague por CPM. 7 dias grátis.",
+  applicationName: "Howhow",
+  appleWebApp: { title: "Howhow", statusBarStyle: "default" },
+  // ícones pequenos para as abas do celular (o favicon.ico, o icon.png e o apple-icon.png vêm da pasta app/)
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#f2f2f2" };
