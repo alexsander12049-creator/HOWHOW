@@ -450,7 +450,7 @@ export const managed = {
   price: "20% da verba · mínimo de R$ 25 mil",
   cta: { label: "Agendar uma demo", href: "#contato" },
   // "vídeo" em motion de cada tópico (abre ao clicar): 3 legendas que acompanham as fases da animação
-  hint: "Toque em cada etapa para ver como funciona",
+  hint: "Cada etapa tem um vídeo curto: passe o mouse ou toque",
   demos: [
     { steps: ["Nosso time lê o seu briefing", "Filtra creators por nicho, público e estilo", "Você recebe a shortlist pronta para aprovar"] },
     { steps: ["Cada creator recebe um roteiro", "Gancho, demonstração e chamada no ponto certo", "Você aprova antes de alguém gravar"] },

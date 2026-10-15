@@ -1,14 +1,14 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { managed } from "@/lib/content";
 import { Check } from "./icons";
 
-// Howhow Gerenciado: cada etapa da lista abre um "vídeo" em motion (feito em código, não é arquivo de vídeo)
-// mostrando o que o nosso time faz. Cada cena tem 3 fases (as legendas) e passa sozinha para a próxima,
-// como stories; dá para pausar, voltar, avançar e fechar (X, Esc ou clicando fora).
+// Howhow Gerenciado: cada etapa da lista abre o SEU "vídeo" em motion (feito em código, não é arquivo de vídeo)
+// num balãozinho ao lado do item, sem escurecer a página. No computador abre ao passar o mouse; no toque,
+// ao tocar (e aparece logo abaixo do item). Cada cena tem 3 fases (as legendas) e repete enquanto o balão está aberto.
 const PHASE = 2600; // ms por fase
 const TOTAL = PHASE * 3;
+const HOLD = 1400; // pausa no fim antes de repetir
 const face = (c: string) => `/howhow/creators/${c}.jpg`;
 
 type SceneProps = { p: number };
@@ -211,86 +211,115 @@ function Payments({ p }: SceneProps) {
 const scenes = [Casting, Script, Shipping, Payments];
 
 export default function ManagedMotion() {
-  const [state, setState] = useState<"closed" | "open" | "closing">("closed");
-  const [t, setT] = useState(0); // tópico
-  const [ms, setMs] = useState(0); // tempo dentro do tópico
-  const [paused, setPaused] = useState(false);
-  const [done, setDone] = useState(false);
-  const closeBtn = useRef<HTMLButtonElement>(null);
-  const lastFocus = useRef<Element | null>(null);
-  const n = managed.bullets.length;
+  const [active, setActive] = useState<number | null>(null);
+  const [ms, setMs] = useState(0);
+  const [run, setRun] = useState(0); // muda a cada repetição/abertura para remontar a cena
+  const [pos, setPos] = useState({ top: 0, arrow: 0 });
+  const list = useRef<HTMLDivElement>(null);
+  const pop = useRef<HTMLDivElement>(null);
+  const items = useRef<(HTMLButtonElement | null)[]>([]);
+  const closeT = useRef(0);
+  const openT = useRef(0);
 
-  const open = (i: number) => {
-    lastFocus.current = document.activeElement;
-    setT(i);
+  const hover = () => window.matchMedia("(hover: hover) and (min-width: 1200px)").matches;
+  const show = (k: number) => {
+    clearTimeout(closeT.current);
+    if (k === active) return;
+    setActive(k);
     setMs(0);
-    setPaused(false);
-    setDone(false);
-    setState("open");
+    setRun((r) => r + 1);
   };
-  const close = useCallback(() => {
-    setState((s) => (s === "open" ? "closing" : s));
-    window.setTimeout(() => {
-      setState("closed");
-      (lastFocus.current as HTMLElement | null)?.focus?.();
-    }, 280);
-  }, []);
-  const go = useCallback(
-    (d: number) => {
-      setDone(false);
-      setMs(0);
-      setT((x) => Math.min(n - 1, Math.max(0, x + d)));
-    },
-    [n],
-  );
+  const hide = () => {
+    clearTimeout(openT.current);
+    closeT.current = window.setTimeout(() => setActive(null), 220);
+  };
 
-  // relógio da cena: avança as fases enquanto está aberto e sem pausa
+  // relógio da cena; no fim segura um pouco e recomeça
   useEffect(() => {
-    if (state !== "open" || paused || done) return;
-    const id = window.setInterval(() => setMs((m) => Math.min(TOTAL, m + 100)), 100);
+    if (active === null) return;
+    const id = window.setInterval(() => setMs((m) => (m + 100 >= TOTAL + HOLD ? -1 : m + 100)), 100);
     return () => clearInterval(id);
-  }, [state, paused, done]);
-  // fim da cena: passa para o próximo tópico; no último, mostra o final com a chamada
+  }, [active]);
   useEffect(() => {
-    if (ms < TOTAL) return;
-    if (t < n - 1) {
-      setT(t + 1);
-      setMs(0);
-    } else setDone(true);
-  }, [ms, t, n]);
+    if (ms !== -1) return;
+    setMs(0);
+    setRun((r) => r + 1);
+  }, [ms]);
 
-  // trava a rolagem, teclado (Esc fecha, setas trocam, espaço pausa) e foco no X
+  // Esc fecha
   useEffect(() => {
-    if (state !== "open") return;
-    const html = document.documentElement;
-    const prev = html.style.overflow;
-    html.style.overflow = "hidden";
-    closeBtn.current?.focus();
-    const key = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") go(1);
-      if (e.key === "ArrowLeft") go(-1);
-      if (e.key === " ") {
-        e.preventDefault();
-        setPaused((v) => !v);
-      }
-    };
+    if (active === null) return;
+    const key = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
     window.addEventListener("keydown", key);
-    return () => {
-      html.style.overflow = prev;
-      window.removeEventListener("keydown", key);
-    };
-  }, [state, close, go]);
+    return () => window.removeEventListener("keydown", key);
+  }, [active]);
 
-  const phase = Math.min(2, Math.floor(ms / PHASE));
-  const Scene = scenes[t];
-  const steps = managed.demos[t].steps;
+  // no computador o balão fica ao lado da lista, centrado no item e sem sair do cartão escuro
+  useLayoutEffect(() => {
+    if (active === null || !hover()) return;
+    const l = list.current, b = pop.current, it = items.current[active];
+    const card = l?.closest(".managed");
+    if (!l || !b || !it || !card) return;
+    const lr = l.getBoundingClientRect(), ir = it.getBoundingClientRect(), cr = card.getBoundingClientRect();
+    const h = b.offsetHeight;
+    const center = ir.top + ir.height / 2 - lr.top;
+    const min = cr.top - lr.top + 14;
+    const max = cr.bottom - lr.top - h - 14;
+    const top = Math.max(min, Math.min(max, center - h / 2));
+    setPos({ top, arrow: Math.max(18, Math.min(h - 18, center - top)) });
+  }, [active]);
+
+  const phase = Math.min(2, Math.floor(Math.max(0, ms) / PHASE));
+  const Scene = active === null ? null : scenes[active];
+
+  const balloon =
+    active !== null && Scene ? (
+      <div
+        ref={pop}
+        className="mpop"
+        role="region"
+        aria-label={`Como funciona: ${managed.bullets[active]}`}
+        style={{ ["--top" as string]: `${pos.top}px`, ["--arrow" as string]: `${pos.arrow}px` }}
+        onMouseEnter={() => clearTimeout(closeT.current)}
+        key={`pop-${active}`}
+      >
+        <div className="mpop-stage">
+          <Scene p={phase} key={run} />
+          <span className="mpop-bar">
+            <i style={{ transform: `scaleX(${Math.min(1, Math.max(0, ms) / TOTAL)})` }} />
+          </span>
+        </div>
+        <div className="mpop-cap">
+          <span className="mpop-dots" aria-hidden>
+            {[0, 1, 2].map((i) => (
+              <i key={i} className={i === phase ? "on" : i < phase ? "past" : ""} />
+            ))}
+          </span>
+          <p key={`${active}-${phase}`}>{managed.demos[active].steps[phase]}</p>
+        </div>
+        <span className="mpop-demo">Demonstração ilustrativa</span>
+      </div>
+    ) : null;
 
   return (
-    <>
-      <div className="managed-list">
-        {managed.bullets.map((b, k) => (
-          <button type="button" className="managed-item" key={b} style={{ ["--k" as string]: k }} onClick={() => open(k)}>
+    <div className="managed-list" ref={list} onMouseLeave={() => hover() && hide()}>
+      {managed.bullets.map((b, k) => (
+        <div className="managed-slot" key={b}>
+          <button
+            ref={(el) => {
+              items.current[k] = el;
+            }}
+            type="button"
+            className={`managed-item${active === k ? " on" : ""}`}
+            style={{ ["--k" as string]: k }}
+            aria-expanded={active === k}
+            onMouseEnter={() => {
+              if (!hover()) return;
+              clearTimeout(openT.current);
+              openT.current = window.setTimeout(() => show(k), active === null ? 120 : 0);
+            }}
+            onClick={() => (active === k && !hover() ? setActive(null) : show(k))}
+          >
             <Check color="#ff4d00" /> <span className="managed-item-text">{b}</span>
             <span className="managed-play" aria-hidden>
               <svg viewBox="0 0 24 24">
@@ -298,99 +327,11 @@ export default function ManagedMotion() {
               </svg>
             </span>
           </button>
-        ))}
-        <p className="managed-hint">{managed.hint}</p>
-        <p className="managed-price">{managed.price}</p>
-      </div>
-
-      {state !== "closed" &&
-        createPortal(
-          <div
-            className={`mm${state === "closing" ? " closing" : ""}`}
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${managed.tag}: ${managed.bullets[t]}`}
-            onClick={(e) => e.target === e.currentTarget && close()}
-          >
-            <div className="mm-box-wrap">
-              <div className="mm-top">
-                <div>
-                  <span className="mm-kicker">
-                    {managed.tag} · {t + 1}/{n}
-                  </span>
-                  <b className="mm-title" key={t}>
-                    {managed.bullets[t]}
-                  </b>
-                </div>
-                <button ref={closeBtn} type="button" className="mm-close" onClick={close} aria-label="Fechar">
-                  <svg viewBox="0 0 24 24" aria-hidden>
-                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                  </svg>
-                </button>
-              </div>
-
-              <div className={`mm-stage${paused ? " paused" : ""}`}>
-                <div className="mm-bars" aria-hidden>
-                  {managed.bullets.map((b, i) => (
-                    <button type="button" key={b} onClick={() => go(i - t)} tabIndex={-1}>
-                      <i style={{ transform: `scaleX(${i < t ? 1 : i > t ? 0 : ms / TOTAL})` }} />
-                    </button>
-                  ))}
-                </div>
-                <Scene p={phase} key={t} />
-                <span className="mm-demo">Demonstração ilustrativa</span>
-                {done && (
-                  <div className="mm-end">
-                    <b>Quer isso rodando na sua marca?</b>
-                    <div>
-                      <a href={managed.cta.href} className="btn orange" onClick={close}>
-                        <i className="dot" /> {managed.cta.label}
-                      </a>
-                      <button type="button" className="btn outline-white" onClick={() => go(-(n - 1))}>
-                        Ver de novo
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="mm-foot">
-                <ol className="mm-steps">
-                  {steps.map((s, i) => (
-                    <li key={`${t}-${i}`} className={i === phase ? "on" : i < phase ? "past" : ""}>
-                      <em>{i + 1}</em>
-                      {s}
-                    </li>
-                  ))}
-                </ol>
-                <div className="mm-ctrl">
-                  <button type="button" onClick={() => go(-1)} disabled={t === 0} aria-label="Etapa anterior">
-                    <svg viewBox="0 0 24 24" aria-hidden>
-                      <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    </svg>
-                  </button>
-                  <button type="button" className="mm-pp" onClick={() => setPaused((v) => !v)} aria-label={paused ? "Continuar" : "Pausar"}>
-                    {paused ? (
-                      <svg viewBox="0 0 24 24" aria-hidden>
-                        <path d="M8 5.5v13l11-6.5Z" fill="currentColor" />
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" aria-hidden>
-                        <path d="M8 5h3v14H8zM13 5h3v14h-3z" fill="currentColor" />
-                      </svg>
-                    )}
-                  </button>
-                  <button type="button" onClick={() => go(1)} disabled={t === n - 1} aria-label="Próxima etapa">
-                    <svg viewBox="0 0 24 24" aria-hidden>
-                      <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>,
-          document.body,
-        )}
-    </>
+          {active === k && balloon}
+        </div>
+      ))}
+      <p className="managed-hint">{managed.hint}</p>
+      <p className="managed-price">{managed.price}</p>
+    </div>
   );
 }
