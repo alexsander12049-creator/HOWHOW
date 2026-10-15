@@ -2635,3 +2635,30 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
   .capp.in .capp-icon { animation: capp-icon-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
   .capp.in .capp-phone { animation: capp-rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 }
+
+/* ================= botões no celular (sem hover): entrada com "pop", toque com mola e brilho passando ================= */
+@media (hover: none), (max-width: 1024px) {
+  /* entrada: quando o bloco aparece, os botões sobem com mola, um depois do outro */
+  .reveal.in .btn, .btn.reveal.in { animation: btn-pop 0.65s 0.12s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+  .reveal.in .btn:nth-child(2) { animation-delay: 0.22s; }
+  .reveal.in .btn:nth-child(3) { animation-delay: 0.32s; }
+  @keyframes btn-pop { from { transform: translateY(16px) scale(0.9); } 60% { transform: translateY(-3px) scale(1.02); } to { transform: none; } }
+  /* toque: afunda um pouco e volta com mola (sem ficar "preso" no estado de hover) */
+  .btn { -webkit-tap-highlight-color: transparent; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, color 0.25s ease; }
+  .btn:hover { transform: none; }
+  .btn.black:hover { background: var(--ink); }
+  .btn:active { transform: scale(0.95); transition-duration: 0.08s; }
+  .btn:active .dot { transform: scale(1.8); }
+  /* brilho passando de tempos em tempos nos botões principais (no computador ele aparece no hover) */
+  .btn.black::after, .btn.orange::after { animation: btn-shine 5s 1.6s ease-in-out infinite; }
+  @keyframes btn-shine { 0% { transform: translateX(-120%); } 22%, 100% { transform: translateX(120%); } }
+  /* botões de destaque "respiram" de leve (só escala, sem repintar sombra) */
+  .signup.in .signup-cta, .plan.popular .plan-cta { animation: btn-breathe 2.8s 1.2s ease-in-out infinite; }
+  @keyframes btn-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+  .managed.in .managed-slot:first-child .managed-item:not(.on) .managed-play { animation: btn-breathe-play 2.4s 1.5s ease-in-out infinite; }
+  @keyframes btn-breathe-play { 0%, 100% { transform: scale(1); background: rgba(255, 255, 255, 0.08); } 50% { transform: scale(1.15); background: var(--orange); } }
+  .store:active { transform: scale(0.96); transition-duration: 0.08s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.in .btn, .btn.reveal.in, .btn.black::after, .btn.orange::after, .signup.in .signup-cta, .plan.popular .plan-cta { animation: none !important; }
+}
