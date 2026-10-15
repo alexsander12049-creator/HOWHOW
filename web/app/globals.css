@@ -2423,7 +2423,6 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
 
 /* ================= agências: quem confia (mural de logos animado) ================= */
 .trust { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-.trust.reveal { opacity: 1; transform: none; }
 .trust-tile { --x: -200px; --y: -200px; position: relative; height: 128px; display: grid; place-items: center; padding: 20px; border-radius: var(--radius-lg); background: #fff; border: 1px solid var(--line); overflow: hidden; isolation: isolate;
   opacity: 0; transform: translateY(18px) scale(0.96); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.4s ease; }
 .trust.in .trust-tile { opacity: 1; transform: none; animation: trust-in 0.7s calc(0.1s + var(--i) * 0.08s) cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }

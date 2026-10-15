@@ -13,7 +13,25 @@ export default function TrustWall() {
   const total = agencies.length + clients.logos.length;
   const [on, setOn] = useState(-1);
   const [hover, setHover] = useState(false);
+  const [shown, setShown] = useState(false);
   const grid = useRef<HTMLDivElement>(null);
+
+  // entrada controlada aqui (e não pelo .reveal global): o React reescreve o className quando o
+  // mouse entra/sai, e apagaria o "in" posto de fora, sumindo com os logos
+  useEffect(() => {
+    const el = grid.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        setShown(true);
+        io.disconnect();
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // destaque passando de logo em logo só enquanto o mural está na tela
   useEffect(() => {
@@ -42,7 +60,7 @@ export default function TrustWall() {
 
   return (
     <div
-      className={`trust reveal${hover ? " lit" : ""}`}
+      className={`trust${shown ? " in" : ""}${hover ? " lit" : ""}`}
       ref={grid}
       onPointerMove={move}
       onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
