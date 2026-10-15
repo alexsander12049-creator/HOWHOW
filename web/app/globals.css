@@ -1894,3 +1894,160 @@ html.rc-on select { cursor: auto !important; }
   .seg-step li, .flow6 li { opacity: 1; animation: none !important; }
   .flow6::before { transform: none; }
 }
+
+/* ================= menu "Soluções" (painel do topo, como o "Use cases" da referência) ================= */
+/* menu um pouco mais largo para caber o "Soluções" sem espremer o botão */
+@media (min-width: 810px) {
+  .nav { width: min(800px, calc(100vw - 32px)); }
+  .nav-row > .btn { flex: none; }
+}
+@media (min-width: 810px) and (max-width: 1023.98px) {
+  .nav-links { gap: 16px; font-size: 14px; }
+}
+.nav-sol { display: flex; align-items: center; }
+.nav-sol-btn { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; transition: color 0.2s ease; }
+.nav-sol-btn svg { width: 12px; height: 12px; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.nav-sol-btn:hover, .nav.sol-open .nav-sol-btn { color: var(--orange); }
+.nav.sol-open .nav-sol-btn svg { transform: rotate(180deg); }
+.sol-panel {
+  position: absolute; top: calc(100% + 10px); left: -40px; right: -40px; z-index: 2; white-space: normal;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 0;
+  background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 10px;
+  box-shadow: 0 40px 80px -30px rgba(13, 14, 17, 0.35), 0 4px 12px rgba(13, 14, 17, 0.05);
+  opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.98); transform-origin: 20% 0;
+  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.35s;
+}
+/* "ponte" invisível entre o botão e o painel, para o mouse não fechar o painel no caminho */
+.sol-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
+.nav.sol-open .sol-panel { opacity: 1; visibility: visible; transform: none; transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s; }
+.sol-col { display: flex; flex-direction: column; gap: 2px; padding: 10px; }
+.sol-col.main { background: var(--bg); border-radius: 16px; }
+.sol-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 2px 10px 8px; }
+.sol-item { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 14px; color: var(--ink); transition: background 0.25s ease; }
+.nav.sol-open .sol-item, .nav.sol-open .sol-promo { animation: a-in 0.45s calc(0.05s + var(--i, 0) * 0.04s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.nav-links .sol-panel a::after { display: none; }
+.nav-links .sol-panel a:hover { color: var(--ink); }
+.sol-item:hover, .sol-item.current { background: #fff; }
+.sol-col:not(.main) .sol-item:hover { background: var(--bg); }
+.sol-icon { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line); color: var(--ink); transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.sol-col.main .sol-icon { width: 46px; height: 46px; background: var(--ink); color: #fff; border-color: var(--ink); }
+.sol-icon svg { width: 20px; height: 20px; }
+.sol-item:hover .sol-icon { background: var(--orange); border-color: var(--orange); color: #fff; transform: rotate(-8deg) scale(1.06); }
+.sol-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.sol-text b { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.sol-text em { font-style: normal; font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.35; }
+.sol-arrow { font-size: 15px; color: var(--muted); opacity: 0; transform: translateX(-6px); transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.25s ease; }
+.sol-item:hover .sol-arrow, .sol-item.current .sol-arrow { opacity: 1; transform: none; color: var(--orange); }
+.sol-promo { margin-top: auto; display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 14px; color: #fff; position: relative; overflow: hidden;
+  background: linear-gradient(120deg, var(--ink), #1b2a55 60%, var(--blue)); }
+.sol-promo b { font-size: 15px; }
+.sol-promo span { font-size: 13px; opacity: 0.8; }
+.nav-links .sol-panel .sol-promo:hover { color: #fff; }
+.sol-promo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.25) 50%, transparent 65%); transform: translateX(-100%); }
+.sol-promo:hover::after { transition: transform 0.8s ease; transform: translateX(100%); }
+/* celular: as duas páginas no topo do menu aberto */
+.nav-menu-sol { display: flex; flex-direction: column; gap: 4px; background: var(--bg); border-radius: 16px; padding: 10px 6px 6px; white-space: normal; }
+.nav.open { background: #fff; }
+.nav-menu-sol .sol-title { padding: 2px 10px 4px; }
+.nav-menu .sol-item { font-size: 15px; letter-spacing: 0; }
+.nav-menu .sol-icon { width: 42px; height: 42px; background: var(--ink); color: #fff; border-color: var(--ink); }
+.nav-menu .sol-arrow { opacity: 1; transform: none; }
+.nav.open .nav-menu-sol .sol-item { animation: a-in 0.45s calc(0.05s + var(--i, 0) * 0.07s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@media (max-width: 809.98px) { .sol-panel { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sol-panel { transform: none; }
+  .nav.sol-open .sol-item, .nav.sol-open .sol-promo, .nav.open .nav-menu-sol .sol-item { animation: none; }
+}
+
+/* ================= páginas de marcas e agências: mais movimento ================= */
+.section.white .scale-stat { background: var(--bg); }
+.section.white .ticker .pill { background: var(--bg); }
+
+/* topo: manchas de cor se movendo, painel com notificações em volta e inclinação seguindo o mouse */
+.seg-hero::before { animation: hero-blobs 14s ease-in-out infinite alternate; }
+.seg-board-wrap { position: relative; --px: 0; --py: 0; perspective: 1400px; }
+.seg-board-wrap .seg-board { transform: rotateY(calc(var(--px) * 7deg)) rotateX(calc(var(--py) * -6deg)); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.seg-board-wrap.in .seg-row { animation: a-in 0.6s calc(0.4s + var(--i, 0) * 0.15s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+/* a linha que acabou de avançar mostra quanto falta para o próximo status */
+.seg-row { position: relative; overflow: hidden; }
+.seg-row::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--orange)); transform: scaleX(0); transform-origin: left; }
+.seg-row.bump::after { animation: row-timer 2.2s linear both; }
+@keyframes row-timer { to { transform: scaleX(1); } }
+.seg-board-wrap .hn-a { top: -46px; left: -54px; }
+.seg-board-wrap .hn-b { top: auto; bottom: -44px; right: -34px; left: auto; }
+.seg-board-wrap .hn-c { top: -34px; right: -14px; bottom: auto; left: auto; }
+.seg-board-wrap .hn-float { opacity: 0; }
+.seg-board-wrap.in .hn-float { animation: hn-in 0.9s cubic-bezier(0.34, 1.3, 0.64, 1) both, hn-bob 6s ease-in-out infinite; }
+.seg-board-wrap.in .hn-a .hn-float { animation-delay: 0.9s, 1.8s; }
+.seg-board-wrap.in .hn-b .hn-float { animation-delay: 1.2s, 2.4s; animation-duration: 0.9s, 7s; }
+.seg-board-wrap.in .hn-c .hn-float { animation-delay: 1.5s, 3s; animation-duration: 0.9s, 6.5s; }
+.seg-board-wrap.in .hn-spark path { animation: hn-draw 1.4s 2s ease-out forwards; }
+.seg-app { background: var(--ink); color: #fff; }
+.seg-app svg { width: 21px; height: 21px; }
+.hn-mini-text b.num { animation: count-bump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); display: inline-block; }
+@keyframes count-bump { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (max-width: 1199.98px) {
+  .seg-board-wrap .hn-a { left: -20px; }
+  .seg-board-wrap .hn-b { right: -14px; }
+  .seg-board-wrap .hn-c { right: -6px; }
+}
+@media (max-width: 999.98px) {
+  .seg-board-wrap { max-width: 640px; margin: 30px auto 20px; width: 100%; }
+}
+
+/* 3 passos: no computador os cartões grudam no topo e se empilham na rolagem */
+@media (min-width: 1000px) and (min-height: 680px) {
+  .seg-steps { gap: 18px; }
+  .seg-step { position: sticky; top: calc(108px + var(--n, 0) * 22px); box-shadow: 0 -30px 60px -50px rgba(0, 0, 0, 0.35); }
+  /* margem decrescente: no fim da seção os cartões saem juntos sem perder o "leque" (são 3 passos) */
+  .seg-step { margin-bottom: calc((2 - var(--n, 0)) * 22px); }
+}
+.seg-step-n b { display: inline-block; }
+.seg-step.in .seg-step-n b { animation: dot-pop 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.seg-step .how-art { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.seg-step:hover .how-art { transform: scale(1.015); }
+
+/* cards do painel: ícone entra girando e depois flutua; no hover ganha cor */
+.seg-card-icon { transition: background 0.3s ease, rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.seg-card.in .seg-card-icon { animation: icon-pop 0.7s calc(0.25s + var(--i, 0) * 0.1s) cubic-bezier(0.34, 1.56, 0.64, 1) both, icon-float 4.5s calc(1.2s + var(--i, 0) * 0.6s) ease-in-out infinite; }
+@keyframes icon-pop { from { transform: scale(0) rotate(-40deg); } to { transform: none; } }
+@keyframes icon-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+.seg-card:hover .seg-card-icon { background: var(--orange-soft); rotate: -10deg; }
+.seg-card { position: relative; overflow: hidden; }
+.seg-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--orange)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.seg-card:hover::after { transform: scaleX(1); }
+
+/* fluxo: ponto de luz percorrendo a linha e cada etapa pulsando quando ele passa */
+.flow6 .flow6-run { position: absolute; opacity: 1; display: block; animation: none; left: 8%; right: 8%; top: 17px; height: 12px; overflow: hidden; pointer-events: none; z-index: 2; }
+.flow6-run i { display: block; width: 100%; height: 100%; transform: translateX(-12px); background: radial-gradient(circle 6px at 6px 50%, #fff 0 2px, var(--orange) 3px 5px, transparent 6px) no-repeat; filter: drop-shadow(0 0 6px rgba(255, 77, 0, 0.8)); }
+.flow6.in .flow6-run i { animation: flow-run 6s 1.8s linear infinite; }
+@keyframes flow-run { 0% { transform: translateX(-12px); opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+.flow6.in li .flow6-dot { animation: dot-pop 0.5s calc(0.35s + var(--i, 0) * 0.2s) cubic-bezier(0.34, 1.56, 0.64, 1) both, flow-ping 6s calc(1.8s + var(--i, 0) * 1.1s) ease-out infinite; }
+@keyframes flow-ping {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 0, 0.5); scale: 1.14; border-color: var(--orange); }
+  14% { box-shadow: 0 0 0 12px rgba(255, 77, 0, 0); scale: 1; border-color: var(--ink); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 0, 0); scale: 1; }
+}
+.flow6 li:last-child .flow6-dot { border-color: var(--orange); }
+@media (max-width: 1199.98px) { .flow6 .flow6-run { display: none; } }
+
+/* por que UGC em volume: número com degradê se movendo e barra se desenhando na base */
+.why3-n { background-image: linear-gradient(120deg, var(--blue), var(--orange), var(--blue)); background-size: 220% 100%; animation: why-shift 6s ease-in-out infinite alternate; }
+@keyframes why-shift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+.why3-card { position: relative; overflow: hidden; }
+.why3-card::after { content: ""; position: absolute; left: 28px; right: 28px; bottom: 0; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--orange)); transform: scaleX(0); transform-origin: left; transition: transform 1s calc(0.4s + var(--i, 0) * 0.15s) cubic-bezier(0.2, 0.8, 0.2, 1); }
+.why3-card.in::after { transform: scaleX(0.35); }
+.why3-card.in:hover::after { transform: scaleX(1); transition-delay: 0s; }
+
+/* celular/tablet: sem filtros animados, sem inclinação */
+@media (max-width: 1024px), (hover: none) {
+  .seg-board-wrap .seg-board { transform: none; }
+  .flow6-run i { filter: none; }
+  .why3-n { animation: none; background-position: 30% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seg-hero::before, .seg-row.bump::after, .seg-card.in .seg-card-icon, .flow6.in .flow6-run i, .why3-n { animation: none !important; }
+  .seg-board-wrap .hn-float, .seg-board-wrap.in .hn-float { opacity: 1; animation: none; }
+  .seg-board-wrap .seg-board { transform: none; }
+  .flow6.in li .flow6-dot { animation: none; }
+}

@@ -39,10 +39,32 @@ export const nav = [
   { label: "Métricas", href: "#metricas" },
   { label: "CPM", href: "#cpm" },
   { label: "Planos", href: "#planos" },
-  { label: "Marcas", href: "/marcas" },
-  { label: "Agências", href: "/agencias" },
 ];
 export const navCta = { label: "Começar grátis", href: "#planos" };
+
+// Menu "Soluções" no topo de todas as páginas (como o "Use cases" da referência): por negócio e por objetivo.
+export type SolutionIcon = "brand" | "agency" | "video" | "coin" | "chart" | "rocket";
+export const solutions = {
+  label: "Soluções",
+  groups: [
+    {
+      title: "Por negócio",
+      items: [
+        { label: "Para marcas", text: "Seu programa de UGC dentro de casa", href: "/marcas", icon: "brand" as SolutionIcon },
+        { label: "Para agências", text: "Creators em escala para os seus clientes", href: "/agencias", icon: "agency" as SolutionIcon },
+      ],
+    },
+    {
+      title: "O que você quer fazer?",
+      items: [
+        { label: "Conteúdo em volume", text: "Um exército de creators UGC postando", href: "/#como-funciona", icon: "video" as SolutionIcon },
+        { label: "Pagar por CPM", text: "Só pelas views que foram entregues", href: "/#cpm", icon: "coin" as SolutionIcon },
+        { label: "Métricas ao vivo", text: "Views de cada post em tempo real", href: "/#metricas", icon: "chart" as SolutionIcon },
+        { label: "Howhow Gerenciado", text: "Nosso time roda as campanhas para você", href: "/#gerenciado", icon: "rocket" as SolutionIcon },
+      ],
+    },
+  ],
+};
 
 /* 1. PROMESSA */
 export const hero = {
@@ -505,7 +527,6 @@ export const brandsPage = {
     { label: "Painel", href: "#painel" },
     { label: "Planos", href: "#planos" },
     { label: "FAQ", href: "#faq" },
-    { label: "Agências", href: "/agencias" },
   ],
   navCta: { label: "Começar grátis", href: "#planos" },
   hero: {
@@ -525,6 +546,20 @@ export const brandsPage = {
         { name: "Criativo C", who: "c5" as CreatorKey, next: "Aprovar o pagamento" },
       ],
       steps: ["Tudo junto", "Próximo passo à vista", "Avance num clique"],
+    },
+    // notificações flutuando em volta do painel (creators fictícios, os mesmos do "Como funciona")
+    toasts: {
+      people: [
+        { title: "Vídeo entregue", text: "@ju.looks enviou o Reels", who: "c6" as CreatorKey },
+        { title: "Roteiro aprovado", text: "@duda.rotina já pode gravar", who: "c2" as CreatorKey },
+        { title: "Nova candidatura", text: "@ana.pele quer participar", who: "c1" as CreatorKey },
+      ],
+      system: [
+        { title: "Pagamento liberado", text: "Nota fiscal conferida", icon: "coin" as SolutionIcon },
+        { title: "Contrato assinado", text: "Direitos de uso combinados", icon: "video" as SolutionIcon },
+        { title: "Relatório pronto", text: "CPM por creator", icon: "chart" as SolutionIcon },
+      ],
+      counter: { start: 18, label: "vídeos aprovados na semana" },
     },
   },
   before: {
@@ -600,7 +635,6 @@ export const agenciesPage = {
     { label: "White-label", href: "#white-label" },
     { label: "Painel", href: "#painel" },
     { label: "FAQ", href: "#faq" },
-    { label: "Marcas", href: "/marcas" },
   ],
   navCta: { label: "Agendar demo", href: "#contato" },
   hero: {
@@ -620,6 +654,19 @@ export const agenciesPage = {
         { name: "Cliente C", who: "c8" as CreatorKey, next: "Aprovar o pagamento" },
       ],
       steps: ["Tudo junto", "Próximo passo à vista", "Avance num clique"],
+    },
+    toasts: {
+      people: [
+        { title: "Cliente B aprovou", text: "Roteiro da @ju.looks", who: "c6" as CreatorKey },
+        { title: "Vídeo entregue", text: "Cliente A · @duda.rotina", who: "c2" as CreatorKey },
+        { title: "Nova candidatura", text: "Cliente C · @caio.tech", who: "c4" as CreatorKey },
+      ],
+      system: [
+        { title: "Relatório enviado", text: "Cliente A · com a sua marca", icon: "chart" as SolutionIcon },
+        { title: "Faturamento unificado", text: "Pagamentos do Cliente C", icon: "coin" as SolutionIcon },
+        { title: "Briefing publicado", text: "Cliente B · 2 TikToks", icon: "video" as SolutionIcon },
+      ],
+      counter: { start: 7, label: "entregas de clientes hoje" },
     },
   },
   before: {

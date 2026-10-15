@@ -8,13 +8,14 @@ const iv = (i: number) => ({ ["--i" as string]: i }) as React.CSSProperties;
 type Step = { title: string; text: string; checks: string[]; art: ArtKey; label: string };
 
 // 3 passos (01/03, 02/03, 03/03) com texto de um lado e a mini tela do outro, alternando.
+// No computador os cartões grudam no topo e vão se empilhando conforme a rolagem.
 export function ThreeSteps({ tag, title, text, items }: { tag: string; title: string; text: string; items: Step[] }) {
   return (
     <>
       <Heading tag={tag} title={title} text={text} />
       <div className="seg-steps">
         {items.map((s, n) => (
-          <div className={`seg-step reveal${n % 2 ? " flip" : ""}`} key={s.title}>
+          <div className={`seg-step reveal${n % 2 ? " flip" : ""}`} key={s.title} style={{ ["--n" as string]: n }}>
             <div className="seg-step-text">
               <span className="seg-step-n">
                 <b>0{n + 1}</b> / 0{items.length}
@@ -62,12 +63,16 @@ export function ControlCards({ cards }: { cards: { title: string; text: string }
   );
 }
 
-// Fluxo de 6 etapas do briefing ao relatório: linha que se desenha e etapas acendendo em sequência.
+// Fluxo de 6 etapas do briefing ao relatório: a linha se desenha, as etapas entram em sequência e depois
+// um ponto de luz percorre a linha em loop, acendendo cada etapa quando passa por ela.
 export function Flow6({ tag, title, text, steps }: { tag: string; title: string; text: string; steps: string[] }) {
   return (
     <>
       <Heading tag={tag} title={title} text={text} />
       <ol className="flow6 reveal">
+        <li className="flow6-run" aria-hidden>
+          <i />
+        </li>
         {steps.map((s, i) => (
           <li key={s} style={iv(i)}>
             <span className="flow6-dot">{i + 1}</span>

@@ -12,8 +12,9 @@ import Faq from "../Faq";
 import ContactForm from "../ContactForm";
 import SiteFooter from "../SiteFooter";
 import { Check, Cross } from "../icons";
-import { Heading, Tag } from "../ui";
-import { brandsPage, agenciesPage, plans, showcase, stories } from "@/lib/content";
+import { Heading, Tag, Ticker } from "../ui";
+import Num from "../Num";
+import { brandsPage, agenciesPage, plans, scale, showcase, stories } from "@/lib/content";
 import SegmentHero from "./SegmentHero";
 import WhiteLabel from "./WhiteLabel";
 import { ControlCards, Flow6, ThreeSteps, WhyCards } from "./Sections";
@@ -23,7 +24,7 @@ import { images } from "@/lib/images";
 type Page = typeof brandsPage | typeof agenciesPage;
 
 // Página por público (marcas ou agências), com o mesmo visual da principal.
-// Ordem (referência sideshift): promessa → logos → antes × depois → 3 passos → (white-label) → painel →
+// Ordem (referência sideshift): promessa → logos → antes × depois → escala → 3 passos → (white-label) → painel →
 // fluxo → por que UGC em volume → cases → (planos) → FAQ → chamada final.
 export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas" | "agencias" }) {
   const isAgency = kind === "agencias";
@@ -65,6 +66,31 @@ export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas"
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* escala: os mesmos números da página principal, contando ao aparecer */}
+      <section className="section white">
+        <div className="container">
+          <Heading tag={scale.tag} title={scale.title} />
+          <div className="scale">
+            {scale.stats.map((s, i) => (
+              <div className="scale-stat reveal" key={s.label} style={{ ["--i" as string]: i }}>
+                <b>
+                  <Num value={s.value} delay={i * 150} duration={1600} />
+                </b>
+                <i className="scale-line" aria-hidden />
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div>
+          <Ticker
+            items={scale.ticker.map((t) => (
+              <span className="pill" key={t}>
+                <Check color="#000" /> {t}
+              </span>
+            ))}
+          />
         </div>
       </section>
 

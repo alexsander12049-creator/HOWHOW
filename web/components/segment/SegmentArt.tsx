@@ -164,9 +164,11 @@ function Report({ client }: { client: number }) {
 
 export default function SegmentArt({ art }: { art: ArtKey }) {
   const client = useCycle(3);
-  if (art === "brief") return <Brief />;
-  if (art === "shortlist") return <Shortlist />;
-  if (art === "compare") return <Compare />;
+  // as telas de marca não trocam de cliente: a cada 7 s remontam e a entrada roda de novo
+  const replay = useCycle(2, 7000);
+  if (art === "brief") return <Brief key={replay} />;
+  if (art === "shortlist") return <Shortlist key={replay} />;
+  if (art === "compare") return <Compare key={replay} />;
   if (art === "clientBrief") return <Brief client={client} />;
   if (art === "clientShortlist") return <Shortlist client={client} />;
   return <Report client={client} />;
