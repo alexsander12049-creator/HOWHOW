@@ -2458,3 +2458,150 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
   .trust-tile, .trust-logo { opacity: 1; transform: none; clip-path: none; animation: none !important; }
   .trust-agency::after { animation: none; }
 }
+
+/* ================= app para creators (rodapé): chamada de download com o celular animado ================= */
+.capp { position: relative; width: 100%; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 40px; align-items: center; min-height: 540px; padding: 56px 0 0 56px; border-radius: 32px; overflow: hidden; isolation: isolate; color: #fff;
+  background: linear-gradient(160deg, #0c1530 0%, #07080b 55%, #120a06 100%); border: 1px solid #1d2230; }
+.capp::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px); background-size: 48px 48px;
+  -webkit-mask: radial-gradient(70% 80% at 70% 60%, #000, transparent 75%); mask: radial-gradient(70% 80% at 70% 60%, #000, transparent 75%); }
+.capp-glow { position: absolute; z-index: -1; inset: -20%; pointer-events: none;
+  background: radial-gradient(30% 35% at 72% 45%, rgba(0, 150, 220, 0.45), transparent 70%), radial-gradient(25% 30% at 90% 85%, rgba(255, 77, 0, 0.35), transparent 70%), radial-gradient(30% 30% at 10% 10%, rgba(0, 150, 220, 0.18), transparent 70%);
+  animation: capp-drift 12s ease-in-out infinite alternate; }
+@keyframes capp-drift { from { transform: translate(0, 0); } to { transform: translate(-3%, 3%); } }
+
+/* texto */
+.capp-copy { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; padding-bottom: 56px; }
+.capp-copy > * { opacity: 0; }
+.capp.in .capp-copy > * { animation: a-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.capp.in .capp-copy > :nth-child(2) { animation-delay: 0.12s; }
+.capp.in .capp-copy > :nth-child(3) { animation-delay: 0.2s; }
+.capp.in .capp-copy > :nth-child(4) { animation-delay: 0.28s; }
+.capp.in .capp-copy > :nth-child(5) { animation-delay: 0.4s; }
+.capp-head { display: flex; align-items: center; gap: 16px; }
+.capp-icon { position: relative; width: 84px; height: 84px; flex: none; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px -14px rgba(0, 150, 220, 0.7), 0 0 0 6px rgba(255, 255, 255, 0.04); }
+.capp-icon img { width: 100%; height: 100%; display: block; }
+/* brilho passando no ícone */
+.capp-icon::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%); transform: translateX(-120%); }
+.capp.in .capp-icon { animation: capp-icon-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both, capp-float 5s 1s ease-in-out infinite; }
+.capp.in .capp-icon::after { animation: capp-shine 4s 1.2s ease-in-out infinite; }
+@keyframes capp-icon-pop { from { transform: scale(0.4) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes capp-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes capp-shine { 0% { transform: translateX(-120%); } 30%, 100% { transform: translateX(120%); } }
+.capp-tag { display: flex; flex-direction: column; gap: 2px; }
+.capp-tag b { font-size: 15px; font-weight: 700; color: #fff; }
+.capp-tag em { font-style: normal; font-size: 13px; color: #9aa3b5; }
+.capp-title { margin: 0; font-size: 48px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; max-width: 520px; }
+.capp-text { margin: 0; font-size: 17px; line-height: 1.55; color: #b9c0cf; max-width: 500px; }
+.capp-perks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
+.capp-perks li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: #e5e8ef; }
+.capp-perks svg { width: 20px; height: 20px; flex: none; }
+.capp.in .capp-perks li { animation: a-in 0.5s calc(0.45s + var(--i) * 0.1s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.capp-stores { display: flex; flex-wrap: wrap; gap: 10px; }
+.store { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; border-radius: 14px; background: #000; color: #fff; border: 1px solid rgba(255, 255, 255, 0.22); position: relative; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease; }
+.store svg { width: 26px; height: 26px; flex: none; }
+.store span { display: flex; flex-direction: column; line-height: 1.1; }
+.store em { font-style: normal; font-size: 11px; color: #c9ceda; }
+.store b { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.store:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 16px 34px -14px rgba(0, 150, 220, 0.8); }
+.store::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.18) 50%, transparent 65%); transform: translateX(-120%); }
+.store:hover::after { transition: transform 0.7s ease; transform: translateX(120%); }
+
+/* palco com o celular */
+.capp-stage { position: relative; align-self: end; height: 100%; min-height: 480px; display: flex; justify-content: center; align-items: flex-end; }
+.capp-ring { position: absolute; left: 50%; top: 52%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, 0.12); translate: -50% -50%; pointer-events: none; }
+.capp-ring.r1 { width: 440px; height: 440px; animation: capp-spin 40s linear infinite; }
+.capp-ring.r2 { width: 600px; height: 600px; border-style: solid; border-color: rgba(255, 255, 255, 0.06); animation: capp-spin 60s linear infinite reverse; }
+.capp-ring::after { content: ""; position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 14px 3px rgba(255, 77, 0, 0.7); }
+.capp-ring.r2::after { background: var(--blue); box-shadow: 0 0 14px 3px rgba(0, 150, 220, 0.7); top: auto; bottom: -5px; }
+@keyframes capp-spin { to { rotate: 360deg; } }
+.capp-phone { position: relative; z-index: 1; width: 290px; height: 560px; margin-bottom: -70px; padding: 10px; border-radius: 48px; background: linear-gradient(145deg, #2b2f3a, #0d0f14 40%, #1c1f27); box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  opacity: 0; transform: translateY(80px); }
+.capp.in .capp-phone { animation: capp-rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both, capp-float 6s 1.4s ease-in-out infinite; }
+@keyframes capp-rise { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: none; } }
+.capp-screen { position: relative; height: 100%; border-radius: 39px; overflow: hidden; background: #0e1015; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.capp-status { display: flex; align-items: center; justify-content: space-between; height: 26px; padding: 0 8px; font-size: 13px; }
+.capp-island { width: 86px; height: 24px; border-radius: 20px; background: #000; }
+.capp-bat { width: 22px; height: 11px; border-radius: 3px; border: 1.5px solid #fff; position: relative; }
+.capp-bat::after { content: ""; position: absolute; inset: 1.5px 5px 1.5px 1.5px; border-radius: 1px; background: #fff; }
+.capp-hello { display: flex; align-items: center; gap: 10px; margin-top: 68px; }
+.capp-hello img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--blue); }
+.capp-hello > span { flex: 1; display: flex; flex-direction: column; line-height: 1.15; }
+.capp-hello em { font-style: normal; font-size: 11px; color: #8b93a6; }
+.capp-hello b { font-size: 15px; }
+.capp-bell { position: relative; width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; background: #1a1d25; color: #fff; }
+.capp-bell svg { width: 17px; height: 17px; }
+.capp-bell span { position: absolute; top: -4px; right: -4px; min-width: 17px; height: 17px; border-radius: 9px; display: grid; place-items: center; font-size: 10px; font-weight: 800; font-style: normal; background: var(--orange); animation: hn-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.capp-balance { display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 18px; background: linear-gradient(135deg, #0096dc, #293b8f); box-shadow: 0 16px 30px -16px rgba(0, 150, 220, 0.8); }
+.capp-balance em { font-style: normal; font-size: 11px; color: rgba(255, 255, 255, 0.8); }
+.capp-balance b { font-size: 26px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; animation: count-bump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.capp-pix { align-self: flex-start; margin-top: 4px; font-size: 11px; font-weight: 700; padding: 6px 10px; border-radius: 10px; background: #fff; color: #0b2a6b; }
+.capp-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8b93a6; margin-top: 2px; }
+.capp-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: #161920; font-size: 12px; }
+.capp-row img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.capp-row b { flex: 1; font-weight: 600; }
+.capp-row em { font-style: normal; font-weight: 700; color: #4ade80; }
+/* notificações empilhadas no topo da tela, a nova chega por cima */
+.capp-notifs { position: absolute; left: 10px; right: 10px; top: 44px; height: 70px; }
+.capp-notif { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 18px; background: rgba(245, 246, 250, 0.96); color: var(--ink);
+  box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.6); transform-origin: 50% 0; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease; }
+.capp-notif.d0 { z-index: 3; animation: capp-drop 0.7s cubic-bezier(0.34, 1.3, 0.64, 1) both; }
+.capp-notif.d1 { z-index: 2; transform: translateY(12px) scale(0.93); opacity: 0.7; }
+.capp-notif.d2 { z-index: 1; transform: translateY(22px) scale(0.86); opacity: 0; }
+@keyframes capp-drop { from { transform: translateY(-140%) scale(0.96); opacity: 0; } to { transform: none; opacity: 1; } }
+.capp-ni { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: var(--blue); }
+.capp-ni.pix { background: #1a9a50; }
+.capp-ni.ok { background: var(--orange); }
+.capp-ni svg { width: 18px; height: 18px; }
+.capp-nt { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.capp-nt b { font-size: 12px; display: flex; justify-content: space-between; gap: 8px; }
+.capp-nt b em { font-style: normal; font-weight: 500; color: var(--muted); font-size: 10px; }
+.capp-nt > span { font-size: 11px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* selos flutuando em volta do celular */
+.capp-chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: #fff; color: var(--ink); font-size: 13px; font-weight: 700; box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.6); opacity: 0; }
+.capp-chip svg { width: 16px; height: 16px; }
+.capp-chip.c1 { left: 0; top: 66%; }
+.capp-chip.c2 { right: 0; top: 30%; }
+.capp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px rgba(255, 77, 0, 0.2); }
+.capp.in .capp-chip.c1 { animation: hn-in 0.8s 0.9s cubic-bezier(0.34, 1.3, 0.64, 1) both, hn-bob 6s 1.8s ease-in-out infinite; }
+.capp.in .capp-chip.c2 { animation: hn-in 0.8s 1.15s cubic-bezier(0.34, 1.3, 0.64, 1) both, hn-bob 7s 2.2s ease-in-out infinite; }
+
+@media (max-width: 1199.98px) {
+  .capp { padding: 44px 0 0 40px; gap: 20px; }
+  .capp-title { font-size: 40px; }
+  .capp-perks { grid-template-columns: minmax(0, 1fr); }
+  .capp-chip.c1 { left: -2%; }
+}
+@media (max-width: 899.98px) {
+  .capp { grid-template-columns: minmax(0, 1fr); padding: 36px 24px 0; min-height: 0; border-radius: 26px; }
+  .capp-copy { padding-bottom: 10px; }
+  .capp-stage { min-height: 440px; }
+  .capp-ring.r1 { width: 360px; height: 360px; }
+  .capp-ring.r2 { width: 500px; height: 500px; }
+}
+@media (max-width: 809.98px) {
+  .capp { padding: 30px 20px 0; }
+  .capp-head { gap: 12px; }
+  .capp-icon { width: 68px; height: 68px; border-radius: 18px; }
+  .capp-title { font-size: 32px; }
+  .capp-text { font-size: 15px; }
+  .capp-stores { width: 100%; }
+  .store { flex: 1; justify-content: center; padding: 10px 10px; gap: 8px; }
+  .store svg { width: 22px; height: 22px; }
+  .store b { font-size: 15px; }
+  .capp-stage { min-height: 400px; }
+  .capp-phone { width: 250px; height: 480px; margin-bottom: -80px; border-radius: 42px; }
+  .capp-screen { border-radius: 33px; }
+  .capp-chip { font-size: 11px; padding: 8px 10px; }
+  .capp-chip.c1 { left: 0; top: 70%; }
+  .capp-chip.c2 { right: 0; top: 26%; }
+}
+/* celular/tablet: sem desfoque animado nem anéis girando */
+@media (max-width: 1024px), (hover: none) {
+  .capp-glow, .capp-ring { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .capp-copy > *, .capp-phone, .capp-chip { opacity: 1; transform: none; animation: none !important; }
+  .capp-glow, .capp-ring, .capp-icon, .capp-icon::after, .capp-notif.d0 { animation: none !important; }
+}

@@ -1,25 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { brand, creators, footer } from "@/lib/content";
+import { brand, footer } from "@/lib/content";
 import { images } from "@/lib/images";
 import { Ticker } from "./ui";
+import CreatorApp from "./CreatorApp";
 
-// Rodapé comum às páginas: faixa "É creator?", colunas de links, faixas cruzadas e legal.
+// Rodapé comum às páginas: chamada do app para creators, colunas de links, faixas cruzadas e legal.
 export default function SiteFooter() {
   return (
     <>
       <footer className="footer">
         <div className="container">
-          <div className="creators-band reveal" id="creators">
-            <div className="creators-cover" style={{ backgroundImage: `url(${images.hopeCapa})` }} />
-            <div className="creators-copy">
-              <h3 className="h3">{creators.title}</h3>
-              <p className="body">{creators.text}</p>
-            </div>
-            <a href={creators.cta.href} className="btn white">
-              <i className="dot" /> {creators.cta.label}
-            </a>
-          </div>
+          <CreatorApp />
           <div className="footer-cols">
             <div className="footer-col reveal footer-brand">
               <Link href="/" className="logo">

@@ -516,9 +516,20 @@ export const contact = {
 
 /* 15. CREATORS (o "For creators" da referência, no rodapé) */
 export const creators = {
+  tag: "Para creators",
   title: "É creator? Usar a Howhow é grátis.",
   text: "Perfil no casting, convites de marcas, pagamento protegido e saque por Pix grátis toda semana. Tudo pelo app.",
-  cta: { label: "Baixar o app", href: "https://howhow.com.br" }, // [CONFIRMAR] links da App Store / Google Play
+  cta: { label: "Baixar o app", href: "https://howhow.com.br/creator" }, // [CONFIRMAR] links da App Store / Google Play
+  perks: ["Perfil no casting das marcas", "Convites de campanha no celular", "Pagamento protegido", "Saque por Pix grátis toda semana"],
+  // [CONFIRMAR] links oficiais das lojas; por enquanto levam à página de creator do site
+  stores: { ios: "https://howhow.com.br/creator", android: "https://howhow.com.br/creator" },
+  appName: "Howhow",
+  // tela do app no celular (ilustrativa): notificações que chegam em sequência
+  notifications: [
+    { title: "Novo convite", text: "Campanha de skincare · Reels · R$ 800", icon: "invite" },
+    { title: "Entrega aprovada", text: "A marca aprovou o seu vídeo", icon: "ok" },
+    { title: "Pix recebido", text: "R$ 800,00 caiu na sua conta", icon: "pix" },
+  ],
 };
 
 export const footer = {
