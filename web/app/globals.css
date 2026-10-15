@@ -2610,3 +2610,28 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
 .footer-col a.logo { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
 .footer-col a.logo:hover { transform: none; color: var(--ink); }
 .footer-col a.logo img { width: 30px; height: 30px; flex: none; }
+
+/* ================= desempenho: animações pausadas fora da tela e celular mais leve ================= */
+/* .off vem do Reveal: a seção saiu da tela, então nada nela fica animando */
+.off, .off::before, .off::after, .off *, .off *::before, .off *::after { animation-play-state: paused !important; }
+/* mini telas dos 3 passos: invólucro que o IntersectionObserver enxerga */
+.sa-wrap { width: 100%; height: 100%; display: grid; place-items: center; }
+
+@media (max-width: 1024px), (hover: none) {
+  /* desfoque de fundo em elementos fixos é refeito a cada quadro da rolagem: no celular sai */
+  .bottom-blur { display: none; }
+  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255, 255, 255, 0.97); }
+  .vmodal { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(8, 9, 12, 0.97); }
+  .case-video *, .vsl * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  /* entradas sem desfoque animado */
+  @keyframes hn-in { from { opacity: 0; transform: translateY(24px) scale(0.9); } to { opacity: 1; transform: none; } }
+  /* pulsos infinitos que repintam sombra/contorno a cada quadro: no celular fica só a entrada */
+  .tl-step.in:first-child .tl-dot { animation: dot-pop 0.6s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .art-scene.in .a-press, .signup.in .signup-cta { animation: none; }
+  .managed.in .managed-slot:first-child .managed-item:not(.on) .managed-play { animation: none; }
+  .flow6.in li .flow6-dot { animation: dot-pop 0.5s calc(0.35s + var(--i, 0) * 0.2s) cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .dash-dot { animation: a-fade 0.4s 1.7s ease forwards; }
+  .seg-card.in .seg-card-icon { animation: icon-pop 0.7s calc(0.25s + var(--i, 0) * 0.1s) cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .capp.in .capp-icon { animation: capp-icon-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .capp.in .capp-phone { animation: capp-rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+}

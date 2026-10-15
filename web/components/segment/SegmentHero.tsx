@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CreatorKey, SolutionIcon as IconName } from "@/lib/content";
 import { Check } from "../icons";
 import SolutionIcon from "../SolutionIcon";
+import { useInView } from "@/lib/useInView";
 
 type Row = { name: string; who: string; next: string };
 type Props = {
@@ -37,9 +38,10 @@ export default function SegmentHero({ tag, title, text, primary, secondary, note
   const [si, setSi] = useState(0);
   const [count, setCount] = useState(toasts.counter.start);
   const wrap = useRef<HTMLDivElement>(null);
+  const live = useInView(wrap);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!live || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ids = [
       setInterval(() => setTick((t) => t + 1), 2200),
       setInterval(() => setPi((n) => (n + 1) % toasts.people.length), 3800),
@@ -47,7 +49,7 @@ export default function SegmentHero({ tag, title, text, primary, secondary, note
       setInterval(() => setCount((n) => n + 1), 5200),
     ];
     return () => ids.forEach(clearInterval);
-  }, [toasts.people.length, toasts.system.length]);
+  }, [live, toasts.people.length, toasts.system.length]);
 
   // profundidade: painel inclina e notificações andam em velocidades diferentes, seguindo o mouse
   useEffect(() => {

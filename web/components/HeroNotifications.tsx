@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { steps } from "@/lib/content";
+import { useInView } from "@/lib/useInView";
 
 // Notificações flutuando em volta da VSL, no estilo das notificações do iPhone/Mac:
 // cards de vidro com ícone, título, detalhe e "agora"; o conteúdo troca sozinho (a nova sobe,
@@ -42,9 +43,11 @@ export default function HeroNotifications() {
   const [conn, setConn] = useState(0);
   const [views, setViews] = useState(12480);
   const wrap = useRef<HTMLDivElement>(null);
+  const live = useInView(wrap);
 
-  // trocas automáticas (cada card no seu ritmo) e views subindo
+  // trocas automáticas (cada card no seu ritmo) e views subindo, só enquanto aparecem na tela
   useEffect(() => {
+    if (!live) return;
     const a = setInterval(() => setCand((n) => (n + 1) % candidates.length), 3600);
     const b = setInterval(() => setConn((n) => (n + 1) % connections.length), 4300);
     const c = setInterval(() => setViews((n) => n + 40 + Math.round(Math.random() * 260)), 1400);
@@ -53,7 +56,7 @@ export default function HeroNotifications() {
       clearInterval(b);
       clearInterval(c);
     };
-  }, []);
+  }, [live]);
 
   // profundidade: os cards acompanham o mouse em velocidades diferentes
   useEffect(() => {

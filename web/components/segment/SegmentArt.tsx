@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "@/lib/useInView";
 import type { SegmentArt as ArtKey } from "@/lib/content";
 import { Tick } from "../icons";
 
@@ -8,13 +9,13 @@ import { Tick } from "../icons";
 const iv = (i: number) => ({ ["--i" as string]: i }) as React.CSSProperties;
 const face = (c: string) => `/howhow/creators/${c}.jpg`;
 
-function useCycle(n: number, ms = 2600) {
+function useCycle(n: number, ms: number, live: boolean) {
   const [i, setI] = useState(0);
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!live || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => setI((x) => (x + 1) % n), ms);
     return () => clearInterval(id);
-  }, [n, ms]);
+  }, [n, ms, live]);
   return i;
 }
 
@@ -163,13 +164,21 @@ function Report({ client }: { client: number }) {
 }
 
 export default function SegmentArt({ art }: { art: ArtKey }) {
-  const client = useCycle(3);
+  const box = useRef<HTMLDivElement>(null);
+  const live = useInView(box);
+  const client = useCycle(3, 2600, live);
   // as telas de marca não trocam de cliente: a cada 7 s remontam e a entrada roda de novo
-  const replay = useCycle(2, 7000);
-  if (art === "brief") return <Brief key={replay} />;
-  if (art === "shortlist") return <Shortlist key={replay} />;
-  if (art === "compare") return <Compare key={replay} />;
-  if (art === "clientBrief") return <Brief client={client} />;
-  if (art === "clientShortlist") return <Shortlist client={client} />;
-  return <Report client={client} />;
+  const replay = useCycle(2, 7000, live);
+  let el: React.ReactNode;
+  if (art === "brief") el = <Brief key={replay} />;
+  else if (art === "shortlist") el = <Shortlist key={replay} />;
+  else if (art === "compare") el = <Compare key={replay} />;
+  else if (art === "clientBrief") el = <Brief client={client} />;
+  else if (art === "clientShortlist") el = <Shortlist client={client} />;
+  else el = <Report client={client} />;
+  return (
+    <div className="sa-wrap" ref={box}>
+      {el}
+    </div>
+  );
 }

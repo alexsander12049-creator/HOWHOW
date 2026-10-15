@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "@/lib/useInView";
 import { steps } from "@/lib/content";
 import { stepArt } from "./stepArt";
 
@@ -41,8 +42,10 @@ export default function HowItWorks() {
     return () => io.disconnect();
   }, []);
 
-  // linha de progresso ao lado dos passos, acompanhando a rolagem
+  // linha de progresso ao lado dos passos, acompanhando a rolagem (só com a lista na tela)
+  const near = useInView(list, "200px 0px");
   useEffect(() => {
+    if (!near) return;
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -64,7 +67,7 @@ export default function HowItWorks() {
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [near]);
 
   const goTo = (n: number) => blocks.current[n]?.scrollIntoView({ behavior: "smooth", block: "center" });
 
