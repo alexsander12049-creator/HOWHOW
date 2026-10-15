@@ -36,17 +36,18 @@ export const brand = {
 
 export const nav = [
   { label: "Como funciona", href: "#como-funciona" },
+  { label: "Métricas", href: "#metricas" },
+  { label: "CPM", href: "#cpm" },
   { label: "Cases", href: "#cases" },
   { label: "Planos", href: "#planos" },
-  { label: "FAQ", href: "#faq" },
 ];
 export const navCta = { label: "Começar grátis", href: "#planos" };
 
 /* 1. PROMESSA */
 export const hero = {
-  tag: "Plataforma de creator marketing",
-  title: "Transforme creators no canal que mais faz sua marca crescer",
-  text: "Encontre, contrate e pague creators num só lugar, sem prospecção fria, DM ou planilha. São 2.246 creators prontos para a sua marca, com envio de produto, nota fiscal e pagamento protegido.",
+  tag: "Plataforma de UGC e creator marketing",
+  title: "Um exército de creators criando conteúdo viral para a sua marca",
+  text: "A Howhow coloca 2.246 creators UGC produzindo vídeos para a sua marca, sem prospecção fria, DM ou planilha. Você acompanha as views de cada post em tempo real e pode pagar por CPM, só pelo que entregou.",
   primary: { label: "Começar grátis", href: "#planos" },
   secondary: { label: "Agendar demo", href: "#contato" },
   note: "14 dias grátis · zero porcentagem para a marca · cartão, Pix ou boleto",
@@ -74,8 +75,8 @@ export const clients = {
 
 /* 3. NÚMEROS */
 export const scale = {
-  tag: "Creator marketing em escala",
-  title: "2.246 creators prontos para a sua marca",
+  tag: "UGC em escala",
+  title: "Seu exército de UGC, pronto para postar",
   stats: [
     { value: "2.246", label: "creators no casting" },
     { value: "3,1 mi", label: "visualizações em um único case" },
@@ -162,11 +163,74 @@ export const steps = {
   cta: { label: "Começar grátis", href: "#planos" },
 };
 
+/* 4b. MÉTRICAS REAIS (painel por dentro da plataforma) */
+// [CONFIRMAR] o benchmark de out/2026 lista "métricas por post" como recurso a lançar no plano de 30 dias.
+// Os números do painel são ilustrativos (mesmo exemplo do benchmark); `badge` some se ficar vazio.
+export const metrics = {
+  tag: "Métricas reais",
+  badge: "Novo",
+  title: "Acompanhe cada view, por dentro da plataforma.",
+  text: "Views, engajamento e CPM de cada post, atualizados sozinhos. Veja quais creators e formatos trazem resultado e coloque mais verba no que funciona.",
+  campaign: "Lançamento · Sérum Vitamina C",
+  periods: ["7 dias", "30 dias", "90 dias"],
+  kpis: [
+    { label: "Views", values: ["412.380", "1.208.940", "3.104.220"], delta: ["▲ 22%", "▲ 18%", "▲ 31%"], up: true },
+    { label: "Engajamento", values: ["4,6%", "4,1%", "4,3%"], delta: ["▲ 0,8 p.p.", "▲ 0,6 p.p.", "▲ 0,4 p.p."], up: true },
+    { label: "CPM médio", values: ["R$ 12", "R$ 14", "R$ 13"], delta: ["▼ R$ 4", "▼ R$ 3", "▼ R$ 5"], up: true },
+    { label: "Investido", values: ["R$ 5.100", "R$ 17.000", "R$ 41.200"], delta: ["de R$ 6 mil", "de R$ 20 mil", "de R$ 50 mil"], up: true },
+  ],
+  // série de views por dia (formato do gráfico); cada período tem a sua curva
+  series: [
+    [18, 24, 31, 29, 46, 58, 72],
+    [12, 14, 18, 17, 22, 26, 25, 31, 38, 36, 42, 47, 45, 52, 60, 58, 64, 71, 69, 78, 84, 80, 88, 97, 92, 104, 112, 108, 121, 130],
+    [8, 10, 13, 12, 16, 19, 18, 23, 27, 26, 31, 35, 34, 39, 44, 42, 48, 53, 51, 58, 63, 61, 68, 74, 72, 80, 86, 84, 92, 99, 97, 106, 113, 110, 119, 127],
+  ],
+  topPosts: [
+    { handle: "@ju.looks", network: "TikTok", views: "420 mil", cpm: "R$ 6", photo: "c6", thumb: 3 },
+    { handle: "@duda.rotina", network: "Kwai", views: "186 mil", cpm: "R$ 11", photo: "c2", thumb: 2 },
+    { handle: "@ana.pele", network: "Reels", views: "92 mil", cpm: "R$ 19", photo: "c1", thumb: 1 },
+  ],
+  networks: [
+    { name: "Kwai", posts: 22 },
+    { name: "Instagram", posts: 19 },
+    { name: "TikTok", posts: 18 },
+  ],
+  toasts: ["Novo post de @mari.viaja · Reels", "@bruno.fit passou de 50 mil views", "Vídeo de @caio.tech aprovado", "@lu.natural publicou no TikTok"],
+  note: "Painel com dados ilustrativos de uma campanha.",
+  bullets: ["Views e engajamento de cada post", "CPM por creator e por rede", "Top posts para virar anúncio"],
+};
+
+/* 6b. CAMPANHA POR CPM */
+// [CONFIRMAR] "CPM 360°" é a frente nº 1 do benchmark (pagamento automático por views). `badge` some se ficar vazio.
+export const cpm = {
+  tag: "Campanha por CPM",
+  badge: "Novo",
+  title: "Pague pelas views, não pelo post.",
+  text: "Você define quanto paga a cada mil visualizações e o teto da campanha. Os creators postam, a Howhow mede as views sozinha e o pagamento sai por ciclo, calculado pelas views reais.",
+  flow: [
+    { title: "Brief por CPM", text: "R$ por mil views + teto" },
+    { title: "Creators entram", text: "candidaturas abertas pelo app" },
+    { title: "Posts vinculados", text: "o link do post fica na campanha" },
+    { title: "Views medidas", text: "atualização automática" },
+    { title: "Pagamento por ciclo", text: "calculado pelas views" },
+    { title: "Relatório", text: "CPM, views e top posts" },
+  ],
+  calc: {
+    title: "Simule a sua campanha",
+    budget: { label: "Verba da campanha", min: 2000, max: 100000, step: 1000, value: 20000 },
+    price: { label: "Quanto você paga por mil views (CPM)", min: 5, max: 50, step: 1, value: 20 },
+    result: "views estimadas",
+    note: "Estimativa: verba ÷ CPM × 1.000. Você nunca paga acima do teto, e o que sobrar volta para você.",
+  },
+  cycle: { title: "Ciclo de pagamento", days: "14 dias", handle: "@bruno.fit", photo: "c5", views: 3200 },
+  cta: { label: "Criar campanha por CPM", href: "#contato" },
+};
+
 /* 5. CONTEÚDO REAL (vídeos: bolinha de play segue o mouse, clique toca) */
 export const showcase = {
   tag: "Conteúdo real",
-  title: "Creators reais, conteúdo real.",
-  text: "O que os creators da Howhow publicam para as marcas.",
+  title: "Conteúdo feito para viralizar.",
+  text: "Vídeos que os creators da Howhow publicaram para as marcas. Clique e assista.",
   // video: N → web/public/howhow/videos/video-N.mp4 (capa: capa-N.jpg)
   // [CONFIRMAR] título e resultado de cada vídeo
   items: [
@@ -394,6 +458,8 @@ export const faq = {
   tag: "FAQ",
   title: "Suas dúvidas, respondidas.",
   items: [
+    { q: "Como funciona a campanha por CPM?", a: "Você define quanto paga a cada mil visualizações e o teto da campanha. Os creators postam, a Howhow mede as views de cada post sozinha e o pagamento sai por ciclo, calculado pelas views reais. Nunca passa do teto." },
+    { q: "Consigo ver as métricas de cada post?", a: "Sim. No painel da campanha você acompanha views, engajamento e CPM de cada post, por creator e por rede, atualizados automaticamente." },
     { q: "Quanto custa?", a: "De R$ 497 a R$ 2.497 por mês, ou a partir de R$ 397/mês no plano anual. Os 14 primeiros dias são grátis. O cachê dos creators é à parte, e a marca não paga porcentagem em cima dele." },
     { q: "Como funciona o teste grátis?", a: "São 14 dias com 1 campanha e 3 convites para creators. Depois você escolhe Start, Growth ou Scale e paga com cartão, Pix ou boleto." },
     { q: "Quanto eu pago para cada creator?", a: "Você define um teto e vê o preço de cada creator antes de fechar. Se ele fechar abaixo do teto, a diferença volta para você. Dá para pagar em permuta + cachê, valor fixo, por views ou post + bônus." },

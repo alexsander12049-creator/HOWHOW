@@ -12,11 +12,13 @@ import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
 import Results from "@/components/Results";
 import HowItWorks from "@/components/HowItWorks";
+import MetricsDashboard from "@/components/MetricsDashboard";
+import CpmCampaign from "@/components/CpmCampaign";
 import Refund from "@/components/Refund";
 import Num from "@/components/Num";
 import { Check, Cross, Heart, Instagram, Sparkle } from "@/components/icons";
 import {
-  brand, clients, compare, creators, faq, finalCta, footer, hero, managed, plans, scale, showcase, start, steps, stories,
+  brand, clients, compare, cpm, creators, faq, finalCta, footer, hero, managed, metrics, plans, scale, showcase, start, steps, stories,
 } from "@/lib/content";
 import { images } from "@/lib/images";
 
@@ -179,6 +181,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4b. MÉTRICAS REAIS */}
+      <section className="section" id="metricas">
+        <div className="container">
+          <div className="heading">
+            <span className="tag reveal">
+              <span className="tag-icon">
+                <Sparkle />
+              </span>
+              {metrics.tag}
+              {metrics.badge && <em className="badge-new">{metrics.badge}</em>}
+            </span>
+            <h2 className="h2 reveal">{metrics.title}</h2>
+            <p className="lead center muted reveal">{metrics.text}</p>
+          </div>
+          <MetricsDashboard />
+          <div className="metrics-bullets">
+            {metrics.bullets.map((b, i) => (
+              <span className="pill sm reveal" key={b} style={{ ["--i" as string]: i }}>
+                <Check color="#0096dc" /> {b}
+              </span>
+            ))}
+          </div>
+          <p className="small muted center reveal">{metrics.note}</p>
+        </div>
+      </section>
+
       {/* 5. CONTEÚDO REAL */}
       <section className="section" id="conteudo">
         <div className="container">
@@ -205,6 +233,13 @@ export default function Home() {
           </div>
           <Testimonials />
           <Results />
+        </div>
+      </section>
+
+      {/* 6b. CAMPANHA POR CPM */}
+      <section className="section" id="cpm">
+        <div className="container">
+          <CpmCampaign />
         </div>
       </section>
 
