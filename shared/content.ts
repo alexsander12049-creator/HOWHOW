@@ -38,8 +38,9 @@ export const nav = [
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Métricas", href: "#metricas" },
   { label: "CPM", href: "#cpm" },
-  { label: "Cases", href: "#cases" },
   { label: "Planos", href: "#planos" },
+  { label: "Marcas", href: "/marcas" },
+  { label: "Agências", href: "/agencias" },
 ];
 export const navCta = { label: "Começar grátis", href: "#planos" };
 
@@ -478,8 +479,217 @@ export const creators = {
 
 export const footer = {
   columns: [
-    { title: "Plataforma", links: [{ label: "Como funciona", href: "#como-funciona" }, { label: "Cases", href: "#cases" }, { label: "Planos", href: "#planos" }, { label: "Howhow Gerenciado", href: "#gerenciado" }] },
-    { title: "Howhow", links: [{ label: "FAQ", href: "#faq" }, { label: "Agendar demo", href: "#contato" }, { label: "Para agências", href: "#agencias" }, { label: "Para creators", href: "#creators" }] },
+    { title: "Plataforma", links: [{ label: "Como funciona", href: "/#como-funciona" }, { label: "Métricas", href: "/#metricas" }, { label: "Planos", href: "/#planos" }, { label: "Howhow Gerenciado", href: "/#gerenciado" }] },
+    { title: "Howhow", links: [{ label: "Para marcas", href: "/marcas" }, { label: "Para agências", href: "/agencias" }, { label: "Para creators", href: "#creators" }, { label: "Agendar demo", href: "#contato" }] },
     { title: "Legal", links: [{ label: "Política de Privacidade", href: "https://howhow.com.br" }, { label: "Termos de Uso", href: "https://howhow.com.br" }, { label: "Exclusão de Dados", href: "https://howhow.com.br" }] },
   ],
+};
+
+/* ================================================================================================
+   PÁGINAS POR PÚBLICO: /marcas e /agencias
+   Estrutura da referência (sideshift.app/solutions/brands e /for-agencies) + argumentos da página antiga
+   da Howhow (howhow.com.br/brand e /agency). Números e depoimentos antigos sem confirmação ficam de fora:
+   [CONFIRMAR] "10 mil+ criadores", "10k+ campanhas", "98% prazos", "100M+ movimentados", "-32% retrabalho",
+   "+87% faturamento", "+40% eficiência", "-30% tempo operacional", depoimentos sem nome, creator "Exclusive",
+   "uma NF para a agência", link do cliente, permissões da equipe.
+   ================================================================================================ */
+export type SegmentArt = "brief" | "shortlist" | "compare" | "clientBrief" | "clientShortlist" | "report";
+
+export const brandsPage = {
+  meta: {
+    title: "Howhow para marcas — Seu programa de creators, dentro de casa",
+    description: "Briefing, aprovação, contrato, nota fiscal e pagamento de creators num fluxo só. 7 dias grátis.",
+  },
+  nav: [
+    { label: "Como funciona", href: "#como-funciona" },
+    { label: "Painel", href: "#painel" },
+    { label: "Planos", href: "#planos" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Agências", href: "/agencias" },
+  ],
+  navCta: { label: "Começar grátis", href: "#planos" },
+  hero: {
+    tag: "Howhow para marcas",
+    title: "Seu programa de creators, dentro de casa.",
+    text: "Briefing, aprovação, contrato, nota fiscal e pagamento num fluxo só. Cada campanha ensina o que fazer na próxima, e esse aprendizado fica com a sua marca.",
+    primary: { label: "Começar grátis", href: "#planos" },
+    secondary: { label: "Agendar demo", href: "#contato" },
+    note: "7 dias grátis · zero porcentagem para a marca",
+    bullets: ["Seu briefing e o seu padrão de aprovação", "Relacionamento direto com os creators", "O aprendizado de cada campanha fica com você"],
+    board: {
+      title: "O que precisa da sua atenção hoje?",
+      label: "Seu programa de creators",
+      rows: [
+        { name: "Criativo A", who: "c1" as CreatorKey, next: "Enviar o briefing" },
+        { name: "Criativo B", who: "c6" as CreatorKey, next: "Revisar o vídeo" },
+        { name: "Criativo C", who: "c5" as CreatorKey, next: "Aprovar o pagamento" },
+      ],
+      steps: ["Tudo junto", "Próximo passo à vista", "Avance num clique"],
+    },
+  },
+  before: {
+    tag: "Sem Howhow × Com Howhow",
+    title: "Saia do direct, da planilha e da validação manual.",
+    columns: [
+      { title: "Sem Howhow", good: false, items: ["Negociações longas e inseguras", "Ajustes constantes durante a execução", "Retrabalho entre marketing, jurídico e financeiro", "Difícil comparar resultados entre campanhas", "Mais tempo gasto, menos previsibilidade"] },
+      { title: "Com Howhow", good: true, items: ["Menos ajustes fora do combinado", "Briefing, entrega e público certo alinhados", "Campanhas fechadas mais rápido", "Controle do que será entregue e quando", "Contrato, gestão e faturamento unificados"] },
+    ],
+  },
+  steps: {
+    tag: "Como funciona",
+    title: "Do primeiro briefing a um programa de creators da casa.",
+    text: "Comece com uma campanha focada e monte o casting e o processo em volta do que a sua marca precisa.",
+    items: [
+      { title: "Dê à campanha um dono e um objetivo.", text: "Escolha o produto, o público e a pergunta criativa. Defina entregáveis, direitos de uso e quem aprova, para todo mundo saber o que é um bom conteúdo.", checks: ["Produto e objetivo da campanha", "Entregáveis e direitos de uso claros", "Um responsável pela aprovação"], art: "brief" as SegmentArt, label: "Defina o padrão" },
+      { title: "Escolha creators que combinam com o produto.", text: "Veja quem se candidatou, compare o encaixe e combine o trabalho antes de gravar. Conversas, envios e ajustes ficam juntos.", checks: ["Creators com encaixe no produto", "Trabalho combinado antes da produção", "Feedback junto de cada envio"], art: "shortlist" as SegmentArt, label: "Monte seu casting" },
+      { title: "Transforme cada campanha num briefing melhor.", text: "Compare creators e formatos com o objetivo, chame de volta quem foi bem e leve o melhor conteúdo para anúncio quando os direitos de uso permitirem.", checks: ["CPM por creator", "Recontrate os melhores", "Escolha a próxima aposta"], art: "compare" as SegmentArt, label: "Decida o próximo investimento" },
+    ],
+  },
+  control: {
+    tag: "Painel",
+    title: "Acompanhe tudo numa tela só.",
+    text: "Métricas, aprovações, relatórios e verba. Tudo centralizado para o seu time escalar resultados.",
+    cards: [
+      { title: "Visão da campanha", text: "Status das publicações, alcance e verba investida em tempo real." },
+      { title: "Performance de cada post", text: "Views, engajamento e CPM por post, por creator e por rede." },
+      { title: "Verba sob controle", text: "Clareza de onde cada real vai, com a sobra devolvida para você." },
+      { title: "Hub de aprovação", text: "Revise roteiros e vídeos num só lugar, protegendo a sua marca." },
+    ],
+  },
+  flow: {
+    tag: "Fluxo",
+    title: "Do briefing ao relatório, sem atrito.",
+    text: "Desenhado para tirar o risco da operação e aproveitar melhor a sua verba de marketing.",
+    steps: ["Envie seu desafio", "Receba o casting ideal", "Aprove a estratégia", "Acompanhe a produção", "Valide o conteúdo", "Mensure o resultado"],
+  },
+  why: {
+    tag: "UGC em volume",
+    title: "Um programa de creators que melhora a cada campanha.",
+    text: "Rodar UGC dentro de casa é ser dono do conteúdo e do aprendizado. Comece com um briefing focado e cresça o casting em volta do que funciona.",
+    cards: [
+      { title: "Monte seu casting", text: "Você não precisa de um time enorme no primeiro dia. Escolha creators pelo encaixe, revise o trabalho e leve os melhores para a próxima campanha." },
+      { title: "Organize o trabalho", text: "Mais conteúdo é mais aprovação e mais pagamento. Briefing, envios, notas fiscais e pagamentos ficam num lugar só." },
+      { title: "Aprenda antes de gastar mais", text: "Compare creators e formatos com o objetivo e decida quais ideias merecem outro briefing ou um teste pago." },
+    ],
+  },
+  faq: [
+    { q: "Qual a diferença para contratar uma agência?", a: "Na Howhow o seu time tem as ferramentas de uma agência (casting, gestão de campanha, pagamentos e métricas) sem fee em cima de cada creator. O relacionamento com os creators e os conteúdos ficam com a sua marca." },
+    { q: "Com quantos creators posso trabalhar?", a: "Depende do plano: até 10 creators no Start, 40 no Growth e sem limite no Scale." },
+    { q: "Preciso de um time dedicado?", a: "Não. Briefing, candidaturas, contratos, notas fiscais e pagamentos ficam num fluxo só, pensado para times enxutos." },
+    { q: "Como sei que os números dos creators são reais?", a: "Os números do How Perfil vêm das redes que o próprio creator conecta, não de print." },
+    { q: "Como garanto que o conteúdo segue as diretrizes da marca?", a: "Você define o briefing e aprova roteiros e vídeos antes da publicação. Os ajustes são pedidos dentro da plataforma." },
+    { q: "Como acompanho os resultados?", a: "No painel da campanha: views, engajamento e CPM de cada post, por creator e por rede." },
+    { q: "O pagamento aos creators é seguro?", a: "Sim. O pagamento fica protegido e só é liberado quando você aprova a entrega, com nota fiscal." },
+    { q: "Posso testar antes de assinar?", a: "Sim: 7 dias grátis com 1 campanha e 3 convites. Depois você escolhe Start, Growth ou Scale." },
+  ],
+  final: {
+    tag: "Comece agora",
+    title: "Monte um programa de creators que melhora a cada campanha.",
+    text: "Comece grátis por 7 dias ou fale com o nosso time para montar a primeira campanha junto.",
+  },
+  profiles: ["Sou Marca"],
+};
+
+export const agenciesPage = {
+  meta: {
+    title: "Howhow para agências — Campanhas com creators para todos os seus clientes",
+    description: "Briefings, creators, aprovações, relatórios e pagamentos de cada cliente num painel só, com white-label da sua agência.",
+  },
+  nav: [
+    { label: "Como funciona", href: "#como-funciona" },
+    { label: "White-label", href: "#white-label" },
+    { label: "Painel", href: "#painel" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Marcas", href: "/marcas" },
+  ],
+  navCta: { label: "Agendar demo", href: "#contato" },
+  hero: {
+    tag: "Howhow para agências",
+    title: "Campanhas com creators para todos os seus clientes, num lugar só.",
+    text: "Briefings, creators, aprovações, relatórios e pagamentos de cada cliente juntos, sem malabarismo entre ferramentas. Sua equipe foca na estratégia.",
+    primary: { label: "Agendar demo", href: "#contato" },
+    secondary: { label: "Ver o white-label", href: "#white-label" },
+    note: "White-label com a marca da sua agência",
+    bullets: ["Um briefing para cada cliente", "Trabalho e feedback dos creators juntos", "Relatório que vira a próxima campanha"],
+    board: {
+      title: "O que precisa da nossa atenção hoje?",
+      label: "Todos os clientes. Um painel.",
+      rows: [
+        { name: "Cliente A", who: "c2" as CreatorKey, next: "Enviar o briefing" },
+        { name: "Cliente B", who: "c4" as CreatorKey, next: "Revisar o vídeo" },
+        { name: "Cliente C", who: "c8" as CreatorKey, next: "Aprovar o pagamento" },
+      ],
+      steps: ["Tudo junto", "Próximo passo à vista", "Avance num clique"],
+    },
+  },
+  before: {
+    tag: "O fim do caos",
+    title: "O fim do caos na gestão de influência.",
+    columns: [
+      { title: "Sem Howhow", good: false, items: ["Dezenas de grupos no WhatsApp", "Uma nota fiscal para cada influenciador", "Roteiros e aprovações perdidos no e-mail", "Cobrança manual de prazos e entregas", "Relatório montado do zero"] },
+      { title: "Com Howhow", good: true, items: ["Comunicação centralizada num painel", "Faturamento unificado", "Aprovação de conteúdo na plataforma", "Prazos e entregas acompanhados", "Métricas atualizadas em tempo real"] },
+    ],
+  },
+  steps: {
+    tag: "Como funciona",
+    title: "Repita o processo. Mantenha cada cliente com a sua cara.",
+    text: "Um jeito único de coordenar creators, preservando o objetivo, a voz e o padrão de aprovação de cada conta.",
+    items: [
+      { title: "Uma direção criativa para cada conta.", text: "Transforme o objetivo do cliente em contexto de produto, ângulos e entregáveis. Combine direitos de uso e quem aprova antes de os creators começarem.", checks: ["Objetivo e voz de cada cliente", "Entregáveis e direitos de uso", "Responsáveis pela aprovação"], art: "clientBrief" as SegmentArt, label: "Traduza o briefing do cliente" },
+      { title: "Creators certos para cada cliente, não só para a vaga.", text: "Avalie creators pelo público e pelo produto de cada cliente. Envios, revisões e conversas ficam juntos, e a próxima campanha começa de onde a outra parou.", checks: ["Encaixe para cada cliente", "Um processo único de envio", "Feedback que segue para a próxima"], art: "clientShortlist" as SegmentArt, label: "Monte o casting certo" },
+      { title: "Dê ao cliente um motivo para a próxima rodada.", text: "Mostre quais creators e formatos foram melhor no objetivo, explique o aprendizado e recomende o próximo briefing, um creator de volta ou um teste pago.", checks: ["Relatório contra o objetivo do cliente", "O aprendizado criativo explicado", "Recomendação do que testar ou repetir"], art: "report" as SegmentArt, label: "Reporte e recomende" },
+    ],
+  },
+  whiteLabel: {
+    tag: "White-label",
+    title: "A Howhow com a marca da sua agência.",
+    text: "Seu logo, suas cores e o seu domínio. Seus clientes e creators veem a sua agência do começo ao fim.",
+    domain: "creators.suaagencia.com.br",
+    agencyName: "Sua Agência",
+    bullets: ["Logo, cores e domínio da agência", "Traga suas marcas e seus creators: só a mensalidade", "Usando creators da Howhow: 15% do cachê desses creators"],
+    monthly: "R$ 4.990,90",
+    annual: "R$ 3.990",
+    cta: { label: "Falar com vendas", href: "#contato" },
+  },
+  control: {
+    tag: "Painel",
+    title: "O controle de todas as campanhas numa tela só.",
+    text: "Campanhas, mensagens, entregáveis e notas fiscais centralizados, para a equipe focar na estratégia.",
+    cards: [
+      { title: "Gestão de campanhas", text: "Status, briefings e prazos de cada cliente em tempo real." },
+      { title: "Métricas sincronizadas", text: "Alcance, views e engajamento direto das redes." },
+      { title: "Faturamento simplificado", text: "Faturamento e pagamentos de todos os creators numa tela." },
+      { title: "Conversa direta", text: "Fale com o casting sem se perder em grupos e redes." },
+    ],
+  },
+  flow: {
+    tag: "Fluxo",
+    title: "Do briefing ao relatório, sem atrito.",
+    text: "Desenhado para tirar a burocracia entre a sua agência e os creators.",
+    steps: ["Criar a campanha", "Encontrar creators", "Gerenciar convites", "Alinhar a execução", "Aprovar os criativos", "Acompanhar resultados"],
+  },
+  why: {
+    tag: "UGC em volume",
+    title: "Mais criativos para os clientes. Um processo que sua equipe repete.",
+    text: "Clientes querem ideias novas e um motivo para continuar investindo. Um programa de creators repetível entrega os dois sem começar do zero todo mês.",
+    cards: [
+      { title: "Cada marca com a sua cara", text: "Um briefing e um padrão de aprovação para cada cliente. Mais conteúdo deve trazer variações úteis, não o mesmo roteiro com outro logo." },
+      { title: "Repetir fica mais fácil", text: "Monte um casting de creators que já entendem o briefing. Envios, feedback e pagamentos seguem juntos conforme as campanhas crescem." },
+      { title: "Mostre o que a campanha ensinou", text: "Ligue cada leva de conteúdo ao objetivo do cliente, mostre quem performou e explique o que testar ou repetir." },
+    ],
+  },
+  faq: [
+    { q: "Que tipo de agência usa a Howhow?", a: "Agências de influência, de UGC e de performance que rodam campanhas com creators para clientes e precisam de uma operação que escala." },
+    { q: "Dá para usar com vários clientes?", a: "Sim. Cada cliente tem os seus briefings, creators, entregas e relatórios separados, num painel único da agência." },
+    { q: "O white-label é de verdade?", a: "Sim: o seu logo, as suas cores e o seu domínio, como creators.suaagencia.com.br." },
+    { q: "Quanto custa?", a: "R$ 4.990,90 por mês, ou R$ 3.990/mês no anual. Trazendo as suas marcas e os seus creators, você paga só a mensalidade; usando creators da Howhow, 15% do cachê desses creators." },
+    { q: "Como gerencio creators e campanhas num lugar só?", a: "Campanhas, mensagens, entregáveis e notas fiscais ficam centralizados no painel, para a equipe focar na estratégia." },
+    { q: "Quanto tempo até as primeiras postagens?", a: "Com o onboarding guiado, a primeira campanha pode estar no ar em até 48 horas." },
+  ],
+  final: {
+    tag: "Próximo cliente",
+    title: "Deixe a próxima campanha do seu cliente mais fácil de rodar.",
+    text: "Traga um briefing de cliente e mostramos a operação rodando com a marca da sua agência.",
+  },
+  profiles: ["Sou Agência"],
 };

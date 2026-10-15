@@ -2,7 +2,9 @@
 import { useEffect, useState } from "react";
 import { brand, nav, navCta } from "@/lib/content";
 
-export default function Nav() {
+type Link = { label: string; href: string };
+// `links`/`cta`: cada página (principal, marcas, agências) passa o seu menu.
+export default function Nav({ links = nav, cta = navCta }: { links?: Link[]; cta?: Link }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [launch, setLaunch] = useState(false);
@@ -36,14 +38,14 @@ export default function Nav() {
           <span className="logo-word">{brand.name}</span>
         </a>
         <div className="nav-links">
-          {nav.map((l) => (
+          {links.map((l) => (
             <a key={l.href} href={l.href}>
               {l.label}
             </a>
           ))}
         </div>
-        <a href={navCta.href} className="btn black">
-          {navCta.label}
+        <a href={cta.href} className="btn black">
+          {cta.label}
         </a>
         <button
           className={`burger${open ? " open" : ""}`}
@@ -56,13 +58,13 @@ export default function Nav() {
         </button>
       </div>
       <div className="nav-menu">
-        {nav.map((l) => (
+        {links.map((l) => (
           <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
             {l.label}
           </a>
         ))}
-        <a href={navCta.href} className="btn black full" onClick={() => setOpen(false)}>
-          {navCta.label}
+        <a href={cta.href} className="btn black full" onClick={() => setOpen(false)}>
+          {cta.label}
         </a>
       </div>
     </nav>

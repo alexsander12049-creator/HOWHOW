@@ -4,8 +4,8 @@ import { contact } from "@/lib/content";
 
 // O envio ainda não vai para lugar nenhum: ligue `onSubmit` a uma API (ex.: app/api/contato/route.ts),
 // a um CRM ou a um serviço de e-mail antes de publicar.
-export default function ContactForm() {
-  const [perfil, setPerfil] = useState(contact.profiles[0]);
+export default function ContactForm({ profiles = contact.profiles }: { profiles?: string[] }) {
+  const [perfil, setPerfil] = useState(profiles[0]);
   const [sent, setSent] = useState(false);
 
   if (sent) {
@@ -31,7 +31,7 @@ export default function ContactForm() {
       <div className="full" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <span style={{ fontSize: 14, color: "rgba(255,255,255,.6)" }}>Você é</span>
         <div className="chips">
-          {contact.profiles.map((p) => (
+          {profiles.map((p) => (
             <button type="button" key={p} className={`chip${p === perfil ? " on" : ""}`} onClick={() => setPerfil(p)}>
               {p}
             </button>

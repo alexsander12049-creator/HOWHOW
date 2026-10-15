@@ -3,11 +3,11 @@ import { useState } from "react";
 import { faq } from "@/lib/content";
 import { Plus } from "./icons";
 
-export default function Faq() {
+export default function Faq({ items = faq.items }: { items?: { q: string; a: string }[] }) {
   const [open, setOpen] = useState(0);
   return (
     <div className="faq reveal">
-      {faq.items.map((it, n) => (
+      {items.map((it, n) => (
         <div key={it.q} className={`faq-item${open === n ? " open" : ""}`} style={{ ["--i" as string]: n }}>
           <button className="faq-q" aria-expanded={open === n} onClick={() => setOpen(open === n ? -1 : n)}>
             <span>{it.q}</span>
