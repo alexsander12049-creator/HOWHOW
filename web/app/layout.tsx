@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Howhow — Um exército de creators UGC para a sua marca",
   description:
     "2.246 creators UGC criando conteúdo viral para a sua marca. Acompanhe as views de cada post em tempo real e pague por CPM. 7 dias grátis.",
-  icons: { icon: "/howhow/foguete.png" },
 };
 
 export const viewport: Viewport = { themeColor: "#f2f2f2" };
