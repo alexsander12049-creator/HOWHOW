@@ -7,6 +7,7 @@ import CaseVideo from "@/components/CaseVideo";
 import VslPlayer from "@/components/VslPlayer";
 import VideoModal from "@/components/VideoModal";
 import ScrollProgress from "@/components/ScrollProgress";
+import RocketCursor from "@/components/RocketCursor";
 import GoalTabs from "@/components/GoalTabs";
 import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
@@ -72,6 +73,7 @@ export default function Home() {
     <>
       <Reveal />
       <ScrollProgress />
+      <RocketCursor />
       <VideoModal />
       <Nav />
 
