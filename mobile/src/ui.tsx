@@ -47,7 +47,6 @@ export function Grid({ children, cols, gap = 10, spans }: { children: ReactNode;
 export function Tag({ children }: { children: string }) {
   return (
     <View style={s.tag}>
-      <View style={s.tagIcon} />
       <Text style={s.tagText}>{children}</Text>
     </View>
   );
@@ -149,9 +148,8 @@ export function FadeIn({ children, delay = 0, style }: { children: ReactNode; de
 export const s = StyleSheet.create({
   section: { width: "100%", maxWidth: 1090, paddingHorizontal: 20, paddingVertical: 60, gap: 30, alignItems: "stretch" },
   heading: { alignItems: "center", gap: 15 },
-  tag: { flexDirection: "row", alignItems: "center", gap: 9, paddingVertical: 7, paddingLeft: 12, paddingRight: 14, borderRadius: 40, backgroundColor: "#fff", borderWidth: 1, borderColor: "#dcdcdc", alignSelf: "center" },
-  tagIcon: { width: 6, height: 6, borderRadius: 3, backgroundColor: c.orange },
-  tagText: { fontFamily: f.semibold, fontSize: 13, color: c.ink2 },
+  tag: { flexDirection: "row", alignItems: "center", alignSelf: "center" },
+  tagText: { fontFamily: f.semibold, fontSize: 14, color: c.muted },
   h1: { fontFamily: f.bold, fontSize: 40, letterSpacing: -2, lineHeight: 44, textAlign: "center", color: c.ink },
   h2: { fontFamily: f.semibold, fontSize: 34, letterSpacing: -1.7, lineHeight: 38, textAlign: "center", color: c.ink },
   h4: { fontFamily: f.medium, fontSize: 20, letterSpacing: -0.4, lineHeight: 24, color: c.ink },

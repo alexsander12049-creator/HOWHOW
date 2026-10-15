@@ -2383,3 +2383,10 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
   .managed.in .managed-slot:first-child .managed-item .managed-play { animation: none; }
   .mpop { animation: none; }
 }
+
+/* etiquetas acima dos títulos: só o texto, sem cápsula, sem ícone (e o "Novo" como palavra em laranja) */
+.tag, .pricing .tag { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; gap: 8px; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; color: var(--muted); }
+.pricing .tag { color: #a9aebb; }
+.tag .tag-icon { display: none; }
+.tag .badge-new { background: none; padding: 0; border-radius: 0; color: var(--orange); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; animation: none; }
+.managed-tag.pill { padding: 0; border: 0; background: none; color: #a0a4b0; font-size: 14px; font-weight: 600; }
