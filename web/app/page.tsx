@@ -16,7 +16,7 @@ import HowItWorks from "@/components/HowItWorks";
 import MetricsDashboard from "@/components/MetricsDashboard";
 import CpmCampaign from "@/components/CpmCampaign";
 import Refund from "@/components/Refund";
-import Num from "@/components/Num";
+import ScaleStats from "@/components/ScaleStats";
 import { Check, Cross, Sparkle } from "@/components/icons";
 import { Cta, Heading, Tag, Ticker } from "@/components/ui";
 import SiteFooter from "@/components/SiteFooter";
@@ -83,17 +83,7 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <Heading tag={scale.tag} title={scale.title} />
-          <div className="scale">
-            {scale.stats.map((s, i) => (
-              <div className="scale-stat reveal" key={s.label} style={{ ["--i" as string]: i }}>
-                <b>
-                  <Num value={s.value} delay={i * 150} duration={1600} />
-                </b>
-                <i className="scale-line" aria-hidden />
-                <span>{s.label}</span>
-              </div>
-            ))}
-          </div>
+          <ScaleStats />
           <Ticker
             items={scale.ticker.map((t) => (
               <span className="pill" key={t}>

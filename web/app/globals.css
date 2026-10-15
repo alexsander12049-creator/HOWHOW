@@ -2051,3 +2051,67 @@ html.rc-on select { cursor: auto !important; }
   .seg-board-wrap .seg-board { transform: none; }
   .flow6.in li .flow6-dot { animation: none; }
 }
+
+/* ================= números de escala: painel único, estilo dashboard ================= */
+.stats { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #fff; border: 1px solid var(--line); border-radius: 28px; overflow: hidden;
+  box-shadow: 0 40px 80px -60px rgba(13, 14, 17, 0.35); }
+.section.white .stats { background: var(--bg); --off: #dedede; }
+.stat { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 30px 30px 28px; min-width: 0; transition: background 0.4s ease; }
+.stat + .stat { border-left: 1px solid var(--line); }
+.stat:hover { background: rgba(0, 0, 0, 0.015); }
+.stat-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.stat-eyebrow i { width: 7px; height: 7px; border-radius: 2px; background: var(--ink); }
+.stat:nth-child(2) .stat-eyebrow i { background: var(--orange); }
+.stat:nth-child(3) .stat-eyebrow i { background: var(--blue); }
+.stat-num { display: flex; align-items: baseline; gap: 2px; font-size: 68px; font-weight: 600; letter-spacing: -0.055em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; margin-top: 6px; }
+.stat-num > .num { font-size: inherit; font-weight: inherit; letter-spacing: inherit; color: inherit; }
+.stat-num small { font-size: 0.5em; font-weight: 500; letter-spacing: -0.02em; color: var(--muted); }
+.stat-label { margin: 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); max-width: 240px; }
+.stat-viz { margin-top: auto; padding-top: 18px; height: 64px; box-sizing: content-box; }
+/* casting: rostos empilhados */
+.stat-people { display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.stat-faces { display: flex; }
+.stat-faces img, .stat-faces em { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; margin-left: -9px; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.3); }
+.stat-faces img:first-child { margin-left: 0; }
+.stat-faces em { display: grid; place-items: center; font-style: normal; font-size: 16px; font-weight: 700; background: var(--ink); color: #fff; }
+.stat-note { font-size: 12px; font-weight: 600; color: var(--muted); }
+/* engajamento: mini gráfico de barras */
+.stat-bars { display: flex; align-items: flex-end; gap: 5px; }
+.stat-bars i { flex: 1; border-radius: 3px 3px 1px 1px; background: var(--off, #e9e9e9); transform-origin: bottom; }
+.stat-bars i.top { background: var(--orange); box-shadow: 0 6px 16px -6px rgba(255, 77, 0, 0.7); }
+.stat-bars i:nth-last-child(2), .stat-bars i:nth-last-child(3) { background: #ffc9b0; }
+/* aprovação: barra segmentada (cada segmento = 4%) */
+.stat-segs { display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); gap: 3px; align-items: end; height: 22px; padding-top: 60px; }
+.stat-segs i { height: 22px; border-radius: 3px; background: var(--off, #e9e9e9); }
+.stat-segs i.on { background: var(--blue); }
+
+/* entradas: painel sobe, cada coluna entra em sequência, rostos/barras/segmentos se montam */
+.stats .stat > * { opacity: 0; }
+.stats.in .stat > * { animation: a-in 0.6s calc(0.15s + var(--i, 0) * 0.15s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.stats.in .stat > .stat-viz { animation-delay: calc(0.35s + var(--i, 0) * 0.15s); }
+.stats .stat-faces > * { opacity: 0; }
+.stats.in .stat-faces > * { animation: a-face 0.5s calc(0.6s + var(--k, 0) * 0.07s) cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.stats .stat-bars i { transform: scaleY(0); }
+.stats.in .stat-bars i { animation: stat-bar 0.7s calc(0.7s + var(--k, 0) * 0.05s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes stat-bar { to { transform: scaleY(1); } }
+.stats .stat-segs i.on { background: var(--off, #e9e9e9); }
+.stats.in .stat-segs i.on { animation: seg-on 0.3s calc(0.9s + var(--k, 0) * 0.04s) ease-out both; }
+@keyframes seg-on { from { background: var(--off, #e9e9e9); } to { background: var(--blue); } }
+/* depois de montado: a barra destacada "respira" e o último segmento aceso pulsa de leve */
+.stats.in .stat-bars i.top { animation: stat-bar 0.7s calc(0.7s + var(--k, 0) * 0.05s) cubic-bezier(0.2, 0.8, 0.2, 1) both, bar-breathe 2.8s 2s ease-in-out infinite; }
+@keyframes bar-breathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.9); } }
+
+@media (max-width: 1199.98px) { .stat-num { font-size: 56px; } .stat { padding: 26px 24px 24px; } }
+@media (max-width: 809.98px) {
+  .stats { grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
+  .stat + .stat { border-left: 0; border-top: 1px solid var(--line); }
+  .stat-num { font-size: 52px; }
+  .stat-label { max-width: none; }
+  .stat-viz { height: 52px; }
+  .stat-segs { padding-top: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stats .stat > *, .stats .stat-faces > * { opacity: 1; animation: none !important; }
+  .stats .stat-bars i { transform: none; animation: none !important; }
+  .stats .stat-segs i.on { background: var(--blue); animation: none !important; }
+}

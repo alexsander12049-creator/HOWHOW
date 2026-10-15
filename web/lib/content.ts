@@ -101,9 +101,9 @@ export const scale = {
   tag: "UGC em escala",
   title: "Seu exército de UGC, pronto para postar",
   stats: [
-    { value: "2.246", label: "creators no casting" },
-    { value: "8,4%", label: "de engajamento médio nos cases" },
-    { value: "96%", label: "das entregas aprovadas sem retrabalho" },
+    { value: "2.246", label: "creators no casting", eyebrow: "Casting", viz: "people" as const },
+    { value: "8,4%", label: "de engajamento médio nos cases", eyebrow: "Engajamento", viz: "bars" as const },
+    { value: "96%", label: "das entregas aprovadas sem retrabalho", eyebrow: "Aprovação", viz: "segments" as const },
   ],
   // faixa com exemplos de campanhas (ilustrativo, sem marca real)
   ticker: [

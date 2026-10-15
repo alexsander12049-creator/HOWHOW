@@ -13,7 +13,7 @@ import ContactForm from "../ContactForm";
 import SiteFooter from "../SiteFooter";
 import { Check, Cross } from "../icons";
 import { Heading, Tag, Ticker } from "../ui";
-import Num from "../Num";
+import ScaleStats from "../ScaleStats";
 import { brandsPage, agenciesPage, plans, scale, showcase, stories } from "@/lib/content";
 import SegmentHero from "./SegmentHero";
 import WhiteLabel from "./WhiteLabel";
@@ -73,17 +73,7 @@ export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas"
       <section className="section white">
         <div className="container">
           <Heading tag={scale.tag} title={scale.title} />
-          <div className="scale">
-            {scale.stats.map((s, i) => (
-              <div className="scale-stat reveal" key={s.label} style={{ ["--i" as string]: i }}>
-                <b>
-                  <Num value={s.value} delay={i * 150} duration={1600} />
-                </b>
-                <i className="scale-line" aria-hidden />
-                <span>{s.label}</span>
-              </div>
-            ))}
-          </div>
+          <ScaleStats />
           <Ticker
             items={scale.ticker.map((t) => (
               <span className="pill" key={t}>
