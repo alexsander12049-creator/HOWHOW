@@ -10,7 +10,6 @@ import ScrollProgress from "@/components/ScrollProgress";
 import RocketCursor from "@/components/RocketCursor";
 import HeroNotifications from "@/components/HeroNotifications";
 import GoalTabs from "@/components/GoalTabs";
-import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
 import HowItWorks from "@/components/HowItWorks";
 import MetricsDashboard from "@/components/MetricsDashboard";
@@ -22,7 +21,7 @@ import { Cta, Heading, Tag, Ticker } from "@/components/ui";
 import SiteFooter from "@/components/SiteFooter";
 import ClientLogos from "@/components/ClientLogos";
 import {
-  compare, faq, finalCta, hero, managed, metrics, plans, scale, showcase, start, steps, stories,
+  compare, faq, finalCta, hero, managed, metrics, scale, showcase, start, steps, stories,
 } from "@/lib/content";
 import { images } from "@/lib/images";
 
@@ -166,14 +165,6 @@ export default function Home() {
       <section className="section" id="devolucao">
         <div className="container">
           <Refund />
-        </div>
-      </section>
-
-      {/* 9. PLANOS (+ agências) */}
-      <section className="section pricing" id="planos">
-        <div className="container" style={{ paddingTop: 0 }}>
-          <Heading tag={plans.tag} title={plans.title} text={plans.text} />
-          <Plans />
         </div>
       </section>
 

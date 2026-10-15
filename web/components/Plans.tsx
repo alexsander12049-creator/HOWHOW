@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { agency, plans } from "@/lib/content";
+import { plans } from "@/lib/content";
 import { Check } from "./icons";
 import Num from "./Num";
 import Odometer from "./Odometer";
@@ -155,25 +155,6 @@ export default function Plans() {
               <Check color="#5cc4f2" /> {item}
             </span>
           ))}
-        </div>
-      </div>
-
-      <div className="agency reveal" id="agencias" onMouseMove={tilt} onMouseLeave={untilt}>
-        <div className="agency-copy">
-          <span className="pill sm agency-tag">{agency.tag}</span>
-          <h3 className="h3">{agency.title}</h3>
-          <p className="body">{agency.text}</p>
-        </div>
-        <div className="agency-price">
-          <p className="plan-price">
-            <Odometer value={annual ? agency.annual : agency.monthly} delay={200} />
-            <span>/mês</span>
-          </p>
-          <p className="plan-sub">{annual ? `cobrado anualmente · no mensal ${agency.monthly}` : `ou ${agency.annual}/mês no anual`}</p>
-          <span className={`plan-save${annual ? " on" : ""}`}>Economia de R$ {saving(agency.monthly, agency.annual)} por ano</span>
-          <a href={agency.cta.href} className="btn white">
-            <i className="dot" /> {agency.cta.label}
-          </a>
         </div>
       </div>
     </>

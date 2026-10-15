@@ -3,7 +3,8 @@
 //
 // Narrativa e ordem das seções seguem a referência sideshift.app:
 // promessa → logos → números → como funciona (5 passos) → conteúdo real → cases e depoimentos →
-// objetivo → devolução da sobra → planos (+ agências) → comparação → gerenciado → como começar → FAQ → CTA final.
+// objetivo → devolução da sobra → comparação → gerenciado → como começar → FAQ → CTA final.
+// No site, os planos ficam só em /marcas e o white-label só em /agencias (o app ainda mostra os planos).
 //
 // Fontes dos dados:
 // - Benchmark "Howhow × SideShift" (out/2026): planos e preços, teste grátis (7 dias, definido pela Howhow; o benchmark falava em 14), white-label para agências,
@@ -38,9 +39,9 @@ export const nav = [
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Métricas", href: "#metricas" },
   { label: "CPM", href: "#cpm" },
-  { label: "Planos", href: "#planos" },
+  { label: "Planos", href: "/marcas#planos" },
 ];
-export const navCta = { label: "Começar grátis", href: "#planos" };
+export const navCta = { label: "Começar grátis", href: "/marcas#planos" };
 
 // Menu "Soluções" no topo de todas as páginas (como o "Use cases" da referência): por negócio e por objetivo.
 export type SolutionIcon = "brand" | "agency" | "video" | "coin" | "chart" | "rocket";
@@ -71,7 +72,7 @@ export const hero = {
   tag: "Plataforma de UGC e creator marketing",
   title: "Um exército de creators criando conteúdo viral para a sua marca",
   text: "A Howhow coloca 2.246 creators UGC produzindo vídeos para a sua marca, sem prospecção fria, DM ou planilha. Você acompanha as views de cada post em tempo real e pode pagar por CPM, só pelo que entregou.",
-  primary: { label: "Começar grátis", href: "#planos" },
+  primary: { label: "Começar grátis", href: "/marcas#planos" },
   secondary: { label: "Agendar demo", href: "#contato" },
   note: "7 dias grátis · zero porcentagem para a marca · cartão, Pix ou boleto",
   // VSL do topo: web/public/howhow/vsl.mp4 (site) e mobile/assets/howhow/vsl.mp4 (app), capa vsl-capa.jpg.
@@ -183,7 +184,7 @@ export const steps = {
     { name: "Lu N.", value: 620, photo: "c3" as CreatorKey },
     { name: "Caio M.", value: 2400, photo: "c4" as CreatorKey },
   ],
-  cta: { label: "Começar grátis", href: "#planos" },
+  cta: { label: "Começar grátis", href: "/marcas#planos" },
 };
 
 /* 4b. MÉTRICAS REAIS (painel por dentro da plataforma) */
@@ -343,7 +344,7 @@ export const goals = {
     },
   ],
   footnote: "Exemplo ilustrativo. Você define o orçamento.",
-  cta: { label: "Começar grátis", href: "#planos" },
+  cta: { label: "Começar grátis", href: "/marcas#planos" },
 };
 
 /* 8. DEVOLUÇÃO DA SOBRA (o argumento de confiança) */
@@ -460,7 +461,7 @@ export const start = {
     { when: "7 dias", title: "Teste completo", text: "1 campanha e 3 convites para ver a Howhow rodando com a sua marca." },
     { when: "Depois", title: "Vire plano pago", text: "Escolha Start, Growth ou Scale conforme o seu volume." },
   ],
-  cta: { label: "Começar grátis", href: "#planos" },
+  cta: { label: "Começar grátis", href: "/marcas#planos" },
 };
 
 /* 13. FAQ (custo, creator que some, NF, prazo) */
@@ -470,13 +471,13 @@ export const faq = {
   items: [
     { q: "Como funciona a campanha por CPM?", a: "Você define quanto paga a cada mil visualizações e o teto da campanha. Os creators postam, a Howhow mede as views de cada post sozinha e o pagamento sai por ciclo, calculado pelas views reais. Nunca passa do teto." },
     { q: "Consigo ver as métricas de cada post?", a: "Sim. No painel da campanha você acompanha views, engajamento e CPM de cada post, por creator e por rede, atualizados automaticamente." },
-    { q: "Quanto custa?", a: "De R$ 497 a R$ 2.497 por mês, ou a partir de R$ 397/mês no plano anual. Os 7 primeiros dias são grátis. O cachê dos creators é à parte, e a marca não paga porcentagem em cima dele." },
+    { q: "Quanto custa?", a: "Os planos para marcas têm mensalidade fixa e começam com 7 dias grátis; os valores estão na página Para marcas. O cachê dos creators é à parte, e a marca não paga porcentagem em cima dele." },
     { q: "Como funciona o teste grátis?", a: "São 7 dias com 1 campanha e 3 convites para creators. Depois você escolhe Start, Growth ou Scale e paga com cartão, Pix ou boleto." },
     { q: "Quanto eu pago para cada creator?", a: "Você define um teto e vê o preço de cada creator antes de fechar. Se ele fechar abaixo do teto, a diferença volta para você. Dá para pagar em permuta + cachê, valor fixo, por views ou post + bônus." },
     { q: "E se o creator sumir ou não entregar?", a: "O pagamento fica protegido: você só aprova e paga o que foi entregue do jeito combinado. Se alguém sair, é só escolher outro creator entre os candidatos." },
     { q: "Tem nota fiscal?", a: "Sim. A nota fiscal de cada creator fica registrada na campanha, junto com o pagamento. Funciona com CPF e CNPJ." },
     { q: "Em quanto tempo a campanha vai ao ar?", a: "Com o onboarding guiado, a primeira campanha pode estar no ar em até 48 horas." },
-    { q: "Vocês atendem agências?", a: "Sim. O plano white-label coloca a Howhow com o logo, as cores e o domínio da sua agência, por R$ 4.990,90/mês (R$ 3.990/mês no anual)." },
+    { q: "Vocês atendem agências?", a: "Sim. O plano white-label coloca a Howhow com o logo, as cores e o domínio da sua agência. Os detalhes e o valor estão na página Para agências." },
     { q: "E se eu não quiser operar?", a: "No Howhow Gerenciado, nosso time faz casting, roteiro, envio, revisão e nota fiscal: 20% da verba, com mínimo de R$ 25 mil." },
   ],
 };
@@ -501,7 +502,7 @@ export const creators = {
 
 export const footer = {
   columns: [
-    { title: "Plataforma", links: [{ label: "Como funciona", href: "/#como-funciona" }, { label: "Métricas", href: "/#metricas" }, { label: "Planos", href: "/#planos" }, { label: "Howhow Gerenciado", href: "/#gerenciado" }] },
+    { title: "Plataforma", links: [{ label: "Como funciona", href: "/#como-funciona" }, { label: "Métricas", href: "/#metricas" }, { label: "Planos", href: "/marcas#planos" }, { label: "Howhow Gerenciado", href: "/#gerenciado" }] },
     { title: "Howhow", links: [{ label: "Para marcas", href: "/marcas" }, { label: "Para agências", href: "/agencias" }, { label: "Para creators", href: "#creators" }, { label: "Agendar demo", href: "#contato" }] },
     { title: "Legal", links: [{ label: "Política de Privacidade", href: "https://howhow.com.br" }, { label: "Termos de Uso", href: "https://howhow.com.br" }, { label: "Exclusão de Dados", href: "https://howhow.com.br" }] },
   ],

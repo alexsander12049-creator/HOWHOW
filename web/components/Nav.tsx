@@ -109,7 +109,7 @@ export default function Nav({ links = nav, cta = navCta }: { links?: Link[]; cta
                     <SolItem key={it.href} it={it} i={n++} current={it.href === path} onClick={() => setSol(false)} />
                   ))}
                   {gi === 0 && (
-                    <a href={home ? "#planos" : "/#planos"} className="sol-promo" style={{ ["--i" as string]: n++ }} onClick={() => setSol(false)}>
+                    <a href={path === "/marcas" ? "#planos" : "/marcas#planos"} className="sol-promo" style={{ ["--i" as string]: n++ }} onClick={() => setSol(false)}>
                       <b>7 dias grátis</b>
                       <span>Teste a Howhow com a sua marca →</span>
                     </a>
