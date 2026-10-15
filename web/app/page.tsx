@@ -17,7 +17,7 @@ import MetricsDashboard from "@/components/MetricsDashboard";
 import CpmCampaign from "@/components/CpmCampaign";
 import Refund from "@/components/Refund";
 import ScaleStats from "@/components/ScaleStats";
-import { Check, Cross, Sparkle } from "@/components/icons";
+import { Check, Cross } from "@/components/icons";
 import { Cta, Heading, Tag, Ticker } from "@/components/ui";
 import SiteFooter from "@/components/SiteFooter";
 import ClientLogos from "@/components/ClientLogos";
@@ -109,9 +109,7 @@ export default function Home() {
         <div className="container">
           <div className="heading">
             <span className="tag reveal">
-              <span className="tag-icon">
-                <Sparkle />
-              </span>
+              <span className="tag-icon" aria-hidden />
               {metrics.tag}
               {metrics.badge && <em className="badge-new">{metrics.badge}</em>}
             </span>

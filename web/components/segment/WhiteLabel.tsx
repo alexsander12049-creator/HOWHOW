@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { agenciesPage } from "@/lib/content";
-import { Check, Sparkle } from "../icons";
+import { Check } from "../icons";
 import Odometer from "../Odometer";
 
 // Cores que a "agência" vai escolhendo no exemplo (a primeira é a da Howhow).
@@ -39,9 +39,7 @@ export default function WhiteLabel() {
     <div className="wl">
       <div className="wl-copy">
         <span className="tag reveal">
-          <span className="tag-icon">
-            <Sparkle />
-          </span>
+          <span className="tag-icon" aria-hidden />
           {w.tag}
         </span>
         <h2 className="h2 reveal">{w.title}</h2>

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Children, type ReactElement } from "react";
 import { Animated, Easing, Image, Pressable, StyleSheet, Text, View, useWindowDimensions, type StyleProp, type ViewStyle } from "react-native";
 import { c, f } from "./theme";
-import { Sparkle } from "./icons";
 
 // Quebras iguais às do site: celular < 810 ≤ tablet < 1200 ≤ computador.
 export function useLayout() {
@@ -48,9 +47,7 @@ export function Grid({ children, cols, gap = 10, spans }: { children: ReactNode;
 export function Tag({ children }: { children: string }) {
   return (
     <View style={s.tag}>
-      <View style={s.tagIcon}>
-        <Sparkle />
-      </View>
+      <View style={s.tagIcon} />
       <Text style={s.tagText}>{children}</Text>
     </View>
   );
@@ -152,9 +149,9 @@ export function FadeIn({ children, delay = 0, style }: { children: ReactNode; de
 export const s = StyleSheet.create({
   section: { width: "100%", maxWidth: 1090, paddingHorizontal: 20, paddingVertical: 60, gap: 30, alignItems: "stretch" },
   heading: { alignItems: "center", gap: 15 },
-  tag: { flexDirection: "row", alignItems: "center", gap: 6, paddingVertical: 5, paddingLeft: 5, paddingRight: 16, borderRadius: 40, backgroundColor: "#fff", borderWidth: 1, borderColor: "#d9d9d9", alignSelf: "center" },
-  tagIcon: { width: 24, height: 24, alignItems: "center", justifyContent: "center" },
-  tagText: { fontFamily: f.regular, fontSize: 14, color: c.ink2 },
+  tag: { flexDirection: "row", alignItems: "center", gap: 9, paddingVertical: 7, paddingLeft: 12, paddingRight: 14, borderRadius: 40, backgroundColor: "#fff", borderWidth: 1, borderColor: "#dcdcdc", alignSelf: "center" },
+  tagIcon: { width: 6, height: 6, borderRadius: 3, backgroundColor: c.orange },
+  tagText: { fontFamily: f.semibold, fontSize: 13, color: c.ink2 },
   h1: { fontFamily: f.bold, fontSize: 40, letterSpacing: -2, lineHeight: 44, textAlign: "center", color: c.ink },
   h2: { fontFamily: f.semibold, fontSize: 34, letterSpacing: -1.7, lineHeight: 38, textAlign: "center", color: c.ink },
   h4: { fontFamily: f.medium, fontSize: 20, letterSpacing: -0.4, lineHeight: 24, color: c.ink },

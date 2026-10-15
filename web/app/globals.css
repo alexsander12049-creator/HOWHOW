@@ -54,14 +54,17 @@ h1, h2, h3, h4, p { margin: 0; }
 .heading { display: flex; flex-direction: column; align-items: center; gap: 15px; max-width: 560px; width: 100%; }
 
 /* ---------- peças ---------- */
+/* etiqueta acima dos títulos: pílula compacta com um ponto laranja pulsando (sem ícone de "brilho") */
 .tag {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 5px 20px 5px 5px; border-radius: 40px;
-  background: var(--surface); border: 1px solid #d9d9d9;
-  font-size: 14px; color: var(--ink-2);
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 14px 7px 12px; border-radius: 40px;
+  background: var(--surface); border: 1px solid #dcdcdc; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-size: 13px; font-weight: 600; letter-spacing: -0.005em; color: var(--ink-2);
 }
-.tag .tag-icon { width: 30px; height: 30px; display: grid; place-items: center; }
-.tag svg { width: 16px; height: 16px; }
+.tag .tag-icon { position: relative; width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--orange); }
+.tag .tag-icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--orange); animation: tag-ping 2.4s ease-out infinite; }
+@keyframes tag-ping { 0% { transform: scale(1); opacity: 0.55; } 70%, 100% { transform: scale(3.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .tag .tag-icon::after { animation: none; display: none; } }
 
 .pill {
   display: inline-flex; align-items: center; gap: 10px;
@@ -1542,7 +1545,7 @@ html.rc-on select { cursor: auto !important; }
 .pricing .h2 { color: #fff; }
 .pricing .lead.muted, .pricing .small.muted { color: #a3a8b4; opacity: 1; }
 .pricing .tag { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); color: #d7dae1; }
-.pricing .tag svg path { fill: #fff; stroke: #fff; }
+
 
 /* chave mensal/anual de vidro */
 .pricing .billing { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); padding: 5px; }

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { goals } from "@/lib/content";
-import { Check, Sparkle } from "./icons";
+import { Check } from "./icons";
 import Num from "./Num";
 
 const AUTO_MS = 6000; // troca sozinha de aba até a pessoa clicar em uma
@@ -46,9 +46,7 @@ export default function GoalTabs() {
     <>
       <div className="heading">
         <span className="tag reveal">
-          <span className="tag-icon">
-            <Sparkle />
-          </span>
+          <span className="tag-icon" aria-hidden />
           {goals.tag}
         </span>
         <h2 className="h2 reveal">{goals.title}</h2>

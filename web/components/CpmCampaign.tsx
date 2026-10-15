@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { cpm } from "@/lib/content";
-import { Check, Sparkle } from "./icons";
+import { Check } from "./icons";
 import Num from "./Num";
 
 const brl = (n: number, d = 0) => n.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -49,9 +49,7 @@ export default function CpmCampaign() {
     <div className="cpm">
       <div className="cpm-copy">
         <span className="tag reveal">
-          <span className="tag-icon">
-            <Sparkle />
-          </span>
+          <span className="tag-icon" aria-hidden />
           {cpm.tag}
           {cpm.badge && <em className="badge-new">{cpm.badge}</em>}
         </span>

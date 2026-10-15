@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { CreatorKey, SolutionIcon as IconName } from "@/lib/content";
-import { Check, Sparkle } from "../icons";
+import { Check } from "../icons";
 import SolutionIcon from "../SolutionIcon";
 
 type Row = { name: string; who: string; next: string };
@@ -79,9 +79,7 @@ export default function SegmentHero({ tag, title, text, primary, secondary, note
         <div className="seg-hero-grid">
           <div className="seg-hero-copy">
             <span className="tag reveal">
-              <span className="tag-icon">
-                <Sparkle />
-              </span>
+              <span className="tag-icon" aria-hidden />
               {tag}
             </span>
             <h1 className="h1 hero-title">

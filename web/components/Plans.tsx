@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { agency, plans } from "@/lib/content";
-import { Check, Sparkle } from "./icons";
+import { Check } from "./icons";
 import Num from "./Num";
 import Odometer from "./Odometer";
 
@@ -90,7 +90,7 @@ export default function Plans() {
         </div>
         <div className="trial-copy">
           <h3 className="h4">
-            <Sparkle color="#fff" /> {plans.trial.title}
+            {plans.trial.title}
           </h3>
           <p className="body">{plans.trial.text}</p>
         </div>

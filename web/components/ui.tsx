@@ -1,12 +1,9 @@
 // Peças de layout usadas por todas as páginas (principal, marcas e agências).
-import { Sparkle } from "./icons";
 
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="tag reveal">
-      <span className="tag-icon">
-        <Sparkle />
-      </span>
+      <span className="tag-icon" aria-hidden />
       {children}
     </span>
   );
