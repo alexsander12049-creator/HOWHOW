@@ -53,7 +53,7 @@ export default function SiteFooter() {
                 <div className="stripe-item small" key={i}>
                   {["Creators", "Marcas", "Campanhas", "Resultados"].map((w) => (
                     <span key={w}>
-                      {w} <i>✦</i>
+                      {w} <i className="stripe-dot" aria-hidden />
                     </span>
                   ))}
                 </div>

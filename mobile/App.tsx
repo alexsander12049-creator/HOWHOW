@@ -28,8 +28,9 @@ export default function App() {
     const y = positions.current[id];
     if (y !== undefined) scroll.current?.scrollTo({ y: Math.max(0, y - 10), animated: true });
   }, []);
+  // links do site com caminho relativo ("/marcas", "/termos-de-uso") abrem no site publicado
   const openSite = useCallback((url: string) => {
-    Linking.openURL(url).catch(() => {});
+    Linking.openURL(url.startsWith("/") ? `https://${brand.site}${url}` : url).catch(() => {});
   }, []);
 
   if (!fontsLoaded) {

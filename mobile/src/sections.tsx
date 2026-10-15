@@ -1052,7 +1052,7 @@ export function Footer({ go, mark, openSite }: { go: Go; mark: Mark; openSite: (
               <View key={k} style={{ flexDirection: "row", alignItems: "center" }}>
                 {["Creators", "Marcas", "Campanhas", "Resultados"].map((w) => (
                   <Text key={w} style={[st.stripe, { fontSize: wide ? 32 : 20 }]}>
-                    {w}  <Text style={{ color: c.orange, fontSize: wide ? 22 : 15 }}>✦</Text>{"   "}
+                    {w}  <Text style={{ color: c.orange, fontSize: wide ? 22 : 15 }}>●</Text>{"   "}
                   </Text>
                 ))}
               </View>

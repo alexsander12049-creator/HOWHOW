@@ -504,7 +504,7 @@ export const footer = {
   columns: [
     { title: "Plataforma", links: [{ label: "Como funciona", href: "/#como-funciona" }, { label: "Métricas", href: "/#metricas" }, { label: "Planos", href: "/marcas#planos" }, { label: "Howhow Gerenciado", href: "/#gerenciado" }] },
     { title: "Howhow", links: [{ label: "Para marcas", href: "/marcas" }, { label: "Para agências", href: "/agencias" }, { label: "Para creators", href: "#creators" }, { label: "Agendar demo", href: "#contato" }] },
-    { title: "Legal", links: [{ label: "Política de Privacidade", href: "https://howhow.com.br" }, { label: "Termos de Uso", href: "https://howhow.com.br" }, { label: "Exclusão de Dados", href: "https://howhow.com.br" }] },
+    { title: "Legal", links: [{ label: "Política de Privacidade", href: "/politica-de-privacidade" }, { label: "Termos de Uso", href: "/termos-de-uso" }, { label: "Exclusão de Dados", href: "/exclusao-de-dados" }] },
   ],
 };
 
