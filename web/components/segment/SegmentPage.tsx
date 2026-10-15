@@ -15,9 +15,10 @@ import SiteFooter from "../SiteFooter";
 import { Check, Cross } from "../icons";
 import { Heading, Tag, Ticker } from "../ui";
 import ScaleStats from "../ScaleStats";
-import { brandsPage, agenciesPage, clients, plans, scale, showcase, stories } from "@/lib/content";
+import { brandsPage, agenciesPage, plans, scale, showcase, stories } from "@/lib/content";
 import SegmentHero from "./SegmentHero";
 import WhiteLabel from "./WhiteLabel";
+import TrustWall from "./TrustWall";
 import { ControlCards, Flow6, ThreeSteps, WhyCards } from "./Sections";
 import Image from "next/image";
 import { images } from "@/lib/images";
@@ -125,20 +126,7 @@ export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas"
         <section className="section" id="cases">
           <div className="container">
             <Heading tag={agenciesPage.trust.tag} title={agenciesPage.trust.title} />
-            <div className="trust">
-              {agenciesPage.trust.agencies.map((a, i) => (
-                <div className="trust-tile trust-agency reveal" key={a} style={{ ["--i" as string]: i }}>
-                  <span className="trust-kind">Agência</span>
-                  <b className="trust-word">{a}</b>
-                </div>
-              ))}
-              {clients.logos.map((c, i) => (
-                <div className="trust-tile reveal" key={c.logo} style={{ ["--i" as string]: i + agenciesPage.trust.agencies.length }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/howhow/marcas/${c.logo}.png`} alt={c.name} style={{ height: c.height }} />
-                </div>
-              ))}
-            </div>
+            <TrustWall />
           </div>
         </section>
       ) : (

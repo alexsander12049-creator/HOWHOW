@@ -2421,14 +2421,41 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
   .signup-steps li:not(:last-child)::after { transform: none; }
 }
 
-/* ================= agências: quem confia ================= */
+/* ================= agências: quem confia (mural de logos animado) ================= */
 .trust { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-.trust-tile { height: 120px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, opacity 0.7s ease; }
-.trust-tile.reveal { transition-delay: calc(var(--i, 0) * 0.07s); }
-.trust-tile.in:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -36px rgba(0, 0, 0, 0.4); transition-delay: 0s; }
-.trust-tile img { max-width: 100%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.75; transition: filter 0.3s ease, opacity 0.3s ease; }
-.trust-tile:hover img { filter: none; opacity: 1; }
-.trust-agency { grid-column: span 1; background: var(--ink); border-color: var(--ink); color: #fff; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.trust.reveal { opacity: 1; transform: none; }
+.trust-tile { --x: -200px; --y: -200px; position: relative; height: 128px; display: grid; place-items: center; padding: 20px; border-radius: var(--radius-lg); background: #fff; border: 1px solid var(--line); overflow: hidden; isolation: isolate;
+  opacity: 0; transform: translateY(18px) scale(0.96); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.4s ease; }
+.trust.in .trust-tile { opacity: 1; transform: none; animation: trust-in 0.7s calc(0.1s + var(--i) * 0.08s) cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+@keyframes trust-in { from { opacity: 0; transform: translateY(18px) scale(0.96); } to { opacity: 1; transform: none; } }
+/* luz que segue o mouse: brilho suave no fundo + borda acesa no ponto do cursor */
+.trust-tile::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity 0.4s ease;
+  background: radial-gradient(260px circle at var(--x) var(--y), rgba(255, 77, 0, 0.07), transparent 60%); }
+.trust-tile::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+  background: radial-gradient(220px circle at var(--x) var(--y), rgba(255, 77, 0, 0.9), rgba(0, 150, 220, 0.5) 45%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.trust.lit .trust-tile::before, .trust.lit .trust-tile::after { opacity: 1; }
+/* logo: revelado de baixo para cima na entrada; cinza até ganhar destaque */
+.trust-logo { display: grid; place-items: center; clip-path: inset(100% 0 0 0); }
+.trust.in .trust-logo { animation: trust-logo 0.8s calc(0.35s + var(--i) * 0.08s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes trust-logo { from { clip-path: inset(100% 0 0 0); transform: translateY(12px); } to { clip-path: inset(0 0 0 0); transform: none; } }
+.trust-tile img { max-width: 100%; width: auto; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+/* destaque automático (e hover): cor, logo cresce de leve, cartão sobe com sombra */
+.trust-tile.on, .trust-tile:hover { transform: translateY(-5px); border-color: var(--line-strong); box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.45); }
+.trust-tile.on img, .trust-tile:hover img { filter: none; opacity: 1; transform: scale(1.07); }
+.trust.lit .trust-tile.on:not(:hover) { transform: none; box-shadow: none; border-color: var(--line); }
+.trust.lit .trust-tile.on:not(:hover) img { filter: grayscale(1); opacity: 0.6; transform: none; }
+/* NonStop: cartão escuro com borda em degradê girando */
+.trust-agency { background: var(--ink); border-color: transparent; color: #fff; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.trust-agency::after { opacity: 1; padding: 1.5px; background: conic-gradient(from var(--spin, 0deg), var(--orange), var(--blue), transparent 40%, transparent 60%, var(--orange)); animation: spin-ring 4s linear infinite; }
+.trust-agency::before { opacity: 1; background: radial-gradient(120% 90% at 50% 120%, rgba(255, 77, 0, 0.35), transparent 60%); }
 .trust-kind { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); }
-.trust-word { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
-@media (max-width: 809.98px) { .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-tile { height: 96px; } .trust-word { font-size: 24px; } }
+.trust-word { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.trust.in .trust-agency .trust-word { animation: trust-logo 0.8s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.trust-agency.on, .trust-agency:hover { box-shadow: 0 30px 60px -30px rgba(255, 77, 0, 0.55); }
+@media (max-width: 809.98px) { .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-tile { height: 100px; } .trust-word { font-size: 26px; } }
+@media (max-width: 1024px), (hover: none) { .trust-agency::after { animation: none; --spin: 140deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .trust-tile, .trust-logo { opacity: 1; transform: none; clip-path: none; animation: none !important; }
+  .trust-agency::after { animation: none; }
+}

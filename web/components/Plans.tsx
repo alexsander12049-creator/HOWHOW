@@ -127,7 +127,7 @@ export default function Plans() {
                   </div>
                 ))}
               </div>
-              <a href={p.cta === "Falar com vendas" ? "#contato" : signup.href} className={`btn full ${p.popular ? "orange plan-cta" : "white"}`}>
+              <a href={p.cta.startsWith("Falar") ? "#contato" : signup.href} className={`btn full ${p.popular ? "orange plan-cta" : "white"}`}>
                 <i className="dot" /> {p.cta}
               </a>
               <ul>

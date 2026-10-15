@@ -416,7 +416,7 @@ export const plans = {
       ],
       features: ["Tudo do Growth", "Usuários ilimitados", "Gerente de conta + Eventos", "3 destaques no Feed"],
       budget: "Verba indicada: R$ 50 mil+/mês",
-      cta: "Falar com vendas",
+      cta: "Falar com um especialista",
       popular: false,
     },
   ],
@@ -431,7 +431,7 @@ export const agency = {
   text: "Logo, cores e domínio da agência (creators.suaagencia.com.br). Traga suas marcas e seus creators pagando só a mensalidade. Usando creators da Howhow, 15% do cachê desses creators.",
   monthly: "R$ 4.990,90",
   annual: "R$ 3.990",
-  cta: { label: "Falar com vendas", href: "#contato" },
+  cta: { label: "Falar com um especialista", href: "#contato" },
 };
 
 /* 10. COMPARAÇÃO */
@@ -724,7 +724,7 @@ export const agenciesPage = {
     bullets: ["Logo, cores e domínio da agência", "Traga suas marcas e seus creators: só a mensalidade", "Usando creators da Howhow: 15% do cachê desses creators"],
     monthly: "R$ 4.990,90",
     annual: "R$ 3.990",
-    cta: { label: "Falar com vendas", href: "#contato" },
+    cta: { label: "Falar com um especialista", href: "#contato" },
   },
   control: {
     tag: "Painel",
