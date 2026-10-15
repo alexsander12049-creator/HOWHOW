@@ -9,9 +9,9 @@ import { Heart } from "./icons";
 import { Pill } from "./ui";
 
 const videos: Record<number, { src: number; poster: ImageSourcePropType }> = {
-  1: { src: require("../assets/howhow/videos/video-1.mp4"), poster: require("../assets/howhow/videos/capa-1.jpg") },
-  2: { src: require("../assets/howhow/videos/video-2.mp4"), poster: require("../assets/howhow/videos/capa-2.jpg") },
   3: { src: require("../assets/howhow/videos/video-3.mp4"), poster: require("../assets/howhow/videos/capa-3.jpg") },
+  4: { src: require("../assets/howhow/videos/video-4.mp4"), poster: require("../assets/howhow/videos/capa-4.jpg") },
+  5: { src: require("../assets/howhow/videos/video-5.mp4"), poster: require("../assets/howhow/videos/capa-5.jpg") },
 };
 
 const fmt = (s: number) => {
@@ -129,7 +129,7 @@ export function CaseVideo({ brand, campaign, result, gradient, video, aspect }: 
       onPress={() => (isPlaying ? player.pause() : play())}
       style={[st.card, { aspectRatio: aspect }, mouse && Platform.OS === "web" && hideCursor]}
       accessibilityRole="button"
-      accessibilityLabel={`${isPlaying ? "Pausar" : "Tocar"} vídeo do case ${brand}`}
+      accessibilityLabel={`${isPlaying ? "Pausar" : "Tocar"} vídeo${brand ? ` do case ${brand}` : ""}`}
     >
       <LinearGradient colors={gradient as [string, string]} start={{ x: 0, y: 0 }} end={{ x: 0.6, y: 1 }} style={StyleSheet.absoluteFill} />
       <VideoView player={player} style={st.fill} contentFit="cover" nativeControls={false} />
@@ -137,7 +137,7 @@ export function CaseVideo({ brand, campaign, result, gradient, video, aspect }: 
       <LinearGradient colors={["rgba(0,0,0,.35)", "transparent"]} style={[StyleSheet.absoluteFill, { bottom: "78%" }]} pointerEvents="none" />
       <LinearGradient colors={["transparent", "rgba(0,0,0,.6)"]} style={[StyleSheet.absoluteFill, { top: "50%" }]} pointerEvents="none" />
 
-      <Text style={st.brand}>{brand.toUpperCase()}</Text>
+      {!!brand && <Text style={st.brand}>{brand.toUpperCase()}</Text>}
       {isPlaying && left !== null && <Text style={st.time}>{fmt(left)}</Text>}
 
       {/* toque: play fixo no centro enquanto está pausado */}
@@ -148,10 +148,12 @@ export function CaseVideo({ brand, campaign, result, gradient, video, aspect }: 
       </View>
 
       <View style={{ gap: 10, marginRight: 46 }}>
-        <Text style={st.title}>{campaign}</Text>
-        <View style={{ alignSelf: "flex-start" }}>
-          <Pill small icon={<Heart color={c.orange} size={15} />}>{result}</Pill>
-        </View>
+        {!!campaign && <Text style={st.title}>{campaign}</Text>}
+        {!!result && (
+          <View style={{ alignSelf: "flex-start" }}>
+            <Pill small icon={<Heart color={c.orange} size={15} />}>{result}</Pill>
+          </View>
+        )}
       </View>
 
       {isPlaying && (

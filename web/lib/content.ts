@@ -262,8 +262,8 @@ export const showcase = {
   // [CONFIRMAR] marca, campanha e resultado de cada vídeo: os nomes antigos (HBO Max, Kwai, JBL) estavam errados,
   // então os cards ficam sem texto até virem os nomes certos (campo vazio = não mostra).
   items: [
-    { brand: "", campaign: "", result: "", gradient: ["#293B8F", "#0096DC"], video: 1 },
-    { brand: "", campaign: "", result: "", gradient: ["#FF4D00", "#FF9A3D"], video: 2 },
+    { brand: "", campaign: "", result: "", gradient: ["#293B8F", "#0096DC"], video: 4 },
+    { brand: "", campaign: "", result: "", gradient: ["#FF4D00", "#FF9A3D"], video: 5 },
     { brand: "", campaign: "", result: "", gradient: ["#0D0E11", "#31343E"], video: 3 },
   ],
 };
