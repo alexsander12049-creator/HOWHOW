@@ -66,7 +66,7 @@ export default function CaseVideo({ brand, campaign, result, gradient, video, in
         onClick={open}
         role="button"
         tabIndex={0}
-        aria-label={`Assistir ao vídeo do case ${brand}`}
+        aria-label={brand ? `Assistir ao vídeo do case ${brand}` : "Assistir ao vídeo"}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
@@ -76,11 +76,13 @@ export default function CaseVideo({ brand, campaign, result, gradient, video, in
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="case-media" src={`/howhow/videos/capa-${video}.jpg`} alt="" loading="lazy" />
-        <span className="case-brand">{brand.toUpperCase()}</span>
-        <h3>{campaign}</h3>
-        <span className="pill sm">
-          <Heart color="#ff4d00" /> {result}
-        </span>
+        {brand && <span className="case-brand">{brand.toUpperCase()}</span>}
+        {campaign && <h3>{campaign}</h3>}
+        {result && (
+          <span className="pill sm">
+            <Heart color="#ff4d00" /> {result}
+          </span>
+        )}
 
         {/* bolinha que acompanha o mouse */}
         <span ref={ball} className="case-cursor" aria-hidden>

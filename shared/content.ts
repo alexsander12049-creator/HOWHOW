@@ -43,6 +43,9 @@ export const nav = [
 ];
 export const navCta = { label: "Começar grátis", href: "/marcas#planos" };
 
+// Cadastro e login da plataforma (mesmos links do "Começar" e do "Entrar" do site antigo)
+export const signup = { href: "https://howhow.com.br/onboarding", login: "https://howhow.com.br/login" };
+
 // Menu "Soluções" no topo de todas as páginas (como o "Use cases" da referência): por negócio e por objetivo.
 export type SolutionIcon = "brand" | "agency" | "video" | "coin" | "chart" | "rocket";
 export const solutions = {
@@ -73,7 +76,7 @@ export const hero = {
   title: "Um exército de creators criando conteúdo viral para a sua marca",
   text: "A Howhow coloca 2.246 creators UGC produzindo vídeos para a sua marca, sem prospecção fria, DM ou planilha. Você acompanha as views de cada post em tempo real e pode pagar por CPM, só pelo que entregou.",
   primary: { label: "Começar grátis", href: "/marcas#planos" },
-  secondary: { label: "Agendar demo", href: "#contato" },
+  secondary: { label: "Ver como funciona", href: "#como-funciona" },
   note: "7 dias grátis · zero porcentagem para a marca · cartão, Pix ou boleto",
   // VSL do topo: web/public/howhow/vsl.mp4 (site) e mobile/assets/howhow/vsl.mp4 (app), capa vsl-capa.jpg.
   vsl: { duration: "1 min" },
@@ -256,11 +259,12 @@ export const showcase = {
   title: "Conteúdo feito para viralizar.",
   text: "Vídeos que os creators da Howhow publicaram para as marcas. Clique e assista.",
   // video: N → web/public/howhow/videos/video-N.mp4 (capa: capa-N.jpg)
-  // [CONFIRMAR] título e resultado de cada vídeo
+  // [CONFIRMAR] marca, campanha e resultado de cada vídeo: os nomes antigos (HBO Max, Kwai, JBL) estavam errados,
+  // então os cards ficam sem texto até virem os nomes certos (campo vazio = não mostra).
   items: [
-    { brand: "HBO Max", campaign: "House of the Dragon", result: "Buzz orgânico e massivo", gradient: ["#293B8F", "#0096DC"], video: 1 },
-    { brand: "Kwai", campaign: "Programa Kwai Creators", result: "127 candidatos · 30 aprovados", gradient: ["#FF4D00", "#FF9A3D"], video: 2 },
-    { brand: "JBL", campaign: "PartyBox", result: "Presença confirmada nas resenhas", gradient: ["#0D0E11", "#31343E"], video: 3 },
+    { brand: "", campaign: "", result: "", gradient: ["#293B8F", "#0096DC"], video: 1 },
+    { brand: "", campaign: "", result: "", gradient: ["#FF4D00", "#FF9A3D"], video: 2 },
+    { brand: "", campaign: "", result: "", gradient: ["#0D0E11", "#31343E"], video: 3 },
   ],
 };
 
@@ -370,7 +374,7 @@ export const plans = {
   trial: {
     title: "7 dias grátis",
     text: "Toda marca testa antes de pagar a primeira mensalidade: 1 campanha e 3 convites. Depois escolhe Start, Growth ou Scale.",
-    cta: { label: "Começar grátis", href: "#contato" },
+    cta: { label: "Começar grátis", href: "https://howhow.com.br/onboarding" },
   },
   items: [
     {
@@ -448,7 +452,7 @@ export const managed = {
   text: "Mesmo software, operado pelo nosso time. Você aprova o plano e a verba; a gente cuida do resto.",
   bullets: ["Casting feito pelo nosso time", "Roteiro dos conteúdos", "Envio de produto e revisão", "Nota fiscal e pagamentos"],
   price: "20% da verba · mínimo de R$ 25 mil",
-  cta: { label: "Agendar uma demo", href: "#contato" },
+  cta: { label: "Falar com o time", href: "#contato" },
   // "vídeo" em motion de cada tópico (abre ao clicar): 3 legendas que acompanham as fases da animação
   hint: "Cada etapa tem um vídeo curto: passe o mouse ou toque",
   demos: [
@@ -492,9 +496,18 @@ export const faq = {
 
 /* 14. CTA FINAL */
 export const finalCta = {
-  tag: "Agende uma demo",
+  tag: "Comece agora",
   title: "Comece grátis por 7 dias.",
-  text: "Prefere conversar antes? Deixe seus dados e mostramos a Howhow rodando com a sua marca.",
+  text: "Crie a sua conta, envie o primeiro briefing e receba os creators. Sem formulário, sem esperar retorno.",
+  // painel com o botão de cadastro (sem formulário)
+  panel: {
+    label: "Crie a sua conta",
+    steps: ["Crie a conta da sua marca", "Envie o primeiro briefing", "Receba e aprove os creators"],
+    perks: ["7 dias grátis", "Zero porcentagem para a marca", "Cartão, Pix ou boleto"],
+    cta: "Criar conta grátis",
+    login: "Já tem conta? Entrar",
+    talk: "Prefere falar com a gente?",
+  },
 };
 
 export const contact = {
@@ -543,7 +556,7 @@ export const brandsPage = {
     title: "Seu programa de creators, dentro de casa.",
     text: "Briefing, aprovação, contrato, nota fiscal e pagamento num fluxo só. Cada campanha ensina o que fazer na próxima, e esse aprendizado fica com a sua marca.",
     primary: { label: "Começar grátis", href: "#planos" },
-    secondary: { label: "Agendar demo", href: "#contato" },
+    secondary: { label: "Criar conta", href: "https://howhow.com.br/onboarding" },
     note: "7 dias grátis · zero porcentagem para a marca",
     bullets: ["Seu briefing e o seu padrão de aprovação", "Relacionamento direto com os creators", "O aprendizado de cada campanha fica com você"],
     board: {
@@ -629,12 +642,18 @@ export const brandsPage = {
   final: {
     tag: "Comece agora",
     title: "Monte um programa de creators que melhora a cada campanha.",
-    text: "Comece grátis por 7 dias ou fale com o nosso time para montar a primeira campanha junto.",
+    text: "Comece grátis por 7 dias: crie a conta, envie o primeiro briefing e receba os creators.",
   },
   profiles: ["Sou Marca"],
 };
 
 export const agenciesPage = {
+  // [CONFIRMAR] logo oficial da NonStop (a agência do Whindersson Nunes); por enquanto aparece o nome escrito
+  trust: {
+    tag: "Quem confia",
+    title: "Agências e marcas que já rodam com a Howhow.",
+    agencies: ["NonStop"],
+  },
   meta: {
     title: "Howhow para agências — Campanhas com creators para todos os seus clientes",
     description: "Briefings, creators, aprovações, relatórios e pagamentos de cada cliente num painel só, com white-label da sua agência.",
@@ -725,13 +744,13 @@ export const agenciesPage = {
     steps: ["Criar a campanha", "Encontrar creators", "Gerenciar convites", "Alinhar a execução", "Aprovar os criativos", "Acompanhar resultados"],
   },
   why: {
-    tag: "UGC em volume",
-    title: "Mais criativos para os clientes. Um processo que sua equipe repete.",
-    text: "Clientes querem ideias novas e um motivo para continuar investindo. Um programa de creators repetível entrega os dois sem começar do zero todo mês.",
+    tag: "Por que agências usam a Howhow",
+    title: "Mais clientes, a mesma equipe.",
+    text: "A operação de creators sai do WhatsApp e da planilha e vai para um painel só. Sua equipe atende mais contas sem crescer na mesma proporção.",
     cards: [
-      { title: "Cada marca com a sua cara", text: "Um briefing e um padrão de aprovação para cada cliente. Mais conteúdo deve trazer variações úteis, não o mesmo roteiro com outro logo." },
-      { title: "Repetir fica mais fácil", text: "Monte um casting de creators que já entendem o briefing. Envios, feedback e pagamentos seguem juntos conforme as campanhas crescem." },
-      { title: "Mostre o que a campanha ensinou", text: "Ligue cada leva de conteúdo ao objetivo do cliente, mostre quem performou e explique o que testar ou repetir." },
+      { title: "Todos os clientes num painel", text: "Briefings, casting, aprovações e pagamentos de cada cliente separados, sem grupo de WhatsApp nem planilha por conta." },
+      { title: "A sua marca na frente", text: "Com o white-label, o cliente vê o logo, as cores e o domínio da sua agência do começo ao fim. A Howhow fica nos bastidores." },
+      { title: "Relatório que segura o cliente", text: "Views, engajamento e CPM por creator em tempo real, prontos para mostrar ao cliente e justificar a próxima verba." },
     ],
   },
   faq: [

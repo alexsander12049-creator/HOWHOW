@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { plans } from "@/lib/content";
+import { plans, signup } from "@/lib/content";
 import { Check } from "./icons";
 import Num from "./Num";
 import Odometer from "./Odometer";
@@ -127,7 +127,7 @@ export default function Plans() {
                   </div>
                 ))}
               </div>
-              <a href="#contato" className={`btn full ${p.popular ? "orange plan-cta" : "white"}`}>
+              <a href={p.cta === "Falar com vendas" ? "#contato" : signup.href} className={`btn full ${p.popular ? "orange plan-cta" : "white"}`}>
                 <i className="dot" /> {p.cta}
               </a>
               <ul>

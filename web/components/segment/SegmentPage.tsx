@@ -10,11 +10,12 @@ import MetricsDashboard from "../MetricsDashboard";
 import Plans from "../Plans";
 import Faq from "../Faq";
 import ContactForm from "../ContactForm";
+import SignupPanel from "../SignupPanel";
 import SiteFooter from "../SiteFooter";
 import { Check, Cross } from "../icons";
 import { Heading, Tag, Ticker } from "../ui";
 import ScaleStats from "../ScaleStats";
-import { brandsPage, agenciesPage, plans, scale, showcase, stories } from "@/lib/content";
+import { brandsPage, agenciesPage, clients, plans, scale, showcase, stories } from "@/lib/content";
 import SegmentHero from "./SegmentHero";
 import WhiteLabel from "./WhiteLabel";
 import { ControlCards, Flow6, ThreeSteps, WhyCards } from "./Sections";
@@ -119,17 +120,40 @@ export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas"
         </div>
       </section>
 
-      <section className="section" id="cases">
-        <div className="container">
-          <Heading tag={stories.tag} title={stories.title} text={showcase.text} />
-          <div className="cases">
-            {showcase.items.map((c, i) => (
-              <CaseVideo key={c.video} {...c} index={i} />
-            ))}
+      {isAgency ? (
+        // agências: quem confia (agências clientes + marcas), sem os cases de marca
+        <section className="section" id="cases">
+          <div className="container">
+            <Heading tag={agenciesPage.trust.tag} title={agenciesPage.trust.title} />
+            <div className="trust">
+              {agenciesPage.trust.agencies.map((a, i) => (
+                <div className="trust-tile trust-agency reveal" key={a} style={{ ["--i" as string]: i }}>
+                  <span className="trust-kind">Agência</span>
+                  <b className="trust-word">{a}</b>
+                </div>
+              ))}
+              {clients.logos.map((c, i) => (
+                <div className="trust-tile reveal" key={c.logo} style={{ ["--i" as string]: i + agenciesPage.trust.agencies.length }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/howhow/marcas/${c.logo}.png`} alt={c.name} style={{ height: c.height }} />
+                </div>
+              ))}
+            </div>
           </div>
-          <Testimonials />
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="section" id="cases">
+          <div className="container">
+            <Heading tag={stories.tag} title={stories.title} text={showcase.text} />
+            <div className="cases">
+              {showcase.items.map((c, i) => (
+                <CaseVideo key={c.video} {...c} index={i} />
+              ))}
+            </div>
+            <Testimonials />
+          </div>
+        </section>
+      )}
 
       {!isAgency && (
         <section className="section pricing" id="planos">
@@ -155,8 +179,9 @@ export default function SegmentPage({ page, kind }: { page: Page; kind: "marcas"
               <h2 className="h2 reveal">{page.final.title}</h2>
               <p className="lead muted reveal">{page.final.text}</p>
             </div>
-            <div style={{ flex: 1, maxWidth: 560, width: "100%" }}>
-              <ContactForm profiles={page.profiles} />
+            <div style={{ flex: 1, maxWidth: isAgency ? 560 : 520, width: "100%" }}>
+              {/* marcas vão direto ao cadastro; agências falam com o time (demo do white-label) */}
+              {isAgency ? <ContactForm profiles={page.profiles} /> : <SignupPanel />}
             </div>
           </div>
         </div>

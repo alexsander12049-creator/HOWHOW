@@ -2390,3 +2390,45 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
 .tag .tag-icon { display: none; }
 .tag .badge-new { background: none; padding: 0; border-radius: 0; color: var(--orange); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; animation: none; }
 .managed-tag.pill { padding: 0; border: 0; background: none; color: #a0a4b0; font-size: 14px; font-weight: 600; }
+
+/* ================= chamada final sem formulário: botão direto para o cadastro ================= */
+.signup { width: 100%; background: var(--ink); color: #fff; border-radius: var(--radius-xl); padding: 30px; display: flex; flex-direction: column; gap: 20px; position: relative; overflow: hidden;
+  box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.6); }
+.signup::before { content: ""; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 77, 0, 0.35), transparent 70%); pointer-events: none; }
+.signup-label { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #a0a4b0; }
+.signup-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; position: relative; }
+.signup-steps li { position: relative; display: flex; align-items: center; gap: 14px; padding: 10px 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.signup-steps li em { position: relative; z-index: 1; flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 14px; font-weight: 800; background: #1c1f28; border: 1px solid #31343e; color: #fff; }
+.signup-steps li:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 44px; height: calc(100% - 34px); width: 2px; background: linear-gradient(var(--orange), var(--blue)); transform: scaleY(0); transform-origin: top; }
+.signup.in .signup-steps li { animation: a-in 0.5s calc(0.2s + var(--i) * 0.2s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.signup.in .signup-steps li em { animation: step-lit 0.5s calc(0.35s + var(--i) * 0.2s) ease both; }
+@keyframes step-lit { to { background: var(--orange); border-color: var(--orange); } }
+.signup.in .signup-steps li:not(:last-child)::after { transition: transform 0.5s calc(0.5s + var(--i) * 0.2s) ease; transform: scaleY(1); }
+.signup-perks { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.signup-perks span { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #d9dce4; }
+.signup-perks svg { width: 18px; height: 18px; }
+.signup-cta { justify-content: center; font-size: 17px; padding: 18px 22px; position: relative; }
+.signup-cta span { transition: transform 0.3s ease; }
+.signup-cta:hover span { transform: translateX(4px); }
+.signup.in .signup-cta { animation: a-press 3.2s 2s ease-in-out infinite; }
+.signup-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; font-size: 13px; color: #a0a4b0; }
+.signup-foot a { color: #fff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.3); text-underline-offset: 3px; }
+.signup-foot a:hover { text-decoration-color: #fff; }
+@media (max-width: 809.98px) { .signup { padding: 24px 20px; } .signup-steps li { font-size: 16px; } .signup-foot { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) {
+  .signup.in .signup-steps li, .signup.in .signup-steps li em, .signup.in .signup-cta { animation: none; }
+  .signup-steps li em { background: var(--orange); border-color: var(--orange); }
+  .signup-steps li:not(:last-child)::after { transform: none; }
+}
+
+/* ================= agências: quem confia ================= */
+.trust { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.trust-tile { height: 120px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, opacity 0.7s ease; }
+.trust-tile.reveal { transition-delay: calc(var(--i, 0) * 0.07s); }
+.trust-tile.in:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -36px rgba(0, 0, 0, 0.4); transition-delay: 0s; }
+.trust-tile img { max-width: 100%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.75; transition: filter 0.3s ease, opacity 0.3s ease; }
+.trust-tile:hover img { filter: none; opacity: 1; }
+.trust-agency { grid-column: span 1; background: var(--ink); border-color: var(--ink); color: #fff; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.trust-kind { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); }
+.trust-word { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+@media (max-width: 809.98px) { .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-tile { height: 96px; } .trust-word { font-size: 24px; } }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import Faq from "@/components/Faq";
-import ContactForm from "@/components/ContactForm";
+import SignupPanel from "@/components/SignupPanel";
 import CaseVideo from "@/components/CaseVideo";
 import VslPlayer from "@/components/VslPlayer";
 import VideoModal from "@/components/VideoModal";
@@ -238,7 +238,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 13. CTA FINAL + FORMULÁRIO */}
+      {/* 13. CTA FINAL + CADASTRO */}
       <section className="section white" id="contato">
         <div className="container" style={{ paddingTop: 0 }}>
           <div className="contact">
@@ -247,8 +247,8 @@ export default function Home() {
               <h2 className="h2 reveal">{finalCta.title}</h2>
               <p className="lead muted reveal">{finalCta.text}</p>
             </div>
-            <div style={{ flex: 1, maxWidth: 560, width: "100%" }}>
-              <ContactForm />
+            <div style={{ flex: 1, maxWidth: 520, width: "100%" }}>
+              <SignupPanel />
             </div>
           </div>
         </div>

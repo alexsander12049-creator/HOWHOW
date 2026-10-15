@@ -18,7 +18,7 @@ export function openVideo(items: VideoItem[], index = 0) {
 export const caseVideos: VideoItem[] = showcase.items.map((c) => ({
   src: `/howhow/videos/video-${c.video}.mp4`,
   poster: `/howhow/videos/capa-${c.video}.jpg`,
-  title: c.campaign,
-  subtitle: c.brand,
+  title: c.campaign || undefined,
+  subtitle: c.brand || undefined,
   vertical: true,
 }));
