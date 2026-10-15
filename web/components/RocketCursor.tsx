@@ -83,7 +83,7 @@ export default function RocketCursor() {
 
       // direção: segue o movimento; parado, volta a apontar como seta
       const target = speed > 1.2 ? (Math.atan2(dy, dx) * 180) / Math.PI : IDLE_ANGLE;
-      let diff = ((target - angle + 540) % 360) - 180;
+      const diff = ((target - angle + 540) % 360) - 180;
       angle += diff * (speed > 1.2 ? 0.22 : 0.1);
 
       scale += ((hot ? 1.25 : 1) - scale) * 0.2;
