@@ -242,7 +242,7 @@ export default function Home() {
       </section>
 
       {/* 9. PLANOS (+ agências) */}
-      <section className="section" id="planos">
+      <section className="section pricing" id="planos">
         <div className="container" style={{ paddingTop: 0 }}>
           <Heading tag={plans.tag} title={plans.title} text={plans.text} />
           <Plans />

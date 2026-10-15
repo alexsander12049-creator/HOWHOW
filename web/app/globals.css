@@ -1519,3 +1519,151 @@ html.rc-on select { cursor: auto !important; }
   .hn-btn, .hn-app, .hn-avatar, .hn-text { animation: none; }
   .hn-spark path { stroke-dashoffset: 0; }
 }
+
+/* ================= PLANOS: palco escuro e tecnológico ================= */
+.pricing { position: relative; overflow: hidden; background: #07080b; color: #fff; isolation: isolate; }
+/* luzes azul e laranja se movendo + grade sutil */
+.pricing::before {
+  content: ""; position: absolute; inset: -20%; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(35% 30% at 25% 30%, rgba(0, 150, 220, 0.35), transparent 70%),
+    radial-gradient(30% 28% at 78% 42%, rgba(255, 77, 0, 0.3), transparent 70%),
+    radial-gradient(40% 30% at 50% 95%, rgba(0, 150, 220, 0.18), transparent 70%);
+  filter: blur(30px); animation: pricing-aurora 16s ease-in-out infinite alternate;
+}
+@keyframes pricing-aurora { 0% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(4%, -3%) rotate(4deg); } 100% { transform: translate(-4%, 2%) rotate(-3deg); } }
+.pricing::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask: radial-gradient(60% 50% at 50% 40%, #000 30%, transparent 80%); mask: radial-gradient(60% 50% at 50% 40%, #000 30%, transparent 80%);
+}
+.pricing .container { position: relative; padding-top: 110px !important; }
+.pricing .h2 { color: #fff; }
+.pricing .lead.muted, .pricing .small.muted { color: #a3a8b4; opacity: 1; }
+.pricing .tag { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); color: #d7dae1; }
+.pricing .tag svg path { fill: #fff; stroke: #fff; }
+
+/* chave mensal/anual de vidro */
+.pricing .billing { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); padding: 5px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.pricing .billing button { color: #c9ccd3; font-size: 15px; padding: 11px 20px; }
+.pricing .billing button.on { color: #000; }
+.pricing .billing-pill { top: 5px; bottom: 5px; background: #fff; box-shadow: 0 8px 24px -8px rgba(255, 255, 255, 0.5); }
+.pricing .billing-hint { background: rgba(26, 154, 80, 0.2); color: #4ade80; }
+.pricing .billing-hint.lit { background: #1a9a50; color: #fff; animation: hint-lit 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes hint-lit { 0% { transform: scale(1); } 40% { transform: scale(1.25) rotate(-4deg); } 100% { transform: scale(1); } }
+
+/* teste grátis: borda em degradê girando + "7" com as barrinhas dos dias enchendo */
+.pricing .trial { position: relative; background: rgba(12, 14, 20, 0.85); color: #fff; border: 1px solid transparent; padding: 20px 24px; gap: 24px;
+  background-clip: padding-box; box-shadow: 0 30px 60px -40px rgba(0, 150, 220, 0.6); }
+.pricing .trial::before {
+  content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; padding: 1px;
+  background: conic-gradient(from var(--spin), var(--blue), var(--orange), #4ade80, var(--blue));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: spin-ring 6s linear infinite;
+}
+.pricing .trial::after { background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.08) 50%, transparent 65%); }
+.trial-days { display: flex; align-items: center; gap: 14px; flex: none; }
+.trial-days b { font-size: 64px; line-height: 1; letter-spacing: -0.06em; background: linear-gradient(180deg, #fff, #8fd3f4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.trial-bars { display: grid; grid-template-columns: repeat(7, 8px); gap: 4px; align-items: end; height: 36px; }
+.trial-bars i { display: block; width: 8px; height: 100%; border-radius: 4px; background: rgba(255, 255, 255, 0.12); position: relative; overflow: hidden; }
+.trial-bars i::after { content: ""; position: absolute; inset: 0; border-radius: 4px; background: linear-gradient(180deg, var(--orange), var(--blue)); transform: scaleY(0); transform-origin: bottom; }
+.trial.in .trial-bars i::after { animation: day-fill 4.2s calc(var(--i, 0) * 0.35s) ease-in-out infinite; }
+@keyframes day-fill { 0% { transform: scaleY(0); } 18%, 70% { transform: scaleY(1); } 88%, 100% { transform: scaleY(0); } }
+.pricing .trial-copy .h4 { display: flex; align-items: center; gap: 8px; }
+.pricing .trial-copy .h4 svg { width: 18px; height: 18px; }
+.pricing .trial-copy .body { color: #c9ccd3; opacity: 1; }
+.pricing .trial-icon { display: none; }
+
+/* cards */
+.pricing .plans { perspective: 1400px; align-items: stretch; gap: 16px; }
+.plan-shell { position: relative; display: flex; }
+.plan-shell.reveal { transform: translateY(40px) rotateX(10deg); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--i, 0) * 0.14s); }
+.plan-shell.reveal.in { transform: none; }
+.plan-shell.popular { z-index: 1; }
+.pricing .plan {
+  flex: 1; color: #fff; background: rgba(255, 255, 255, 0.045); border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 30px;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d;
+  transition: transform 0.25s ease-out, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+.pricing .plan:hover { border-color: rgba(255, 255, 255, 0.24); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8); }
+.pricing .plan::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(92, 196, 242, 0.14), transparent 45%); }
+.pricing .plan.popular {
+  background: linear-gradient(180deg, #151923 0%, #0c0e13 100%); border-color: transparent;
+  margin: -18px 0; padding-top: 48px; padding-bottom: 48px;
+}
+.pricing .plan.popular::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 138, 77, 0.16), transparent 45%); }
+.pricing .plan.popular::before { inset: -2px; padding: 2px; background: conic-gradient(from var(--spin), transparent 0 40%, var(--orange) 60%, var(--blue) 80%, transparent 100%); }
+/* brilho pulsando atrás do plano popular */
+.plan-glow { position: absolute; inset: -6% -4%; z-index: -1; border-radius: 40px; pointer-events: none; filter: blur(50px);
+  background: radial-gradient(50% 50% at 50% 40%, rgba(255, 77, 0, 0.55), transparent 70%), radial-gradient(50% 50% at 50% 80%, rgba(0, 150, 220, 0.45), transparent 70%);
+  animation: glow-pulse 4s ease-in-out infinite; }
+@keyframes glow-pulse { 0%, 100% { opacity: 0.55; transform: scale(0.96); } 50% { opacity: 0.95; transform: scale(1.04); } }
+.pricing .plan-top .h4 { font-size: 22px; }
+.pricing .plan-badge { background: linear-gradient(90deg, var(--orange), #ff8a4d, var(--orange)); background-size: 200% 100%; border: 0; color: #fff; animation: badge-shine 2.5s linear infinite; box-shadow: 0 6px 20px -6px rgba(255, 77, 0, 0.8); }
+@keyframes badge-shine { to { background-position: -200% 0; } }
+.pricing .plan-for { color: #a3a8b4; opacity: 1; }
+.pricing .plan-price { font-size: 46px; display: flex; align-items: baseline; gap: 4px; }
+.pricing .plan.popular .plan-price { font-size: 54px; text-shadow: 0 0 30px rgba(255, 120, 60, 0.45); }
+.pricing .plan-price > span:last-child { color: #8b909b; opacity: 1; font-size: 16px; }
+.pricing .plan-sub { color: #8b909b; opacity: 1; }
+.pricing .plan-limits div { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.06); }
+.pricing .plan.popular .plan-limits div { background: rgba(255, 255, 255, 0.07); }
+.pricing .plan-limits span { color: #a3a8b4; opacity: 1; }
+.pricing .plan ul { border-color: rgba(255, 255, 255, 0.1); }
+.pricing .plan li { color: #e4e6eb; }
+.plan-shell .plan li { opacity: 0; }
+.plan-shell.in .plan li { animation: a-in 0.5s calc(0.55s + var(--i, 0) * 0.08s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.plan-shell.in .plan li svg { animation: a-tick 0.45s calc(0.65s + var(--i, 0) * 0.08s) cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.pricing .plan-budget { color: #8b909b; opacity: 1; border-color: rgba(255, 255, 255, 0.1); }
+.pricing .soon { background: rgba(255, 77, 0, 0.18); color: #ff8a4d; }
+.pricing .btn.white:hover { background: var(--orange); color: #fff; }
+/* botão do plano popular com reflexo passando sozinho */
+.plan-cta { box-shadow: 0 14px 30px -12px rgba(255, 77, 0, 0.8); }
+.plan-cta::after { animation: cta-shine 3.2s 1.5s ease-in-out infinite; }
+@keyframes cta-shine { 0% { transform: translateX(-120%); } 40%, 100% { transform: translateX(120%); } }
+
+/* economia no anual */
+.plan-save { display: inline-flex; margin-top: 8px; font-size: 12px; font-weight: 700; color: #4ade80; background: rgba(26, 154, 80, 0.16); border: 1px solid rgba(74, 222, 128, 0.25); padding: 0 10px; border-radius: 20px;
+  max-height: 0; opacity: 0; overflow: hidden; transform: translateY(-6px); transition: max-height 0.4s ease, opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.4s ease; }
+.plan-save.on { max-height: 30px; opacity: 1; transform: none; padding: 4px 10px; }
+
+/* contador de painel */
+.odo { display: inline-flex; align-items: baseline; font-variant-numeric: tabular-nums; }
+.odo-digit { display: inline-block; height: 1em; line-height: 1; overflow: hidden; vertical-align: baseline; }
+.odo-col { display: flex; flex-direction: column; transition: transform 0.9s cubic-bezier(0.2, 0.9, 0.2, 1); }
+.odo-col span, .odo-sym { display: block; height: 1em; line-height: 1; }
+.odo-sym { display: inline-block; white-space: pre; }
+
+/* inclui + agências no escuro */
+.pricing .included .pill { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.12); color: #d7dae1; }
+.pricing .included .pill:hover { border-color: #5cc4f2; }
+.pricing .agency { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.25s ease-out, opacity 0.7s ease, border-color 0.3s ease; }
+.pricing .agency.reveal:not(.in) { transform: translateY(20px); }
+.pricing .agency:hover { border-color: rgba(255, 255, 255, 0.22); }
+.pricing .agency-price { background: rgba(0, 0, 0, 0.3); border-color: rgba(255, 255, 255, 0.1); }
+.pricing .agency-price .plan-price { font-size: 40px; }
+
+@media (max-width: 1199.98px) {
+  .pricing .plan.popular { margin: 0; }
+}
+@media (max-width: 809.98px) {
+  .pricing .container { padding-top: 70px !important; }
+  .pricing .trial { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .trial-days b { font-size: 52px; }
+  .pricing .plan-price { font-size: 40px; }
+  .pricing .plan.popular .plan-price { font-size: 44px; }
+  .pricing .plan.popular { padding-top: 30px; padding-bottom: 30px; }
+  .pricing .plan { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pricing::before, .plan-glow, .pricing .plan-badge, .plan-cta::after, .pricing .trial::before, .trial.in .trial-bars i::after { animation: none !important; }
+  .trial-bars i::after { transform: scaleY(1); }
+  .plan-shell .plan li { opacity: 1; animation: none !important; }
+  .odo-col { transition: none; }
+}
+/* o contador do preço herda o tamanho do preço (e não a regra dos "span" do /mês) */
+.plan-price .odo, .plan-price .odo span { font-size: inherit; font-weight: inherit; letter-spacing: inherit; opacity: 1; margin: 0; color: inherit; }
