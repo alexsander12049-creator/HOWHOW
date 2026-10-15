@@ -2605,3 +2605,8 @@ button.managed-item:focus-visible { outline: 2px solid var(--orange); outline-of
   .capp-copy > *, .capp-phone, .capp-chip { opacity: 1; transform: none; animation: none !important; }
   .capp-glow, .capp-ring, .capp-icon, .capp-icon::after, .capp-notif.d0 { animation: none !important; }
 }
+
+/* logo do rodapé: foguete ao lado do nome (a regra dos links do rodapé trocava o flex por inline-block) */
+.footer-col a.logo { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+.footer-col a.logo:hover { transform: none; color: var(--ink); }
+.footer-col a.logo img { width: 30px; height: 30px; flex: none; }
