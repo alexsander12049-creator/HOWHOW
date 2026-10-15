@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { agency, plans } from "@/lib/content";
 import { Check, Sparkle } from "./icons";
 import Num from "./Num";
@@ -34,6 +34,16 @@ export default function Plans() {
   const [annual, setAnnual] = useState(false);
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
   const [pill, setPill] = useState({ left: 4, width: 0 });
+  const anchor = useRef<HTMLDivElement>(null);
+
+  // animações da seção só rodam quando ela está na tela (economiza bateria e deixa a rolagem leve)
+  useEffect(() => {
+    const sec = anchor.current?.closest("section");
+    if (!sec) return;
+    const io = new IntersectionObserver(([e]) => sec.classList.toggle("live", e.isIntersecting), { rootMargin: "100px 0px" });
+    io.observe(sec);
+    return () => io.disconnect();
+  }, []);
 
   // a pílula desliza até o botão escolhido
   useLayoutEffect(() => {
@@ -49,7 +59,7 @@ export default function Plans() {
 
   return (
     <>
-      <div className="billing reveal" role="radiogroup" aria-label="Forma de cobrança">
+      <div ref={anchor} className="billing reveal" role="radiogroup" aria-label="Forma de cobrança">
         <span className="billing-pill" style={{ left: pill.left, width: pill.width }} aria-hidden />
         {[false, true].map((a, k) => (
           <button
