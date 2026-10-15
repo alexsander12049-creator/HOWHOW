@@ -7,9 +7,9 @@ const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight
 const russo = Russo_One({ variable: "--font-russo", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "Howhow — Creator marketing que faz sua marca crescer",
+  title: "Howhow — Um exército de creators UGC para a sua marca",
   description:
-    "Plataforma de creator marketing que conecta marcas, creators e agências num único ambiente: campanha, candidaturas, entregas, pagamento e resultado.",
+    "2.246 creators UGC criando conteúdo viral para a sua marca. Acompanhe as views de cada post em tempo real e pague por CPM. 14 dias grátis.",
   icons: { icon: "/howhow/foguete.png" },
 };
 
