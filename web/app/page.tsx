@@ -10,7 +10,6 @@ import ScrollProgress from "@/components/ScrollProgress";
 import GoalTabs from "@/components/GoalTabs";
 import Plans from "@/components/Plans";
 import Testimonials from "@/components/Testimonials";
-import Results from "@/components/Results";
 import HowItWorks from "@/components/HowItWorks";
 import MetricsDashboard from "@/components/MetricsDashboard";
 import CpmCampaign from "@/components/CpmCampaign";
@@ -223,16 +222,7 @@ export default function Home() {
       <section className="section" id="cases">
         <div className="container" style={{ paddingTop: 0 }}>
           <Heading tag={stories.tag} title={stories.title} />
-          <div className="numbers wide reveal">
-            {stories.numbers.map((n) => (
-              <div className="number" key={n.label}>
-                <b>{n.value}</b>
-                <span>{n.label}</span>
-              </div>
-            ))}
-          </div>
           <Testimonials />
-          <Results />
         </div>
       </section>
 

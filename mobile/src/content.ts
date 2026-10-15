@@ -6,7 +6,7 @@
 // objetivo → devolução da sobra → planos (+ agências) → comparação → gerenciado → como começar → FAQ → CTA final.
 //
 // Fontes dos dados:
-// - Benchmark "Howhow × SideShift" (out/2026): planos e preços, 14 dias grátis, white-label para agências,
+// - Benchmark "Howhow × SideShift" (out/2026): planos e preços, teste grátis (7 dias, definido pela Howhow; o benchmark falava em 14), white-label para agências,
 //   Gerenciado (20% da verba, mín. R$ 25 mil), devolução da sobra, 4 modelos de pagamento, envio de produto,
 //   nota fiscal, 2.246 creators no casting, fila de decisões, posicionamento "plataforma, não agência".
 //   O próprio documento pede para validar os valores com o financeiro antes de publicar.
@@ -50,7 +50,7 @@ export const hero = {
   text: "A Howhow coloca 2.246 creators UGC produzindo vídeos para a sua marca, sem prospecção fria, DM ou planilha. Você acompanha as views de cada post em tempo real e pode pagar por CPM, só pelo que entregou.",
   primary: { label: "Começar grátis", href: "#planos" },
   secondary: { label: "Agendar demo", href: "#contato" },
-  note: "14 dias grátis · zero porcentagem para a marca · cartão, Pix ou boleto",
+  note: "7 dias grátis · zero porcentagem para a marca · cartão, Pix ou boleto",
   // VSL do topo: web/public/howhow/vsl.mp4 (site) e mobile/assets/howhow/vsl.mp4 (app), capa vsl-capa.jpg.
   vsl: { duration: "1 min" },
 };
@@ -79,8 +79,8 @@ export const scale = {
   title: "Seu exército de UGC, pronto para postar",
   stats: [
     { value: "2.246", label: "creators no casting" },
-    { value: "3,1 mi", label: "visualizações em um único case" },
     { value: "8,4%", label: "de engajamento médio nos cases" },
+    { value: "96%", label: "das entregas aprovadas sem retrabalho" },
   ],
   // faixa com exemplos de campanhas (ilustrativo, sem marca real)
   ticker: [
@@ -247,19 +247,6 @@ export type PhotoKey = "luisa" | "katia";
 export const stories = {
   tag: "Cases",
   title: "Marcas que confiam na Howhow",
-  numbers: [
-    { value: "3,1 mi", label: "visualizações" },
-    { value: "8,4%", label: "engajamento" },
-    { value: "96%", label: "aprovadas sem retrabalho" },
-  ],
-  // Cards de resultado ao lado dos depoimentos: só campanhas reais (dados do site antigo e do benchmark).
-  // `video` = índice do vídeo em showcase.items (abre no pop-up). [CONFIRMAR] views/CPM por case, quando houver.
-  resultsTitle: "Resultados de campanhas",
-  results: [
-    { brand: "HBO Max", campaign: "House of the Dragon", highlight: "Fãs reais", text: "Buzz orgânico e massivo nas redes com fãs de verdade falando sobre a série.", video: 0 },
-    { brand: "Kwai", campaign: "Programa Kwai Creators", highlight: "127 → 30", text: "127 creators se candidataram e 30 foram aprovados para o programa.", video: 1 },
-    { brand: "JBL", campaign: "PartyBox", highlight: "Produto em uso", text: "Creators de lifestyle e música mostraram a PartyBox no contexto real de uso.", video: 2 },
-  ],
   quotes: [
     {
       quote: "Para House of the Dragon, precisávamos de fãs reais falando sobre a série. A curadoria foi perfeita e o buzz nas redes sociais foi orgânico e massivo.",
@@ -357,7 +344,7 @@ export const plans = {
   text: "Mensalidade simples. Zero porcentagem para a marca: o cachê do creator não leva taxa por cima.",
   billing: { monthly: "Mensal", annual: "Anual", annualHint: "economize até 20%" },
   trial: {
-    title: "14 dias grátis",
+    title: "7 dias grátis",
     text: "Toda marca testa antes de pagar a primeira mensalidade: 1 campanha e 3 convites. Depois escolhe Start, Growth ou Scale.",
     cta: { label: "Começar grátis", href: "#contato" },
   },
@@ -426,7 +413,7 @@ export const compare = {
   columns: [
     { title: "Na DM", good: false, items: ["Caça de perfil no Instagram", "Mídia kit em PDF", "Preço diferente pro mesmo Reels", "Briefing perdido no áudio", "Ninguém sabe se deu resultado"] },
     { title: "Intermediário", good: false, items: ["Fee em cima de cada creator", "Proposta sob medida no WhatsApp", "Resposta lenta", "Relatório em PDF no fim", "Você não vê o processo"] },
-    { title: "Howhow", good: true, items: ["2.246 creators com filtros únicos", "Preço no site, 14 dias grátis", "Envio de produto e nota fiscal", "Sobra devolvida para a marca", "Zero porcentagem para a marca"] },
+    { title: "Howhow", good: true, items: ["2.246 creators com filtros únicos", "Preço no site, 7 dias grátis", "Envio de produto e nota fiscal", "Sobra devolvida para a marca", "Zero porcentagem para a marca"] },
   ],
 };
 
@@ -447,7 +434,7 @@ export const start = {
   steps: [
     { when: "Dia 1", title: "Escolha o plano", text: "Preço no site. Comece grátis com cartão, Pix ou boleto." },
     { when: "Em até 48h", title: "Primeira campanha no ar", text: "Onboarding guiado do briefing à publicação." }, // [CONFIRMAR] meta de 48h
-    { when: "14 dias", title: "Teste completo", text: "1 campanha e 3 convites para ver a Howhow rodando com a sua marca." },
+    { when: "7 dias", title: "Teste completo", text: "1 campanha e 3 convites para ver a Howhow rodando com a sua marca." },
     { when: "Depois", title: "Vire plano pago", text: "Escolha Start, Growth ou Scale conforme o seu volume." },
   ],
   cta: { label: "Começar grátis", href: "#planos" },
@@ -460,8 +447,8 @@ export const faq = {
   items: [
     { q: "Como funciona a campanha por CPM?", a: "Você define quanto paga a cada mil visualizações e o teto da campanha. Os creators postam, a Howhow mede as views de cada post sozinha e o pagamento sai por ciclo, calculado pelas views reais. Nunca passa do teto." },
     { q: "Consigo ver as métricas de cada post?", a: "Sim. No painel da campanha você acompanha views, engajamento e CPM de cada post, por creator e por rede, atualizados automaticamente." },
-    { q: "Quanto custa?", a: "De R$ 497 a R$ 2.497 por mês, ou a partir de R$ 397/mês no plano anual. Os 14 primeiros dias são grátis. O cachê dos creators é à parte, e a marca não paga porcentagem em cima dele." },
-    { q: "Como funciona o teste grátis?", a: "São 14 dias com 1 campanha e 3 convites para creators. Depois você escolhe Start, Growth ou Scale e paga com cartão, Pix ou boleto." },
+    { q: "Quanto custa?", a: "De R$ 497 a R$ 2.497 por mês, ou a partir de R$ 397/mês no plano anual. Os 7 primeiros dias são grátis. O cachê dos creators é à parte, e a marca não paga porcentagem em cima dele." },
+    { q: "Como funciona o teste grátis?", a: "São 7 dias com 1 campanha e 3 convites para creators. Depois você escolhe Start, Growth ou Scale e paga com cartão, Pix ou boleto." },
     { q: "Quanto eu pago para cada creator?", a: "Você define um teto e vê o preço de cada creator antes de fechar. Se ele fechar abaixo do teto, a diferença volta para você. Dá para pagar em permuta + cachê, valor fixo, por views ou post + bônus." },
     { q: "E se o creator sumir ou não entregar?", a: "O pagamento fica protegido: você só aprova e paga o que foi entregue do jeito combinado. Se alguém sair, é só escolher outro creator entre os candidatos." },
     { q: "Tem nota fiscal?", a: "Sim. A nota fiscal de cada creator fica registrada na campanha, junto com o pagamento. Funciona com CPF e CNPJ." },
@@ -474,7 +461,7 @@ export const faq = {
 /* 14. CTA FINAL */
 export const finalCta = {
   tag: "Agende uma demo",
-  title: "Comece grátis por 14 dias.",
+  title: "Comece grátis por 7 dias.",
   text: "Prefere conversar antes? Deixe seus dados e mostramos a Howhow rodando com a sua marca.",
 };
 

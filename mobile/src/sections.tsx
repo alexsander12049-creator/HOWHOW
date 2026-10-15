@@ -479,18 +479,9 @@ export function Showcase() {
 
 /* ---------- 6. CASES + DEPOIMENTOS ---------- */
 export function Stories({ mark }: { mark: Mark }) {
-  const { wide } = useLayout();
   return (
     <Section onLayout={mark("cases")} style={{ paddingTop: 0 }}>
       <Heading tag={stories.tag} title={stories.title} />
-      <View style={{ flexDirection: "row", gap: 8 }}>
-        {stories.numbers.map((n) => (
-          <View key={n.label} style={st.number}>
-            <Text style={[st.numberValue, wide && { fontSize: 46, lineHeight: 50 }]}>{n.value}</Text>
-            <Text style={s.small}>{n.label}</Text>
-          </View>
-        ))}
-      </View>
       <Testimonials />
     </Section>
   );
